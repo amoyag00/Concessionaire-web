@@ -140,4 +140,10 @@ footer{
 footer a{
     color: white;
     font-family: 'Orbitron';
+    
+}
+
+/* contact */
+.contact{
+    display: block;
 }
