@@ -29,12 +29,12 @@
 }
 
 /* header */
-input{
+input.login{
     margin:25px 50px 0px 10px;
     font-size: 20px;
     float: right;
 }
-input[type="text"], input[type="password"]{
+input[type="text"].login, input[type="password"].login{
 	padding:10px;
         border:none;
         outline-color: black;
@@ -43,11 +43,11 @@ input[type="text"], input[type="password"]{
         height:10px;
         width:150px;      
 }
-input:hover, #contact:hover{
+input.login:hover, #contact:hover{
     box-shadow: 0 0 10px 5px white;
 }
 
-input[type="submit"], #contact{
+input[type="submit"].login, #contact{
     border: solid 2px white;
     background: transparent;
     font-family: 'Orbitron';
@@ -78,7 +78,7 @@ img#logo{
 
 /* center page */
 div.center-page{
-    margin:100px 100px 70px 100px;
+    margin:100px 100px 60px 100px;
 }
 p{
    font-family: 'Orbitron';
@@ -136,14 +136,74 @@ footer{
 
 #copyright{
     font-size:10px;
+    padding:10px;
 }
+
 footer a{
     color: white;
-    font-family: 'Orbitron';
-    
+    font-family: 'Orbitron'; 
+}
+
+footer a#contact{
+    margin-bottom: 10px;
+    webkit-touch-callout: none; /* iOS Safari */
+   -webkit-user-select: none; /* Safari */
+   -khtml-user-select: none; /* Konqueror HTML */
+   -moz-user-select: none; /* Firefox */
+   -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently supported by Chrome
+        and Opera */;
+    text-decoration: none;
 }
 
 /* contact */
+#contact-body{
+    
+    margin:auto;
+    text-align: center;
+    background-image: linear-gradient(to right, #d7d2cc 0%, #304352 100%);
+   
+}
+
 .contact{
     display: block;
+    margin:20px;
+    font-family: 'Orbitron';
+    font-size: 17px;
+    padding:5px;
+   
+}
+
+#contact-div{
+    display:inline-block;
+}
+
+input.contact{
+    border: none;
+    outline:none;
+    width:200px;
+    height:40px;
+    box-shadow: 10px 10px 20px -6px black;
+}
+
+textarea.contact{
+    border:none;
+    height:100px;
+    width:500px;
+    box-shadow: 10px 10px 20px -6px black;
+}
+
+input[type="submit"].contact:hover{
+    box-shadow: 10px 10px 20px -6px black;
+    filter: invert(100%);
+}
+.contact:not(#contact-div):focus{
+    border:2px solid black;
+}
+
+h1.contact{
+    text-decoration: none;
+    color:white;
+    font-size:50px;
+    
 }
