@@ -1,0 +1,143 @@
+/* background */
+.background:before{
+    content:"";
+    position:fixed;
+    left:0;
+    right:0;
+    z-index:-1;
+    display:block;
+    background-image: url(../img/car.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    -webkit-filter: blur(3px);
+    -moz-filter: blur(3px);
+    -o-filter: blur(3px);
+    -ms-filter: blur(3px);
+    filter: blur(3px);
+    width: 100%;
+    height: 100%;
+}
+
+.background{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right:0;
+  z-index: 0;
+  margin-left: 20px;
+  margin-right: 20px;    
+}
+
+/* header */
+input{
+    margin:25px 50px 0px 10px;
+    font-size: 20px;
+    float: right;
+}
+input[type="text"], input[type="password"]{
+	padding:10px;
+        border:none;
+        outline-color: black;
+        font-family:'Economica';
+        border: none;
+        height:10px;
+        width:150px;      
+}
+input:hover, #contact:hover{
+    box-shadow: 0 0 10px 5px white;
+}
+
+input[type="submit"], #contact{
+    border: solid 2px white;
+    background: transparent;
+    font-family: 'Orbitron';
+    font-size: 17px;
+    color: white;
+    padding:10px 10px 10px 10px;
+    height:30px;
+    line-height:7px;
+}
+#logo, #logo-text{
+    display:inline-block;
+    
+}
+
+img#logo{
+    height:50px;
+    width: 50px;
+    vertical-align: middle;
+    display:inline-block;
+    margin:auto;
+}
+
+#logo-text{
+    font-family: Gugi;
+    font-size:20px;
+    padding:0px;
+}
+
+/* center page */
+div.center-page{
+    margin:100px 100px 70px 100px;
+}
+p{
+   font-family: 'Orbitron';
+   font-size:50px;
+   color : white;
+   text-align: center;
+   clear:left;
+   clear:right;
+   webkit-touch-callout: none; /* iOS Safari */
+   -webkit-user-select: none; /* Safari */
+   -khtml-user-select: none; /* Konqueror HTML */
+   -moz-user-select: none; /* Firefox */
+   -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently supported by Chrome
+        and Opera */;
+   
+}
+/* logos */
+.social-logos{
+    text-align:center;
+}
+
+.logo-link{
+    display:inline;
+    margin: 20px;
+}
+
+.logo-link img{
+    background-color:black;
+    filter: invert(100%);
+    height: 75px;
+    width: 75px;
+    border-radius:50px;
+}
+
+#twitter img:hover{
+    filter: none;
+    background-color:#5194ff;
+}
+
+#facebook img:hover{
+    filter: none;
+    background-color:#0a46a8;
+}
+#google img:hover{
+    filter: none;
+    background-color:#f75454;
+}
+
+/* footer */
+footer{
+    margin-top:0px;
+    text-align:center;
+}
+
+#copyright{
+    font-size:10px;
+}
+footer a{
+    color: white;
+    font-family: 'Orbitron';
+}
