@@ -27,8 +27,25 @@
   margin-left: 20px;
   margin-right: 20px;    
 }
+/* generic header */
+header{
+    background-color:#47494c;
+    box-shadow: 0 10px 20px -6px black inset,
+    0 10px 10px -6px black;
+}
+header img#logo-header{
+    height: 75px;
+    width: 75px;
+    display:inline-block;
+    vertical-align:middle;
+}
 
-/* header */
+header p#header-text{
+    margin:0px;
+    padding:20px;
+}
+
+/* header home*/
 input.login{
     margin:25px 50px 0px 10px;
     font-size: 20px;
@@ -204,6 +221,133 @@ input[type="submit"].contact:hover{
 h1.contact{
     text-decoration: none;
     color:white;
-    font-size:50px;
+    font-size:50px;   
+}
+
+/* concessionaire home */
+#body-conc{
+    background: -moz-linear-gradient(#A9A9A9, #000000 80%) fixed;
+    font-family:'Gugi';
+    margin:0px;
+}
+/* side menu */
+#conc-nav{
+    background-color: #A9A9A9;
+    color:white;
+    width: 200px;
+    height: 300px; 
+    text-align: center;
+    box-shadow: 0 10px 20px -6px black inset,
+    0 10px 10px 6px black;
     
 }
+
+#conc-nav a{
+    padding:20px;
+    width:160px;
+    display: block;
+    overflow:hidden;
+    margin:0px;
+
+}
+#conc-nav a:hover{
+   background-color:#f45850;
+   box-shadow: 0 10px 15px -6px black inset,
+        0 -10px 15px -6px black inset;
+  
+}
+
+/* footer */
+footer{
+     position:static;
+     clear:both;
+     margin:auto;
+     padding-top: 20px;
+     padding-left: 70px;
+     padding-right: 70px;
+     padding-bottom: 40px;
+     background-color:#47494c;
+     margin-top: 50px;
+     box-shadow: 0 10px 20px -6px black inset,
+     0px -5px 10px -6px black;
+}
+
+div#list-container{
+    display: flex;
+    justify-content: space-between;
+}
+
+ul.footer-list{
+    list-style-type:none;
+    display:inline-block;
+    padding-left:0px;
+}
+
+ul.footer-list li:not(.list-header){
+    margin-bottom: 10px;
+}
+ul.footer-list a:not(.list-header){
+     text-decoration:none;
+     color: white;
+     font-family: 'Gugi';
+     font-size: 15px;
+}
+
+ul.footer-list a:not(.list-header):hover{
+    text-decoration: underline;
+}
+
+li.list-header{
+    margin-bottom: 20px;
+}
+
+footer a.list-header{
+    color: #f45850;
+    text-decoration:none;
+    font-family: 'Gugi'; 
+    font-size: 30px;
+}
+
+
+
+li.footer-images img{
+    height: 50px;
+    width: 50px;
+    border-radius: 50px;
+   
+}
+footer a.footer-images{
+    margin-right: 10px;
+    display: inline-block;
+    height: 50px;
+    width: 50px;
+    border-radius: 50px;
+    background-color: #f45850;
+    background-size: 30px 30px;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-top: 15px;
+}
+
+a#facebook:hover{
+    background-color:#0a46a8;
+}
+a#twitter:hover{
+    background-color:#5194ff;
+}
+a#google:hover{
+    background-color:#f75454;
+}
+
+div#copyright{
+    color:white;
+    font-family:'Gugi';
+    display: block;
+    text-align: center;
+}
+
+ footer div#copyright a{
+    text-decoration: none;
+    color:#f45850;
+}
+
