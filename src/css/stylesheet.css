@@ -28,7 +28,7 @@
   margin-right: 20px;    
 }
 /* generic header */
-header{
+header:not(#index-header){
     background-color:#47494c;
     box-shadow: 0 10px 20px -6px black inset,
     0 10px 10px -6px black;
@@ -238,27 +238,102 @@ h1.contact{
     height: 300px; 
     text-align: center;
     box-shadow: 0 10px 20px -6px black inset,
-    0 10px 10px 6px black;
+        0px 2px 10px 0px black;
+    float:left;
     
 }
 
-#conc-nav a{
+#conc-nav button{
     padding:20px;
-    width:160px;
+    width:200px;
     display: block;
     overflow:hidden;
     margin:0px;
-
+    background: transparent;
+    border:none;
+    font-family:'Gugi';
+    color:white;
 }
-#conc-nav a:hover{
+#conc-nav button:hover{
    background-color:#f45850;
    box-shadow: 0 10px 15px -6px black inset,
         0 -10px 15px -6px black inset;
   
 }
 
+div#search-cart{
+    text-align:center;
+}
+
+#search{
+    display: inline-block;
+    width:400px;
+    height:20px;
+    font-family: 'Gugi';
+    margin:30px;
+    display:hidden;
+}
+
+#cart{
+    height: 60px;
+    width: 60px;
+    float: right;
+    margin:25px;
+    visibility:hidden;
+    background-image: url('../img/cart.png');
+    background-size: 100%;
+    background-color:transparent;
+    border: none;
+}
+#cart span{
+    background-color: red;
+    border-radius:10px;
+    padding:2px 7px 2px 7px;
+    margin-left:10px;
+    font-family: 'Gugi';
+    font-size: 15px;
+    color:white;
+}
+#productos-pedidos{
+    float:left;
+}
+
+.producto{
+    display:inline-block;
+    margin:30px;
+    margin-top:0px;
+    height:250px;
+    width:200px;
+    background-color:orange;
+    text-align: center;
+}
+.producto span{
+    display:block;
+}
+
+.producto input[type="number"]{
+    width:40px;
+    margin-left:20px;
+}
+.producto button{
+    padding:20px;
+    width:200px;
+    display: block;
+    overflow:hidden;
+    margin:0px;
+    background: #f45850;
+    border:none;
+    font-family:'Gugi';
+    color:white;
+    vertical-align: bottom;
+    box-shadow: 0 10px 15px -6px black;
+}
+.producto button:hover{
+   border: 2px solid white;
+}
+
 /* footer */
-footer{
+footer:not(#index-footer){
      position:static;
      clear:both;
      margin:auto;
@@ -329,13 +404,13 @@ footer a.footer-images{
     margin-top: 15px;
 }
 
-a#facebook:hover{
+footer a#facebook:hover{
     background-color:#0a46a8;
 }
-a#twitter:hover{
+footer a#twitter:hover{
     background-color:#5194ff;
 }
-a#google:hover{
+footer a#google:hover{
     background-color:#f75454;
 }
 
@@ -350,4 +425,6 @@ div#copyright{
     text-decoration: none;
     color:#f45850;
 }
+
+
 
