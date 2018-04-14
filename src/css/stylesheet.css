@@ -294,8 +294,16 @@ div#search-cart{
     font-size: 15px;
     color:white;
 }
+
+#cart:hover{
+    -webkit-filter: drop-shadow(2px 2px 0 black)
+                  drop-shadow(-2px -2px 0 black);
+    filter: drop-shadow(2px 2px 0 black) 
+          drop-shadow(-2px -2px 0 black);
+}
 #productos-pedidos{
     float:left;
+    margin-bottom:100px;
 }
 
 .producto{
@@ -311,11 +319,28 @@ div#search-cart{
     display:block;
 }
 
+#dropdown-table button{
+    width:25px;
+    height:25px;
+    display:inline-block;
+    border:none;
+    background-color:red;
+    color:white;
+    margin:10px;
+}
+#dropdown-table button:hover{
+    border: 1px solid white;
+}
+
+.id-td{
+    display:hidden;
+}
+
 .producto input[type="number"]{
     width:40px;
     margin-left:20px;
 }
-.producto button{
+.producto button, #pedir{
     padding:20px;
     width:200px;
     display: block;
@@ -328,8 +353,21 @@ div#search-cart{
     vertical-align: bottom;
     box-shadow: 0 10px 15px -6px black;
 }
-.producto button:hover{
+.producto button:hover, #pedir:hover{
    border: 2px solid white;
+}
+
+#dropdown{
+    display:none;
+    z-index:1;
+    position:absolute;
+    right:0;
+    background-color:#A9A9A9;
+    padding: 15px;
+    text-align:center;
+}
+.show{
+    display:block;
 }
 
 /* footer */
