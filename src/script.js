@@ -3,7 +3,7 @@ $(document).ready(function(){
      $('#cart').on("click",showDropdown);
      $('.add-cart').on("click",addToCart);
      $('#dropdown-table').on("click",".delete-button",deleteFromCart);
-    
+     $('#mis-pedidos').on("click",misPedidosHandler);
 });
 
 var cartItems=new Array();
@@ -13,6 +13,7 @@ var currentPrice=0.0;
 
 function pedidoHandler(){
    $('#cart').css('visibility','visible');
+   $('#filter').css('visibility','hidden');
 }
 
 function purchasedItem(id, quantity){
@@ -82,5 +83,13 @@ function getItemOfId(id, array){
             return array[i];
         }
     }
+}
+
+
+function misPedidosHandler(){
+    $('#cart').css('visibility','hidden');
+    $("#productos-pedidos").empty();
+    $('#filter').css('visibility','visible');
+    
 }
 

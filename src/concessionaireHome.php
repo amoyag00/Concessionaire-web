@@ -18,7 +18,13 @@
         </header>
         <div id="search-cart">
             <button id="cart" src="img/cart.png"><span>0</span></button>
-            <input type="text" id="search" placeholder="buscar" />
+            <select id="filter">
+                <option value="date">Fecha</option>
+                <option value="provider">Proveedor</option>
+                <option value="producto">Producto</option>
+                
+            </select>
+            <input type="text" id="search" placeholder="Filtrar" />
             <div id="dropdown">
                 <table id="dropdown-table">
                     <tr id="header-row">
