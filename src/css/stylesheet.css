@@ -514,4 +514,5 @@ div#copyright{
     display: none;
     background-color: white;
     overflow: hidden;
+    transition: 1s ease-out;
 }

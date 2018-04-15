@@ -9,11 +9,18 @@ $(document).ready(function(){
         var panel = $(this).next();
         //alert($(panel).css("display"));
         $(this).toggleClass("active");
-        if($(panel).css("display") === "block"){
+        /*if($(panel).css("display") === "block"){
             $(panel).css("display","none");
         }
         else{
             $(panel).css("display","block");
+        }*/
+        //alert(panel.style.maxHeight);
+        if($(panel).css("display") === "none"){
+            $(panel).show(500);
+        }
+        else{
+            $(panel).hide(500);
         }
     });
 });
