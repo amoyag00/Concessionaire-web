@@ -230,6 +230,12 @@ h1.contact{
     font-family:'Gugi';
     margin:0px;
 }
+
+#body-prov{
+    background: -moz-linear-gradient(#A9A9A9, #000000 80%) fixed;
+    font-family:'Gugi';
+    margin:0px;
+}
 /* side menu */
 #conc-nav{
     background-color: #A9A9A9;
@@ -475,7 +481,7 @@ div#copyright{
     color: #444;
     cursor: pointer;
     padding: 18px;
-    width: 30%;
+    width: 300px;
     border-style: solid;
     border-width: 1px;
     text-align: left;
@@ -484,9 +490,11 @@ div#copyright{
     transition: 0.4s;
     font-family:'Gugi';
     display: block;
-    margin-left: 10%;
+    /*margin-left: 10%;
     margin-bottom: 1%;
-    margin-top: 5%; 
+    margin-top: 5%;*/ 
+    margin-bottom: 1%;
+    margin-top: 5%;
 }
 
 .desplegable:after{
@@ -515,4 +523,23 @@ div#copyright{
     background-color: white;
     overflow: hidden;
     transition: 1s ease-out;
+}
+
+#lists, #file{
+    float: left;
+    overflow: hidden;
+}
+
+#lists{
+    width: 30%;
+    margin-left: 10%;
+    margin-bottom: 5%;
+    margin-top: 5%; 
+}
+
+#file{
+    width: 30%;
+    margin-left: 10%;
+    margin-bottom: 5%;
+    margin-top: 5%; 
 }

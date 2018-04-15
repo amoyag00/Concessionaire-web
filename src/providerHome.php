@@ -14,7 +14,7 @@ and open the template in the editor.
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="providerHome.js"></script>
     </head>
-    <body id="body-conc">
+    <body id="body-prov">
         <header>
             <?php
             require_once 'header.php';
@@ -22,15 +22,25 @@ and open the template in the editor.
         </header>
         
         <section>
-            <button class="desplegable" value="Lista de productos">Lista de productos</button>
-            <div class="panel-lista">
-                <label>Lista de productos</label>
-            </div>
             
-            <button class="desplegable" value="Lista de pedidos">Lista de pedidos</button>
-            <div class="panel-lista">
-                <label>Lista de pedidos</label>
+            <div id="lists">
+                <h2>Listas</h2>
+                
+                <button class="desplegable" value="Lista de productos">Lista de productos</button>
+                <div class="panel-lista">
+                    <label>Lista de productos</label>
+                </div>
+
+                <button class="desplegable" value="Lista de pedidos">Lista de pedidos</button>
+                <div class="panel-lista">
+                    <label>Lista de pedidos</label>
+                </div>
             </div>
+                
+                <div id="file">
+                    <h2>Actualizar productos</h2>
+                </div>
+            
         </section>
         
         <footer>
