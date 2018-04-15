@@ -7,7 +7,8 @@
 $(document).ready(function(){
     $(".desplegable").click(function(){
         var panel = $(this).next();
-        alert($(panel).css("display"));
+        //alert($(panel).css("display"));
+        $(this).toggleClass("active");
         if($(panel).css("display") === "block"){
             $(panel).css("display","none");
         }
