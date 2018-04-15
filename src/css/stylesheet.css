@@ -543,3 +543,27 @@ div#copyright{
     margin-bottom: 5%;
     margin-top: 5%; 
 }
+
+.input-file{
+    font-family:'Gugi';
+    border-radius: 0px;
+    border-style: solid;
+    border-width: 2px;
+}
+
+.input-file:hover{
+    background-color: #ccc;
+}
+
+input[name="archivo"]{
+    margin-left: 10px;
+    background-color: white;
+}
+
+input[name="actualizar"]{
+    margin-top: 20px;
+}
+
+#not-confirmed{
+    margin-left: 30px;
+}

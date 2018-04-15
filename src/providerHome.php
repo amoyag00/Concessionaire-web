@@ -26,6 +26,12 @@ and open the template in the editor.
             <div id="lists">
                 <h2>Listas</h2>
                 
+                <input id="all" type="radio" name="filtro" checked="true">
+                <label for="all">Ver todos</label>
+                
+                <input id="not-confirmed" type="radio" name="filtro">
+                <label for="not-confirmed">Ver no confirmados</label>
+                
                 <button class="desplegable" value="Lista de productos">Lista de productos</button>
                 <div class="panel-lista">
                     <label>Lista de productos</label>
@@ -39,6 +45,10 @@ and open the template in the editor.
                 
                 <div id="file">
                     <h2>Actualizar productos</h2>
+                    
+                    <label>Seleccionar archivo XML</label>
+                    <input type="file" name="archivo" class="input-file">
+                    <input type="submit" name="actualizar" value="Actualizar" class="input-file">
                 </div>
             
         </section>
