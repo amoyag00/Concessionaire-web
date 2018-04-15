@@ -51,12 +51,7 @@
             <button type="button" id="realizar-pedido">Realizar pedido</button>
         </nav>
          <div id="productos-pedidos">
-            <div class="producto" id="1">
-                <span class="product-name">nombre producto</span>
-                Cantidad<input type="number" value="0" class="product-quantity"/>
-                <span class="product-price">precio €</span>
-                <button type="button" class="add-cart"> Añadir al carro</button>
-            </div>
+            
         </div>
     </body>
     <footer>

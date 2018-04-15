@@ -1,7 +1,7 @@
 $(document).ready(function(){
      $('#realizar-pedido').on("click",pedidoHandler);
      $('#cart').on("click",showDropdown);
-     $('.add-cart').on("click",addToCart);
+     $('#productos-pedidos').on("click",".add-cart",addToCart);
      $('#dropdown-table').on("click",".delete-button",deleteFromCart);
      $('#mis-pedidos').on("click",misPedidosHandler);
 });
@@ -13,7 +13,15 @@ var currentPrice=0.0;
 
 function pedidoHandler(){
    $('#cart').css('visibility','visible');
+   $("#productos-pedidos").empty();
    $('#filter').css('visibility','hidden');
+   //quitar cuando haya bbdd
+   $('#productos-pedidos').append("<div class='producto' id='1'>"+
+                "<img src='img/logo.png' class='product-img'></img>"+
+                "<span class='product-name'>g-34 motor</span>"+
+                "Cantidad<input type='number' value='1'min='1' class='product-quantity'/>"+
+                "<span class='product-price'>5 €</span>"+
+                "<button type='button' class='add-cart'> Añadir al carro</button></div>");
 }
 
 function purchasedItem(id, quantity){
@@ -39,23 +47,30 @@ function showDropdown(){
 }
 
 function addToCart(){
-   
     var id=$(this).parent().attr('id');
     var item=getItemOfId(id, searchedItems);
     var name=item.name;
     var quantity=$(this).prevAll().eq(1).val();
     var price=item.price;
     
-    $('#dropdown-table #header-row').after(
+   
+     currentPrice+=price*quantity;
+    $('#dropdown-table #total-price').html(currentPrice+" €");
+     var auxItem=getItemOfId(id,cartItems);
+    if(auxItem!==null){
+        auxItem.quantity=parseInt(auxItem.quantity)+parseInt(quantity);
+        $("#"+id).parent().prev().html(auxItem.quantity);
+    }else{
+         $('#dropdown-table #header-row').after(
             ' <tr>'+
                     '<td>'+name+'</td>'+
                     '<td>'+price+'€</td>'+
                     '<td>'+quantity+'</td>'+
                     '<td><button id='+id+' class="delete-button">X</button></td>'+
                     '</tr>');
-     currentPrice+=price*quantity;
-    $('#dropdown-table #total-price').html(currentPrice+" €");
-    cartItems.push(new purchasedItem(id, quantity));
+       cartItems.push(new purchasedItem(id, quantity)); 
+    }
+    
     $('#cart span').text(cartItems.length);
     
 }
@@ -83,13 +98,36 @@ function getItemOfId(id, array){
             return array[i];
         }
     }
+    return null;
 }
 
 
 function misPedidosHandler(){
     $('#cart').css('visibility','hidden');
+    $('#dropdown').css("display","none");
     $("#productos-pedidos").empty();
     $('#filter').css('visibility','visible');
+    $('#productos-pedidos').append("<table class='pedido'>"+
+                                        "<tr>"+
+                                            "<th>Nombre</th>"+
+                                            "<th>Proveedor</th>"+
+                                            "<th>Precio</th>"+
+                                            "<th>Cantidad</th>"+
+                                            "<th>Estado</th>"+
+                                            "<th></th>"+
+                                        "</tr>"+
+                                        "<tr>"+
+                                            "<td>Motor g324</td>"+
+                                            "<td>Tesla</td>"+
+                                            "<td>5 €</td>"+
+                                            "<td>2</td>"+
+                                            "<td>Sin confirmar</td>"+
+                                        "</tr>"+
+                                        "<tr>"+
+                                            "<td>Total: 10€</td>"+
+                                            "<td id='total-price'></td>"+
+                                        "</tr>"+
+                                    "</table>");
     
 }
 

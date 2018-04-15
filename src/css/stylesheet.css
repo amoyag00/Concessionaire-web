@@ -317,7 +317,14 @@ div#search-cart{
     float:left;
     margin-bottom:100px;
 }
-
+.pedido{
+    background-color:#A9A9A9;
+    box-shadow: 10px 10px 10px -6px black;
+    margin:20px;
+}
+.pedido tr, td, th{
+    padding:10px;
+}
 .producto{
     display:inline-block;
     margin:30px;
@@ -326,6 +333,7 @@ div#search-cart{
     width:200px;
     background-color:orange;
     text-align: center;
+    box-shadow: 10px 10px 10px -6px black;
 }
 .producto span{
     display:block;
@@ -352,12 +360,17 @@ div#search-cart{
     width:40px;
     margin-left:20px;
 }
+
+.producto img{
+    height: 180px;
+    width: 200px;
+}
 .producto button, #pedir{
     padding:20px;
     width:200px;
     display: block;
     overflow:hidden;
-    margin:0px;
+    margin:10px 0px 0px 0px;
     background: #f45850;
     border:none;
     font-family:'Gugi';
@@ -475,7 +488,7 @@ div#copyright{
     text-decoration: none;
     color:#f45850;
 }
-
+/* provider home */
 .desplegable {
     background-color: #eee;
     color: #444;
