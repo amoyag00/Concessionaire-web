@@ -1,3 +1,6 @@
+<?php
+    require_once 'isConcessionaire.php';
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -51,6 +54,48 @@
             <button type="button" id="realizar-pedido">Realizar pedido</button>
         </nav>
          <div id="productos-pedidos">
+             <?php
+            require_once 'models/Pedido.php';
+            $pedidos = Pedido::getPedidosOfConc($_SESSION["user"]);
+            if(count($pedidos)>0){ ?>
+             
+                
+                <?php
+                $total=0;
+                foreach($pedidos as $pedido){ ?>
+                    <table class='pedido'>
+                        <tr>
+                            <th><?php echo "Pedido ID: ".$pedido["pedido_id"] ?></th>
+                        </tr>
+                        <tr>
+                            <th>Producto</th>
+                            <th>Proveedor</th>
+                            <th>Precio</th>
+                            <th>Cantidad</th>
+                            <th>Fecha</th>
+                            <th>Estado</th>
+                            
+                        </tr>
+                        <tr>
+                            <td><?php ?></td>
+                            <td><?php ?></td>
+                            <td><?php ?></td>
+                            <td><?php ?></td>
+                            <td><?php echo $pedido["fecha"]?></td>
+                            <td><?php if($pedido["estado"]==1){
+                                        echo "Confirmado";
+                                      }else{
+                                          echo "No confirmado";
+                                      } ?></td>
+                        </tr>
+          <?php } ?>
+                    <tr>
+                        <td id='total-price'> <?php echo "Total: ".$total." €" ?></td>
+                    </tr>
+                        
+                <?php } ?>
+                </table>
+         
             
         </div>
     </body>

@@ -42,7 +42,7 @@ nombreCon VARCHAR(15),
 fecha date,
 estado INT,
 
-PRIMARY KEY(pedido_id,nombreCon),
+PRIMARY KEY(pedido_id),
 FOREIGN KEY(nombreCon) REFERENCES Concesionario(nombreCon)
 );
 

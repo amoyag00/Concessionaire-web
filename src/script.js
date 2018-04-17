@@ -15,6 +15,8 @@ function pedidoHandler(){
    $('#cart').css('visibility','visible');
    $("#productos-pedidos").empty();
    $('#filter').css('visibility','hidden');
+   $(this).prop("disabled",true);
+   $('#mis-pedidos').prop("disabled",false);
    //quitar cuando haya bbdd
    $('#productos-pedidos').append("<div class='producto' id='1'>"+
                 "<img src='img/logo.png' class='product-img'></img>"+
@@ -107,6 +109,8 @@ function misPedidosHandler(){
     $('#dropdown').css("display","none");
     $("#productos-pedidos").empty();
     $('#filter').css('visibility','visible');
+    $(this).prop("disabled",true);
+    $('#realizar-pedido').prop("disabled",false);
     $('#productos-pedidos').append("<table class='pedido'>"+
                                         "<tr>"+
                                             "<th>Nombre</th>"+
