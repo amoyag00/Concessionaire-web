@@ -15,13 +15,14 @@ class Usuario{
     
     function checkPassword($username, $password){
         $this->conn=DBConnection::getConnection();
-        $statement=$this->conn->prepare("SELECT * FROM Usuario WHERE nombre=? AND contrasena=?");
+        $statement=$this->conn->prepare("SELECT tipo FROM Usuario WHERE nombre=? AND contrasena=?");
         $statement->bind_param("ss",$username,$password);
         $statement->execute();
         $result=$statement->get_result();
         $statement->close();
         //$this->conn->close();
-        return $result->num_rows==1;
+        return $result->fetch_assoc();
+
     }
     
     function insert(){
@@ -50,9 +51,6 @@ class Usuario{
     function getType($username){
         $this->conn=DBConnection::getConnection();
         $statement=$this->conn->prepare("SELECT tipo FROM Usuario WHERE nombre = ?");
-        if ($statement === FALSE) {
-            die($statement->error);
-        }
         $statement->bind_param("s",$username);
         $statement->execute();
         $statement->bind_result($type);

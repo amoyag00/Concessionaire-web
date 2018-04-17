@@ -4,11 +4,13 @@ if( isset($_POST["user"]) && isset($_POST["password"]) ){
     $user = FILTER_VAR($_POST["user"],FILTER_SANITIZE_STRING);
     $pass = FILTER_VAR($_POST["password"],FILTER_SANITIZE_STRING);
     $u = new Usuario();
-    if($u->checkPassword($user,$pass)){
+    $result=$u->checkPassword($user,$pass);
+    
+    if(!empty($result["tipo"])){
         session_start();
         session_regenerate_id();
         $_SESSION["user"]=$user;
-        $_SESSION["type"]=$u->getType($user);
+        $_SESSION["type"]=$result["tipo"];
        
         if($_SESSION["type"]=="provider"){
 

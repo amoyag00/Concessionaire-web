@@ -28,7 +28,7 @@
            
         }
         
-        static public function getPedidosOfConc($conc_name){
+        static public function listPedidosOfConc($conc_name){
             $connection=DBConnection::getConnection();
             $statement=$connection->prepare("SELECT * FROM Pedido WHERE nombreCon = ?");
             $statement->bind_param("s",$conc_name);

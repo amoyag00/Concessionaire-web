@@ -261,11 +261,33 @@ h1.contact{
     font-family:'Gugi';
     color:white;
 }
-#conc-nav button:hover{
+#conc-nav button:disabled{
+    background-color:black;
+}
+#conc-nav button:hover:enabled{
    background-color:#f45850;
    box-shadow: 0 10px 15px -6px black inset,
-        0 -10px 15px -6px black inset;
-  
+        0 -10px 15px -6px black inset;  
+}
+
+#ver-todo{
+    padding:20px;
+    width:150px;
+    display: block;
+    overflow:hidden;
+    margin:0px;
+    background-color:#f45850;
+    border:none;
+    font-family:'Gugi';
+    color:white;
+    margin-top:0px;
+    display:inline-block;
+}
+
+#ver-todo:hover{
+   border: 2px solid white;
+ 
+   
 }
 
 div#search-cart{

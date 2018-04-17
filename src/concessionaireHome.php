@@ -28,6 +28,7 @@
                 
             </select>
             <input type="text" id="search" placeholder="Filtrar" />
+            <button id="ver-todo">Ver todo</button>
             <div id="dropdown">
                 <table id="dropdown-table">
                     <tr id="header-row">
@@ -50,13 +51,13 @@
         </div>
        
         <nav id="conc-nav">
-            <button type="button" id="mis-pedidos">Mis pedidos</button>
+            <button type="button" id="mis-pedidos" disabled="">Mis pedidos</button>
             <button type="button" id="realizar-pedido">Realizar pedido</button>
         </nav>
          <div id="productos-pedidos">
              <?php
             require_once 'models/Pedido.php';
-            $pedidos = Pedido::getPedidosOfConc($_SESSION["user"]);
+            $pedidos = Pedido::listPedidosOfConc($_SESSION["user"]);
             if(count($pedidos)>0){ ?>
              
                 
