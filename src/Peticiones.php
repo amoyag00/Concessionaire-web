@@ -1,6 +1,6 @@
 <?php
 require_once 'isConcessionaire.php';
-require_once 'Pedido.php';
+require_once 'models/Pedido.php';
 
 header("Content-type: application/json; charset=utf-8");
 

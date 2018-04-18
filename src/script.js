@@ -112,26 +112,26 @@ function misPedidosHandler(){
     $(this).prop("disabled",true);
     $('#realizar-pedido').prop("disabled",false);
     
-    peticionAjax('Peticiones.php','data='+JSON.stringify({"peticion":"listarPedidos"}),showPedidos);
+    peticionAjax("Peticiones.php","data="+JSON.stringify({"peticion":"listarPedidos"}),showPedidos);
 }
  
 function showPedidos(data){
-    alert('log');
     var pedidos=JSON.parse(data);
-    
     for(var i=0;i<pedidos.length;i++){
         var tabla="<table class='pedido'>"+
+                        "<tr>"+
+                            "<th>Pedido ID: "+pedidos[i].pedido_id +"</th>"+
+                            "<th>Fecha: "+pedidos[i].fecha +"</th>"+
+                        "</tr>"+
                         "<tr>" +
-                            "<th>Nombre</th>" +
+                            "<th>Producto</th>" +
                             "<th>Proveedor</th>" +
                             "<th>Precio</th>" +
                             "<th>Cantidad</th>" +
                             "<th>Estado</th>" +
                             "<th></th>" +
-                        "</tr>"+
-                        "<tr>"+
-                            "<th><Pedido ID: "+pedidos[i].pedido_id +"></th>"+
                         "</tr>";
+                        
         /*for(var j=0;j<listaproducos.length;j++){
              tabla+="<tr>"+
             "<td>Motor g324</td>" +
@@ -142,12 +142,10 @@ function showPedidos(data){
             "</tr>";
         }*/
          
-        
         tabla+="<tr>"+
-                        "<td>Total: 10€</td>" +
-                        "<td id='total-price'></td>" +
+                        "<td>Total: "+"€</td>" +
                         "</tr>" +
-                        "</table>"
+                        "</table>";
         $('#productos-pedidos').append(tabla);   
     }
 
@@ -163,7 +161,7 @@ function peticionAjax(script, data, callback){
         }
     };
     request.open("POST",script,true);//method script async
-    //request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     request.send(data);
 }
 
