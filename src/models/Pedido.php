@@ -30,7 +30,7 @@
         
         static public function listPedidosOfConc($conc_name){
             $connection=DBConnection::getConnection();
-            $statement=$connection->prepare("SELECT * FROM Pedido WHERE nombreCon = ?");
+            $statement=$connection->prepare("SELECT pedido_id, nombreCon,estado, DATE_FORMAT(fecha,'%d/%m/%Y') AS fecha FROM Pedido WHERE nombreCon=?");
             $statement->bind_param("s",$conc_name);
             $statement->execute();
             $result=$statement->get_result();
@@ -58,9 +58,10 @@
         
         function insert(){
             $statement=$this->connection->prepare("INSERT INTO Pedido(nombreCon, fecha, estado) VALUES(?,?,?)");
-            $statement->bind_param("sss",$this->conc_name,$this->date, $this->status);
+            $statement->bind_param("ssi",$this->conc_name,$this->date, $this->status);
             $statement->execute();
             $statement->close();
+            return $this->connection->lastInsertId();
             //$this->conn->close();
         }
     }

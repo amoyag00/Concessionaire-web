@@ -4,6 +4,8 @@ $(document).ready(function(){
      $('#productos-pedidos').on("click",".add-cart",addToCart);
      $('#dropdown-table').on("click",".delete-button",deleteFromCart);
      $('#mis-pedidos').on("click",misPedidosHandler);
+     $('#ver-todo').on("click",verTodoHandler);
+     $('#pedir').on("click",registrarPedido);
 });
 
 var cartItems=new Array();
@@ -163,6 +165,24 @@ function peticionAjax(script, data, callback){
     request.open("POST",script,true);//method script async
     request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     request.send(data);
+}
+
+function verTodoHandler(){
+    $("#productos-pedidos").empty();
+    if($('#mis-pedidos').is(':disabled')){
+        peticionAjax("Peticiones.php","data="+JSON.stringify({"peticion":"listarPedidos"}),showPedidos);
+    }else{
+        
+    }
+}
+
+function registrarPedido(){
+    if(cartItems.length===0){
+        alert("No ha añadido productos al pedido");
+    }else{
+        peticionAjax("Peticiones.php","data="+JSON.stringify({"peticion":"registrarPedido"}),showPedidos);
+    }
+    
 }
 
 

@@ -42,10 +42,7 @@
                         <td id="total-price"></td>
                         
                     </tr>
-                       
-                </table>
-                
-                
+                </table>  
                 <button id="pedir">Realizar pedido</button>
             </div>
         </div>
@@ -54,13 +51,13 @@
             <button type="button" id="mis-pedidos" disabled="">Mis pedidos</button>
             <button type="button" id="realizar-pedido">Realizar pedido</button>
         </nav>
-         <div id="productos-pedidos">
+        
+        <div id="productos-pedidos">
              <?php
             require_once 'models/Pedido.php';
             $pedidos = Pedido::listPedidosOfConc($_SESSION["user"]);
             if(count($pedidos)>0){ ?>
              
-                
                 <?php
                 $total=0;
                 foreach($pedidos as $pedido){ ?>
@@ -88,15 +85,14 @@
                                           echo "No confirmado";
                                       } ?></td>
                         </tr>
+                        <tr>
+                            <td id='total-price'> <?php echo "Total: ".$total." €" ?></td>
+                        </tr>
           <?php } ?>
-                    <tr>
-                        <td id='total-price'> <?php echo "Total: ".$total." €" ?></td>
-                    </tr>
+                    
                         
                 <?php } ?>
-                </table>
-         
-            
+                </table>   
         </div>
     </body>
     <footer>
