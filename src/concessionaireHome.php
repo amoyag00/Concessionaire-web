@@ -67,13 +67,13 @@
                     <table class='pedido'>
                         <tr>
                             <th><?php echo "Pedido ID: ".$pedido["pedido_id"] ?></th>
+                            <th><?php echo "Fecha: ".$pedido["fecha"]?></th>
                         </tr>
                         <tr>
                             <th>Producto</th>
                             <th>Proveedor</th>
                             <th>Precio</th>
                             <th>Cantidad</th>
-                            <th>Fecha</th>
                             <th>Estado</th>
                             
                         </tr>
@@ -82,7 +82,6 @@
                             <td><?php ?></td>
                             <td><?php ?></td>
                             <td><?php ?></td>
-                            <td><?php echo $pedido["fecha"]?></td>
                             <td><?php if($pedido["estado"]==1){
                                         echo "Confirmado";
                                       }else{
