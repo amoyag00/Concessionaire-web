@@ -46,9 +46,11 @@ and open the template in the editor.
                 <div id="file">
                     <h2>Actualizar productos</h2>
                     
-                    <label>Seleccionar archivo XML</label>
-                    <input type="file" name="archivo" class="input-file">
-                    <input type="submit" name="actualizar" value="Actualizar" class="input-file">
+                    <form method="POST" action="actualizarProductos.php" enctype="multipart/form-data">
+                        <label>Seleccionar archivo XML</label>
+                        <input type="file" name="archivo" class="input-file">
+                        <input type="submit" name="actualizar" value="Actualizar" class="input-file">
+                    </form>
                 </div>
             
         </section>
