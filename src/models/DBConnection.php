@@ -2,8 +2,8 @@
 class DBConnection{
     private static $connection;
     const DB_SERVER = 'localhost';
-    const DB_USERNAME = 'root';
-    const DB_PASSWORD = 'root';
+    const DB_USERNAME = 'herks';
+    const DB_PASSWORD = 'herks';
     const DB_NAME = 'herks';
     public static function getConnection(){
         if(!isset(self::$connection)){
