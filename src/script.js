@@ -13,20 +13,7 @@ var searchedItems=new Array();
 searchedItems.push(new item(1,"g-34 motor","very good",5,"tesla"));
 var currentPrice=0.0;
 
-function pedidoHandler(){
-   $('#cart').css('visibility','visible');
-   $("#productos-pedidos").empty();
-   $('#filter').css('visibility','hidden');
-   $(this).prop("disabled",true);
-   $('#mis-pedidos').prop("disabled",false);
-   //quitar cuando haya bbdd
-   $('#productos-pedidos').append("<div class='producto' id='1'>"+
-                "<img src='img/logo.png' class='product-img'></img>"+
-                "<span class='product-name'>g-34 motor</span>"+
-                "Cantidad<input type='number' value='1'min='1' class='product-quantity'/>"+
-                "<span class='product-price'>5 €</span>"+
-                "<button type='button' class='add-cart'> Añadir al carro</button></div>");
-}
+
 
 function purchasedItem(id, quantity){
     this.id=id;
@@ -151,6 +138,33 @@ function showPedidos(data){
         $('#productos-pedidos').append(tabla);   
     }
 
+}
+
+function pedidoHandler(){
+   $('#cart').css('visibility','visible');
+   $("#productos-pedidos").empty();
+   $('#filter').css('visibility','hidden');
+   $(this).prop("disabled",true);
+   $('#mis-pedidos').prop("disabled",false);
+    peticionAjax("Peticiones.php","data="+JSON.stringify({"peticion":"listarProductos"}),showProductos);
+}
+
+function showProductos(data){
+    var productos=JSON.parse(data);
+    alert(productos);
+    for(var i=0;i<productos.length;i++){
+        if(productos[i].disponible===1){
+            var producto="<div class='producto' id="+productos[i].producto_id+">"+
+                "<span class='product-name'>"+productos[i].nombre+"</span>"+
+                "<span class='provider-name'>"+productos[i].nombrePro+"</span>"+
+                "Cantidad<input type='number' value='1'min='1' class='product-quantity'/>"+
+                "<span class='product-price'>"+productos[i].precio+"</span>"+
+                "<button type='button' class='add-cart'> Añadir al carro</button></div>"
+        
+        $('#productos-pedidos').append(producto);
+        }   
+    }
+   
 }
 
 function peticionAjax(script, data, callback){
