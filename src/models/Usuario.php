@@ -1,4 +1,5 @@
 <?php
+namespace Models;
 include 'DBConnection.php';
 class Usuario{
     private $conn;

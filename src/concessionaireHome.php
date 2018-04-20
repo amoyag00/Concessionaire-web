@@ -1,4 +1,5 @@
 <?php
+namespace Concessionaire;
     require_once 'isConcessionaire.php';
 ?>
 <!DOCTYPE html>
@@ -55,7 +56,7 @@
         <div id="productos-pedidos">
              <?php
             require_once 'models/Pedido.php';
-            $pedidos = Pedido::listPedidosOfConc($_SESSION["user"]);
+            $pedidos = \Models\Pedido::listPedidosOfConc($_SESSION["user"]);
             if(count($pedidos)>0){ ?>
              
                 <?php
