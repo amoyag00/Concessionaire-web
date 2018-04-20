@@ -14,8 +14,13 @@ class Producto{
     private $precio;
     private $disponible;
     
-    function __construct() {
+    function __construct($proveedor, $nombre, $caracteristicas, $precio, $disponible) {
         $this->connection = DBConnection::getConnection();
+        $this->proveedor = $proveedor;
+        $this->nombre = $nombre;
+        $this->caracteristicas = $caracteristicas;
+        $this->precio = $precio;
+        $this->disponible = $disponible;
     }
     
     function setAttributes($data){
@@ -38,7 +43,7 @@ class Producto{
     }
     
     function insert(){
-        $statement = $this->connection->prepare("INSERT INTO Producto(producto_id, nombrePro, nombre, caracteristicas, precio, disponible) VALUES(?,?,?,?,?)");
+        $statement = $this->connection->prepare("INSERT INTO Producto(nombrePro, nombre, caracteristicas, precio, disponible) VALUES(?,?,?,?,?)");
         $statement->bind_param("sssii", $this->proveedor, $this->nombre, $this->caracteristicas, $this->precio, $this->disponible);
         $statement->execute();
         $statement->close();

@@ -8,9 +8,18 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
+require_once 'models/Producto.php';
+
 if(isset($_FILES["archivo"])){
     $xmlContent = file_get_contents($_FILES["archivo"]["tmp_name"]);
     $productos = new SimpleXMLElement($xmlContent);
     
-    echo $productos->Producto[0]->attributes();
+    //echo $productos->Producto[0]->attributes();
+    for($i=0;$i<sizeof($productos);$i++){
+        $elemento = $productos->Producto[$i];
+        
+        $nuevoProducto = new Producto($elemento->Proveedor, $elemento->Nombre, $elemento->Caracteristicas, $elemento->Precio, $elemento->Disponible);
+        $nuevoProducto->insert();
+        //echo $nuevoProducto::proveedor;
+    }
 }
