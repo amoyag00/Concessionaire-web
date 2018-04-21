@@ -14,7 +14,7 @@ if( isset($_POST["user"]) && isset($_POST["password"]) ){
         $_SESSION["type"]=$result["tipo"];
        
         if($_SESSION["type"]=="provider"){
-
+            header("Location: providerHome.php");
         }else if($_SESSION["type"]=="concessionaire"){
             header("Location: concessionaireHome.php");
         }else if($_SESSION["type"]=="admin"){
