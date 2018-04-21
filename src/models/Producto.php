@@ -14,17 +14,12 @@ class Producto{
     private $precio;
     private $disponible;
     
-    function __construct($proveedor, $nombre, $caracteristicas, $precio, $disponible) {
+    function __construct() {
         $this->connection = DBConnection::getConnection();
-        $this->proveedor = $proveedor;
-        $this->nombre = $nombre;
-        $this->caracteristicas = $caracteristicas;
-        $this->precio = $precio;
-        $this->disponible = $disponible;
     }
     
     function setAttributes($data){
-        $this->proveedor = $data["proveedor"];
+        $this->proveedor = $data["nombrePro"];
         $this->nombre = $data["nombre"];
         $this->caracteristicas = $data["caracteristicas"];
         $this->precio = $data["precio"];
@@ -47,5 +42,33 @@ class Producto{
         $statement->bind_param("sssii", $this->proveedor, $this->nombre, $this->caracteristicas, $this->precio, $this->disponible);
         $statement->execute();
         $statement->close();
+    }
+    
+    function getProducto($p_id){
+        $statement = $this->connection->prepare("SELECT * FROM Producto WHERE producto_id=?");
+        $statement->bind_param("i", $p_id);
+        $statement->execute();
+        $producto = $statement->get_result();
+        
+        if($fila = $producto->fetch_assoc()){
+            $this->setAttributes($fila);
+        }
+        $statement->close();
+    }
+    
+    static function getListaProductosProveedor($prov_name){
+        $connection = DBConnection::getConnection();
+        $statement = $connection->prepare("SELECT producto_id, nombre, caracteristicas, precio, disponible FROM Producto WHERE nombrePro=?");
+        $statement->bind_param("s", $prov_name);
+        $statement->execute();
+        $lista = $statement->get_result();
+        $listaProductos = array();
+        
+        while($fila = $lista->fetch_assoc()){
+            $listaProductos[] = $fila;
+        }
+        $statement->close();
+        
+        return $listaProductos;
     }
 }

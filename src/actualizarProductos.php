@@ -18,7 +18,17 @@ if(isset($_FILES["archivo"])){
     for($i=0;$i<sizeof($productos);$i++){
         $elemento = $productos->Producto[$i];
         
-        $nuevoProducto = new Producto($elemento->Proveedor, $elemento->Nombre, $elemento->Caracteristicas, $elemento->Precio, $elemento->Disponible);
+        $nuevoProducto = new Producto();
+        
+        $datos = array(
+            "nombrePro" => $elemento->Proveedor,
+            "nombre" => $elemento->Nombre,
+            "caracteristicas" => $elemento->Caracteristicas,
+            "precio" => $elemento->Precio,
+            "disponible" => $elemento->Disponible,
+        );
+        
+        $nuevoProducto->setAttributes($datos);
         $nuevoProducto->insert();
         //echo $nuevoProducto::proveedor;
     }
