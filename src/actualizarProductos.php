@@ -31,5 +31,11 @@ if(isset($_FILES["archivo"])){
         $nuevoProducto->setAttributes($datos);
         $nuevoProducto->insert();
         //echo $nuevoProducto::proveedor;
+        
+        goBack();
     }
+}
+
+function goBack(){
+    header("Location: {$_SERVER["HTTP_REFERER"]}");
 }

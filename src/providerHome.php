@@ -32,14 +32,14 @@ and open the template in the editor.
                 <input id="not-confirmed" type="radio" name="filtro">
                 <label for="not-confirmed">Ver no confirmados</label>
                 
-                <button class="desplegable" value="Lista de productos">Lista de productos</button>
-                <div class="panel-lista">
-                    <label>Lista de productos</label>
-                </div>
-
                 <button class="desplegable" value="Lista de pedidos">Lista de pedidos</button>
                 <div class="panel-lista">
                     <label>Lista de pedidos</label>
+                </div>
+                
+                <button class="desplegable" value="Lista de productos">Lista de productos</button>
+                <div class="panel-lista">
+                    <label>Lista de productos</label>
                 </div>
             </div>
                 
