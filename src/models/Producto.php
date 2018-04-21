@@ -4,7 +4,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+namespace Models;
 require_once 'DBConnection.php';
+
 class Producto{
     private $connection;
     private $producto_id;
@@ -64,6 +66,22 @@ class Producto{
         $lista = $statement->get_result();
         $listaProductos = array();
         
+        while($fila = $lista->fetch_assoc()){
+            $listaProductos[] = $fila;
+        }
+        $statement->close();
+        
+        return $listaProductos;
+    }
+    
+    static function getAll(){
+        $connection = DBConnection::getConnection();
+         echo "llega";
+        $statement = $connection->prepare("SELECT * FROM Producto");
+        $statement->execute();
+        $lista = $statement->get_result();
+        $listaProductos = array();
+        echo "llega";
         while($fila = $lista->fetch_assoc()){
             $listaProductos[] = $fila;
         }

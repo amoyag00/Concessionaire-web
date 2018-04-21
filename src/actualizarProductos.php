@@ -13,12 +13,12 @@ require_once 'models/Producto.php';
 if(isset($_FILES["archivo"])){
     $xmlContent = file_get_contents($_FILES["archivo"]["tmp_name"]);
     $productos = new SimpleXMLElement($xmlContent);
-    
+    echo "entra";
     //echo $productos->Producto[0]->attributes();
     for($i=0;$i<sizeof($productos);$i++){
         $elemento = $productos->Producto[$i];
         
-        $nuevoProducto = new Producto();
+        $nuevoProducto = new \Models\Producto();
         
         $datos = array(
             "nombrePro" => $elemento->Proveedor,
