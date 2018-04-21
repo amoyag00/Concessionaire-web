@@ -80,11 +80,7 @@ namespace Concessionaire;
                             <td><?php ?></td>
                             <td><?php ?></td>
                             <td><?php ?></td>
-                            <td><?php if($pedido["estado"]==1){
-                                        echo "Confirmado";
-                                      }else{
-                                          echo "No confirmado";
-                                      } ?></td>
+                            
                         </tr>
                         <tr>
                             <td id='total-price'> <?php echo "Total: ".$total." €" ?></td>
