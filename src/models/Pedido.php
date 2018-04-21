@@ -1,4 +1,5 @@
 <?php
+namespace Models;
     require_once 'DBConnection.php';
     
     class Pedido{

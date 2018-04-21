@@ -1,4 +1,5 @@
 <?php
+namespace footer;
 echo "<div id='list-container'>
 				<ul id='about' class='footer-list'>
 					<li class='list-header'><a href='#' class='list-header'>About</a></li>

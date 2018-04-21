@@ -1,4 +1,5 @@
 <?php
+namespace Peticiones;
 require_once 'isConcessionaire.php';
 require_once 'models/Pedido.php';
 require_once 'models/Producto.php';
@@ -9,10 +10,10 @@ $obj= json_decode($_POST["data"]);
 
 switch($obj->peticion){
     case "listarPedidos":
-        echo json_encode(Pedido::listPedidosOfConc($_SESSION["user"]));
+        echo json_encode(\Models\Pedido::listPedidosOfConc($_SESSION["user"]));
         break;
     case "registrarPedido":
-        $pedido= new Pedido();
+        $pedido= new \Models\Pedido();
         $attributes=array("conc_name"=>$_SESSION["user"],
                             "status"=>0);
         $pedido->setAttributes($attributes);

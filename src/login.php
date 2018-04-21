@@ -1,9 +1,10 @@
 <?php
+namespace Login;
 include 'models/Usuario.php';
 if( isset($_POST["user"]) && isset($_POST["password"]) ){
     $user = FILTER_VAR($_POST["user"],FILTER_SANITIZE_STRING);
     $pass = FILTER_VAR($_POST["password"],FILTER_SANITIZE_STRING);
-    $u = new Usuario();
+    $u = new \Models\Usuario();
     $result=$u->checkPassword($user,$pass);
     
     if(!empty($result["tipo"])){
