@@ -176,9 +176,9 @@ footer a#contact{
 /* contact */
 #contact-body{
     
-    margin:auto;
-    text-align: center;
-    background-image: linear-gradient(to right, #d7d2cc 0%, #304352 100%);
+    background: -moz-linear-gradient(#A9A9A9, #000000 80%) fixed;
+    font-family:'Gugi';
+    margin:0px;
    
 }
 

@@ -8,6 +8,11 @@
         <link href="https://fonts.googleapis.com/css?family=Orbitron|Economica|Gugi" rel="stylesheet"> 
         <link rel="icon" type="image/png" href="img/logo.png">
     </head>
+    <header>
+        <?php
+            require_once 'header.php';
+        ?>
+    </header>
     <body  id="contact-body">
         
         <div id="contact-div">
@@ -20,4 +25,11 @@
             </form>
         </div>
     </body>
+    <footer>
+        <?php
+            require_once 'footer.php';
+        ?>
+    </footer>
 </html>
+
+
