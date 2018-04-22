@@ -17,7 +17,7 @@ if(isset($_FILES["archivo"])){
     for($i=0;$i<sizeof($productos);$i++){
         $elemento = $productos->Producto[$i];
       
-        echo $elemento->attributes()["id"];
+        //echo $elemento->attributes()["id"];
 
         $nuevoProducto = new \Models\Producto();
         
