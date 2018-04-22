@@ -312,7 +312,7 @@ div#search-cart{
     height: 60px;
     width: 60px;
     float: right;
-    margin:25px;
+    margin:10px 25px 10px 25px;
     visibility:hidden;
     background-image: url('../img/cart.png');
     background-size: 100%;
@@ -335,10 +335,11 @@ div#search-cart{
     filter: drop-shadow(2px 2px 0 black) 
           drop-shadow(-2px -2px 0 black);
 }
-#productos-pedidos{
-    float:left;
-    margin-bottom:100px;
+#main-div{
+    display:block;
+    margin:50px 0px 100px 200px;
 }
+
 .pedido{
     background-color:#A9A9A9;
     box-shadow: 10px 10px 10px -6px black;
@@ -348,14 +349,16 @@ div#search-cart{
     padding:10px;
 }
 .producto{
+    padding-top:10px;
     display:inline-block;
     margin:30px;
     margin-top:0px;
-    height:250px;
+    height:180px;
     width:200px;
     background-color:orange;
     text-align: center;
     box-shadow: 10px 10px 10px -6px black;
+    overflow:hidden;
 }
 .producto span{
     display:block;
@@ -392,13 +395,14 @@ div#search-cart{
     width:200px;
     display: block;
     overflow:hidden;
-    margin:10px 0px 0px 0px;
+    margin:35px 0px 0px 0px;
     background: #f45850;
     border:none;
     font-family:'Gugi';
     color:white;
     vertical-align: bottom;
     box-shadow: 0 10px 15px -6px black;
+    bottom:0px;
 }
 .producto button:hover, #pedir:hover{
    border: 2px solid white;

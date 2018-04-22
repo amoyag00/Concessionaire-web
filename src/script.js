@@ -1,16 +1,15 @@
 $(document).ready(function(){
-     $('#realizar-pedido').on("click",pedidoHandler);
+     $('#realizar-pedido-button').on("click",realizarPedidoHandler);
      $('#cart').on("click",showDropdown);
-     $('#productos-pedidos').on("click",".add-cart",addToCart);
+     $('#main-div').on("click",".add-cart",addToCart);
      $('#dropdown-table').on("click",".delete-button",deleteFromCart);
-     $('#mis-pedidos').on("click",misPedidosHandler);
+     $('#mis-pedidos-button').on("click",misPedidosHandler);
      $('#ver-todo').on("click",verTodoHandler);
      $('#pedir').on("click",registrarPedido);
 });
 
 var cartItems=new Array();
 var searchedItems=new Array();
-searchedItems.push(new item(1,"g-34 motor","very good",5,"tesla"));
 var currentPrice=0.0;
 
 
@@ -95,12 +94,13 @@ function getItemOfId(id, array){
 
 function misPedidosHandler(){
     $('#cart').css('visibility','hidden');
-    $('#dropdown').css("display","none");
-    $("#productos-pedidos").empty();
     $('#filter').css('visibility','visible');
+    $('#dropdown').css("display","none");
+    $("#main-div").empty();
+    //Buttons
     $(this).prop("disabled",true);
-    $('#realizar-pedido').prop("disabled",false);
-    
+    $('#realizar-pedido-button').prop("disabled",false);
+    //Content
     peticionAjax("Peticiones.php","data="+JSON.stringify({"peticion":"listarPedidos"}),showPedidos);
 }
  
@@ -135,34 +135,39 @@ function showPedidos(data){
                         "<td>Total: "+"€</td>" +
                         "</tr>" +
                         "</table>";
-        $('#productos-pedidos').append(tabla);   
+        $('#main-div').append(tabla);   
     }
 
 }
 
-function pedidoHandler(){
+function realizarPedidoHandler(){
    $('#cart').css('visibility','visible');
-   $("#productos-pedidos").empty();
    $('#filter').css('visibility','hidden');
+   //Buttons
    $(this).prop("disabled",true);
-   $('#mis-pedidos').prop("disabled",false);
+   $('#mis-pedidos-button').prop("disabled",false);
+    //Content
+    $("#main-div").empty();
     peticionAjax("Peticiones.php","data="+JSON.stringify({"peticion":"listarProductos"}),showProductos);
 }
 
 function showProductos(data){
     var productos=JSON.parse(data);
-    alert(productos);
     for(var i=0;i<productos.length;i++){
-        if(productos[i].disponible===1){
-            var producto="<div class='producto' id="+productos[i].producto_id+">"+
-                "<span class='product-name'>"+productos[i].nombre+"</span>"+
-                "<span class='provider-name'>"+productos[i].nombrePro+"</span>"+
-                "Cantidad<input type='number' value='1'min='1' class='product-quantity'/>"+
-                "<span class='product-price'>"+productos[i].precio+"</span>"+
-                "<button type='button' class='add-cart'> Añadir al carro</button></div>"
-        
-        $('#productos-pedidos').append(producto);
-        }   
+        var producto_id = productos[i].producto_id;
+        var nombre = productos[i].nombre;
+        var nombrePro = productos[i].nombrePro;
+        var precio = productos[i].precio;
+        searchedItems.push(new item(producto_id, nombre, " features", precio, nombrePro));
+        var producto = "<div class='producto' id=" + producto_id + ">" +
+                "<span class='product-name'>" + nombre + "</span>" +
+                "<span class='provider-name'>" + "<b>Proveedor: </b>" + nombrePro + "</span>" +
+                "Cantidad<input type='number' value='1'min='1' class='product-quantity'/>" +
+                "<span class='product-price'>" + "<b>€/unidad: </b>" + precio + "</span>" +
+                "<button type='button' class='add-cart'> Añadir al carro</button></div>";
+
+        $('#main-div').append(producto);
+         
     }
    
 }
@@ -182,11 +187,11 @@ function peticionAjax(script, data, callback){
 }
 
 function verTodoHandler(){
-    $("#productos-pedidos").empty();
-    if($('#mis-pedidos').is(':disabled')){
+    $("#main-div").empty();
+    if($('#mis-pedidos-button').is(':disabled')){
         peticionAjax("Peticiones.php","data="+JSON.stringify({"peticion":"listarPedidos"}),showPedidos);
     }else{
-        
+        peticionAjax("Peticiones.php","data="+JSON.stringify({"peticion":"listarProductos"}),showProductos);
     }
 }
 

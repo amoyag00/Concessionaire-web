@@ -1,6 +1,8 @@
 <?php
 namespace Concessionaire;
     require_once 'isConcessionaire.php';
+    require_once 'models/Pedido.php';
+    require_once 'models/Producto.php';
 ?>
 <!DOCTYPE html>
 <html>
@@ -49,17 +51,15 @@ namespace Concessionaire;
         </div>
        
         <nav id="conc-nav">
-            <button type="button" id="mis-pedidos" disabled="">Mis pedidos</button>
-            <button type="button" id="realizar-pedido">Realizar pedido</button>
+            <button type="button" id="mis-pedidos-button" disabled="">Mis pedidos</button>
+            <button type="button" id="realizar-pedido-button">Realizar pedido</button>
         </nav>
         
-        <div id="productos-pedidos">
+        <div id="main-div">
              <?php
-            require_once 'models/Pedido.php';
+            
             $pedidos = \Models\Pedido::listPedidosOfConc($_SESSION["user"]);
-            if(count($pedidos)>0){ ?>
-             
-                <?php
+            if(count($pedidos)>0){ 
                 $total=0;
                 foreach($pedidos as $pedido){ ?>
                     <table class='pedido'>
@@ -85,11 +85,10 @@ namespace Concessionaire;
                         <tr>
                             <td id='total-price'> <?php echo "Total: ".$total." €" ?></td>
                         </tr>
-          <?php } ?>
-                    
-                        
-                <?php } ?>
-                </table>   
+                    </table>
+          <?php }             
+            } ?>
+                  
         </div>
     </body>
     <footer>

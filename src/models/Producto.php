@@ -76,7 +76,7 @@ class Producto{
     
     static function getAll(){
         $connection = DBConnection::getConnection();
-        $statement = $connection->prepare("SELECT * FROM Producto");
+        $statement = $connection->prepare("SELECT * FROM Producto WHERE disponible=1");
         $statement->execute();
         $lista = $statement->get_result();
         $listaProductos = array();

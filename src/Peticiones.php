@@ -20,8 +20,7 @@ switch($obj->peticion){
         $pedido_id=$pedido->insert();
         break;
     case "listarProductos":
-        $p=new Producto();
-        echo json_encode($p->filter("seat"));
+        echo json_encode(\Models\Producto::getAll());
         break;   
 }
 
