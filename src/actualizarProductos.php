@@ -13,11 +13,12 @@ require_once 'models/Producto.php';
 if(isset($_FILES["archivo"])){
     $xmlContent = file_get_contents($_FILES["archivo"]["tmp_name"]);
     $productos = new SimpleXMLElement($xmlContent);
-    echo "entra";
     //echo $productos->Producto[0]->attributes();
     for($i=0;$i<sizeof($productos);$i++){
         $elemento = $productos->Producto[$i];
-        
+      
+        echo $elemento->attributes()["id"];
+
         $nuevoProducto = new \Models\Producto();
         
         $datos = array(
@@ -27,10 +28,9 @@ if(isset($_FILES["archivo"])){
             "precio" => $elemento->Precio,
             "disponible" => $elemento->Disponible,
         );
-        
+
         $nuevoProducto->setAttributes($datos);
-        $nuevoProducto->insert();
-        //echo $nuevoProducto::proveedor;
+        $nuevoProducto->updateOrInsert($elemento->attributes()["id"]);
         
         goBack();
     }

@@ -76,17 +76,23 @@ class Producto{
     
     static function getAll(){
         $connection = DBConnection::getConnection();
-         echo "llega";
         $statement = $connection->prepare("SELECT * FROM Producto");
         $statement->execute();
         $lista = $statement->get_result();
         $listaProductos = array();
-        echo "llega";
+        
         while($fila = $lista->fetch_assoc()){
             $listaProductos[] = $fila;
         }
         $statement->close();
         
         return $listaProductos;
+    }
+    
+    function updateOrInsert($p_id){
+        $statement = $this->connection->prepare("INSERT INTO Producto (producto_id, nombrePro, nombre, caracteristicas, precio, disponible) VALUES(?,?,?,?,?,?) ON DUPLICATE KEY UPDATE nombrePro = VALUES(nombrePro), nombre = VALUES(nombre), caracteristicas = VALUES(caracteristicas), precio = VALUES(precio), disponible = VALUES(disponible)");
+        $statement->bind_param("isssii", $p_id, $this->proveedor, $this->nombre, $this->caracteristicas, $this->precio, $this->disponible);
+        $statement->execute();
+        $statement->close();
     }
 }
