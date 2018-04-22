@@ -10,7 +10,7 @@ ini_set('display_errors', 1);
 
 require_once 'models/Producto.php';
 
-if(isset($_FILES["archivo"])){
+if(is_uploaded_file($_FILES["archivo"]["tmp_name"])){
     $xmlContent = file_get_contents($_FILES["archivo"]["tmp_name"]);
     $productos = new SimpleXMLElement($xmlContent);
     //echo $productos->Producto[0]->attributes();
@@ -22,7 +22,7 @@ if(isset($_FILES["archivo"])){
         $nuevoProducto = new \Models\Producto();
         
         $datos = array(
-            "nombrePro" => $elemento->Proveedor,
+            "nombrePro" => NULL,
             "nombre" => $elemento->Nombre,
             "caracteristicas" => $elemento->Caracteristicas,
             "precio" => $elemento->Precio,
@@ -34,6 +34,11 @@ if(isset($_FILES["archivo"])){
         
         goBack();
     }
+}
+else{    
+    echo '<script type="text/javascript">
+            alert("No se ha introducido un archivo de actualizacion");
+          </script>';
 }
 
 function goBack(){
