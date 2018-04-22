@@ -43,6 +43,7 @@ and open the template in the editor.
                         <tr>
                             <td scope="col">Identificador</td>
                             <td scope="col">Nombre</td>
+                            <td scope="col">Precio</td>
                             <td scope="col">Disponibilidad</td>
                         </tr>
                     <?php
@@ -65,6 +66,9 @@ and open the template in the editor.
                                         }
                                         else if($j==1){
                                             echo $producto["nombre"];
+                                        }
+                                        else if($j==2){
+                                            echo $producto["precio"];
                                         }
                                         else{
                                             if($producto["disponible"]){

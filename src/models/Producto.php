@@ -60,7 +60,7 @@ class Producto{
     
     static function getListaProductosProveedor($prov_name){
         $connection = DBConnection::getConnection();
-        $statement = $connection->prepare("SELECT producto_id, nombre, disponible FROM Producto WHERE nombrePro=?");
+        $statement = $connection->prepare("SELECT producto_id, nombre, precio, disponible FROM Producto WHERE nombrePro=?");
         $statement->bind_param("s", $prov_name);
         $statement->execute();
         $lista = $statement->get_result();
