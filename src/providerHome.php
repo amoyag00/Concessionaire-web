@@ -32,14 +32,53 @@ and open the template in the editor.
                 <input id="not-confirmed" type="radio" name="filtro">
                 <label for="not-confirmed">Ver no confirmados</label>
                 
-                <button class="desplegable" value="Lista de pedidos">Lista de pedidos</button>
+                <button class="desplegable" value="Lista de pedidos">Lsta de pedidos</button>
                 <div class="panel-lista">
                     <label>Lista de pedidos</label>
                 </div>
                 
                 <button class="desplegable" value="Lista de productos">Lista de productos</button>
                 <div class="panel-lista">
-                    <label>Lista de productos</label>
+                    <table id="tabla-productos">
+                        <tr>
+                            <td scope="col">Identificador</td>
+                            <td scope="col">Nombre</td>
+                            <td scope="col">Disponibilidad</td>
+                        </tr>
+                    <?php
+                        error_reporting(E_ALL);
+                        ini_set('display_errors', 1);
+                        require_once 'models/Producto.php';
+                        session_start();
+                        session_regenerate_id();
+                        $lista = \Models\Producto::getListaProductosProveedor($_SESSION["user"]);
+                        
+                        for($i=0;$i<sizeof($lista);$i++){ 
+                            $producto = $lista[$i] ?>
+                            <tr>
+                            <?php
+                                for($j=0;$j<sizeof($producto);$j++){ ?>
+                                    <td class="celda-producto">
+                                    <?php 
+                                        if($j==0){
+                                            echo $producto["producto_id"];
+                                        }
+                                        else if($j==1){
+                                            echo $producto["nombre"];
+                                        }
+                                        else{
+                                            if($producto["disponible"]){
+                                                echo "Producto disponible";
+                                            }
+                                            else{
+                                                echo "Producto agotado";
+                                            }
+                                        } ?>
+                                    </td>
+                                <?php } ?>
+                            </tr>
+                        <?php } ?>
+                    </table>
                 </div>
             </div>
                 
