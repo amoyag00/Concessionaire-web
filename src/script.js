@@ -6,6 +6,7 @@ $(document).ready(function(){
      $('#mis-pedidos-button').on("click",misPedidosHandler);
      $('#ver-todo').on("click",verTodoHandler);
      $('#pedir').on("click",registrarPedido);
+     $('#search').keypress(filter);
 });
 
 var cartItems=new Array();
@@ -158,11 +159,13 @@ function showProductos(data){
         var nombre = productos[i].nombre;
         var nombrePro = productos[i].nombrePro;
         var precio = productos[i].precio;
-        searchedItems.push(new item(producto_id, nombre, " features", precio, nombrePro));
+        var caracteristicas =productos[i].caracteristicas;
+        searchedItems.push(new item(producto_id, nombre, caracteristicas, precio, nombrePro));
         var producto = "<div class='producto' id=" + producto_id + ">" +
                 "<span class='product-name'>" + nombre + "</span>" +
                 "<span class='provider-name'>" + "<b>Proveedor: </b>" + nombrePro + "</span>" +
-                "Cantidad<input type='number' value='1'min='1' class='product-quantity'/>" +
+                "<span class='features'>" + "<b>Caracteristicas: </b>" + caracteristicas + "</span>" +
+                "<b>Cantidad: </b><input type='number' value='1'min='1' class='product-quantity'/>" +
                 "<span class='product-price'>" + "<b>€/unidad: </b>" + precio + "</span>" +
                 "<button type='button' class='add-cart'> Añadir al carro</button></div>";
 
@@ -200,6 +203,20 @@ function registrarPedido(){
         alert("No ha añadido productos al pedido");
     }else{
         peticionAjax("Peticiones.php","data="+JSON.stringify({"peticion":"registrarPedido"}),showPedidos);
+    }
+    
+}
+
+function filter(event){
+    if(event.which==13){ //enter
+       $("#main-div").empty();
+        if($('#mis-pedidos-button').is(':disabled')){
+            var param=$('#filter').val();
+            var filter=$('#search').val();
+            peticionAjax("Peticiones.php","data="+JSON.stringify({"peticion":"filtrarPedidos","param":param,"filter":filter}),showPedidos);
+        }else{
+            peticionAjax("Producto.php","data="+JSON.stringify({"peticion":"listarProductos"}),showProductos);
+        } 
     }
     
 }

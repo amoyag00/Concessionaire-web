@@ -21,7 +21,10 @@ switch($obj->peticion){
         break;
     case "listarProductos":
         echo json_encode(\Models\Producto::getAll());
-        break;   
+        break;
+    case "filtrarPedidos":
+        echo json_encode(\Models\Pedido::filterPedidos($obj->param, $obj->filter,$_SESSION["user"]));
+        break;
 }
 
 ?>

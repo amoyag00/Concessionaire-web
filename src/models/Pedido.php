@@ -43,6 +43,31 @@ namespace Models;
             return $pedidos;
         }
         
+        static public function filterPedidos($param, $filter, $conc){
+            $connection=DBConnection::getConnection();
+   
+            if($param=="Fecha"){
+                $statement=$connection->prepare("SELECT pedido_id, nombreCon, DATE_FORMAT(fecha,'%d/%m/%Y') AS fecha "
+                        . "FROM Pedido WHERE DATE_FORMAT(fecha,'%d/%m/%Y') > ? AND nombreCon=?");
+                        $statement->bind_param("ss", $filter,$conc);
+            }else if ($param=="Proveedor"){
+                $statement=$connection->prepare("SELECT pedido_id, nombreCon, DATE_FORMAT(fecha,'%d/%m/%Y') AS fecha"
+                        . " FROM Pedido WHERE ? LIKE ?");
+                        $statement->bind_param("ss",$param, $filter);
+            }else if($param=="Producto"){
+                
+            }
+            $statement->execute();
+            $result=$statement->get_result();
+            $pedidos =[];
+            while($row=$result->fetch_assoc()){
+                $pedidos [] =$row;
+            }
+            $statement->close();
+            //$this->conn->close();
+            return $pedidos;
+        }
+        
         function loadPedido($id){
             $statement=$this->connection->prepare("SELECT * FROM Pedido WHERE pedido_id=?");
             $statement->bind_param("s",$id);

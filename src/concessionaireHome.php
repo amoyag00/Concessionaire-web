@@ -25,9 +25,9 @@ namespace Concessionaire;
         <div id="search-cart">
             <button id="cart" src="img/cart.png"><span>0</span></button>
             <select id="filter">
-                <option value="date">Fecha</option>
-                <option value="provider">Proveedor</option>
-                <option value="producto">Producto</option>
+                <option value="Fecha">Fecha</option>
+                <option value="Proveedor">Proveedor</option>
+                <option value="Producto">Producto</option>
                 
             </select>
             <input type="text" id="search" placeholder="Filtrar" />
