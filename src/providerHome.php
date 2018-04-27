@@ -26,19 +26,22 @@ and open the template in the editor.
             <div id="lists">
                 <h2>Listas</h2>
                 
-                <input id="all" type="radio" name="filtro" checked="true">
+                <input id="all" type="radio" name="filtro" checked="true" class="all-filter">
                 <label for="all">Ver todos</label>
                 
-                <input id="not-confirmed" type="radio" name="filtro">
+                <input id="not-confirmed" type="radio" name="filtro" class="confirmed-filter">
                 <label for="not-confirmed">Ver no confirmados</label>
                 
-                <button class="desplegable" value="Lista de pedidos">Lsta de pedidos</button>
-                <div class="panel-lista">
+                <button class="desplegable" value="Lista de pedidos">Lista de pedidos</button>
+                <div class="panel-lista" id="lista-pedidos">
                     <label>Lista de pedidos</label>
+                    <?php
+                    
+                        ?>
                 </div>
                 
                 <button class="desplegable" value="Lista de productos">Lista de productos</button>
-                <div class="panel-lista">
+                <div class="panel-lista" id="lista-productos">
                     <table id="tabla-productos">
                         <tr>
                             <td scope="col">Identificador</td>

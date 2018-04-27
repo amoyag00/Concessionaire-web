@@ -28,6 +28,36 @@ namespace Models;
            
         }
         
+        static function getAll(){
+            $connection=DBConnection::getConnection();
+            $statement = $connection->prepare("SELECT pedido_id, nombreCon, estado, DATE_FORMAT(fecha, '%d/%m/%Y') AS fecha FROM Pedido");
+            $statement->execute();
+            $result = $statement->get_result();
+            $pedidos = array();
+            
+            while($fila=$result->fetch_assoc()){
+                $pedidos [] =$fila;
+            }
+            $statement->close();
+            
+            return $pedidos;
+        }
+        
+        static function getNotConfirmed(){
+            $connection=DBConnection::getConnection();
+            $statement = $connection->prepare("SELECT pedido_id, nombreCon, estado, DATE_FORMAT(fecha, '%d/%m/%Y') AS fecha FROM Pedido WHERE estado=0");
+            $statement->execute();
+            $result = $statement->get_result();
+            $pedidos = array();
+            
+            while($fila=$result->fetch_assoc()){
+                $pedidos [] =$fila;
+            }
+            $statement->close();
+            
+            return $pedidos;
+        }
+        
         static public function listPedidosOfConc($conc_name){
             $connection=DBConnection::getConnection();
             $statement=$connection->prepare("SELECT pedido_id, nombreCon, DATE_FORMAT(fecha,'%d/%m/%Y') AS fecha FROM Pedido WHERE nombreCon=?");

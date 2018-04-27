@@ -23,6 +23,39 @@ $(document).ready(function(){
             $(panel).hide(500);
         }
     });
+
+    $(".all-filter").click(function(){
+        var request = new XMLHttpRequest();
+        
+        request.onreadystatechange = function(){
+            if(this.readyState==4 && this.status==200){
+                //alert(JSON.parse(this.responseText));
+                //alert(this.responseText);
+                console.log(this.responseText);
+            }
+        };
+        
+        request.open("POST", "Peticiones.php", true);
+        request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        request.send("data="+JSON.stringify({"peticion":"listaPedidosComleta"}));
+    });
+    
+    $(".confirmed-filter").click(function(){
+        var request = new XMLHttpRequest();
+        
+        request.onreadystatechange = function(){
+            if(this.readyState == 4 && this.status == 200){
+               // alert("llega");
+               //alert(JSON.parse(this.responseText));
+               //alert(this.responseText);
+               console.log(this.responseText);
+            }
+        };
+        
+        request.open("POST", "Peticiones.php", true);
+        request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        request.send("data="+JSON.stringify({"peticion":"listaNoConfirmados"}));
+    });
 });
 
 

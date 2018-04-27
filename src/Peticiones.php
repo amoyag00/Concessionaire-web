@@ -25,6 +25,10 @@ switch($obj->peticion){
     case "filtrarPedidos":
         echo json_encode(\Models\Pedido::filterPedidos($obj->param, $obj->filter,$_SESSION["user"]));
         break;
+    case "listaPedidosCompleta":
+        echo json_encode(\Models\Pedido::getAll());
+        break;
+    case "listaNoConfirmados":
+        echo json_encode(\Models\Pedido::getNotConfirmed());
+        break;
 }
-
-?>
