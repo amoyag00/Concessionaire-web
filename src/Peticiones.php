@@ -7,7 +7,9 @@ require_once 'models/Producto.php';
 header("Content-type: application/json; charset=utf-8");
 
 $obj= json_decode($_POST["data"]);
-
+?><script type="text/javascript">
+            alert("<?php echo $obj->peticion;?>");
+          </script> <?php
 switch($obj->peticion){
     case "listarPedidos":
         echo json_encode(\Models\Pedido::listPedidosOfConc($_SESSION["user"]));
@@ -26,9 +28,11 @@ switch($obj->peticion){
         echo json_encode(\Models\Pedido::filterPedidos($obj->param, $obj->filter,$_SESSION["user"]));
         break;
     case "listaPedidosCompleta":
+        
         echo json_encode(\Models\Pedido::getAll());
         break;
     case "listaNoConfirmados":
         echo json_encode(\Models\Pedido::getNotConfirmed());
         break;
 }
+?>

@@ -24,24 +24,26 @@ $(document).ready(function(){
         }
     });
 
-    $(".all-filter").click(function(){
-        var request = new XMLHttpRequest();
-        
-        request.onreadystatechange = function(){
-            if(this.readyState==4 && this.status==200){
-                //alert(JSON.parse(this.responseText));
-                //alert(this.responseText);
-                console.log(this.responseText);
-            }
-        };
-        
-        request.open("POST", "Peticiones.php", true);
-        request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        request.send("data="+JSON.stringify({"peticion":"listaPedidosComleta"}));
-    });
+    $(".list-filter").on("change", filterHandler);
     
-    $(".confirmed-filter").click(function(){
-        var request = new XMLHttpRequest();
+    /*$(".confirmed-filter").click(function(){
+        ajaxRequest("data="+JSON.stringify({"peticion":"listaNoConfirmados"}) ,"Peticiones.php");
+    });*/
+});
+
+function filterHandler(){
+    /*alert($("#all").attr("checked"));
+    alert($("#not-confirmed").attr("checked"));*/
+    if($("#all").is(":checked")){
+        ajaxRequest("data="+JSON.stringify({"peticion":"listaPedidosCompleta"}) ,"Peticiones.php");
+    }
+    else{
+        
+    }
+}
+
+function ajaxRequest(data, script){
+    var request = new XMLHttpRequest();
         
         request.onreadystatechange = function(){
             if(this.readyState == 4 && this.status == 200){
@@ -52,10 +54,9 @@ $(document).ready(function(){
             }
         };
         
-        request.open("POST", "Peticiones.php", true);
+        request.open("POST", script, true);
         request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        request.send("data="+JSON.stringify({"peticion":"listaNoConfirmados"}));
-    });
-});
+        request.send(data);
+}
 
 
