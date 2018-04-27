@@ -7,9 +7,7 @@ require_once 'models/Producto.php';
 header("Content-type: application/json; charset=utf-8");
 
 $obj= json_decode($_POST["data"]);
-?><script type="text/javascript">
-            alert("<?php echo $obj->peticion;?>");
-          </script> <?php
+
 switch($obj->peticion){
     case "listarPedidos":
         echo json_encode(\Models\Pedido::listPedidosOfConc($_SESSION["user"]));

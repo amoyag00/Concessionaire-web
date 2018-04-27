@@ -35,6 +35,7 @@ function filterHandler(){
     /*alert($("#all").attr("checked"));
     alert($("#not-confirmed").attr("checked"));*/
     if($("#all").is(":checked")){
+        alert(JSON.stringify({"peticion":"listaPedidosCompleta"}));
         ajaxRequest("data="+JSON.stringify({"peticion":"listaPedidosCompleta"}) ,"Peticiones.php");
     }
     else{
