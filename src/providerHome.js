@@ -23,6 +23,16 @@ $(document).ready(function(){
             $(panel).hide(500);
         }
     });
+    
+    $("#pedidos").click(function(){
+        if($("#all").is(":checked")){
+        //alert(JSON.stringify({"peticion":"listaPedidosCompleta"}));
+            ajaxRequest("data="+JSON.stringify({"peticion":"listaPedidosCompleta"}) ,"Peticiones.php");
+        }
+        else{
+            ajaxRequest("data="+JSON.stringify({"peticion":"listaNoConfirmados"}) ,"Peticiones.php");
+        }
+    });
 
     $(".list-filter").on("change", filterHandler);
     
@@ -46,42 +56,45 @@ function filterHandler(){
 function tablaPedidos(respuesta){
     //console.log(respuesta);
     var listaPedidos = JSON.parse(respuesta);
-    var tabla = "<table id='tabla-pedidos>"+
-                    "<tr> "+
+    var tabla = "<table id='tabla-pedidos'>"+
+                    "<tr>"+
                         "<th scope='col'>ID</th>"+
                         "<th scope='col'>Concesionario</th>"+
                         "<th scope='col'>Fecha</th>"+
                         "<th scope='col'>Estado</th>"+
                     "</tr>";
-    /*alert(tabla);
+    //alert(tabla);
     for(i=0;i<listaPedidos.length;i++){
         var pedido = listaPedidos[i];
         tabla = tabla+"<tr>";
         //console.log(pedido.pedido_id);
-        for(j=0;j<listaPedidos[i].length;j++){
-            tabla = tabla+"<td>";
-            if(j==0){
-                tabla = tabla+pedido.pedido_id;
-            }
-            else if(j==1){
-                tabla = tabla+pedido.nombreCon;
-            }
-            else if(j==2){
-                tabla = tabla+pedido.fecha;
-            }
-            else{
-                if(pedido.estado==1){
-                    tabla = tabla+"Confirmado";
-                }
-                else{
-                    tabla = tabla+"<button class='confirm' value='confirmed'>Confirmar</button>";
-                }
-            }
+        tabla = tabla+"<td class='celda-pedido'>";
+        tabla = tabla+pedido.pedido_id;
+        tabla = tabla+"</td>";
+        
+        tabla = tabla+"<td class='celda-pedido'>";
+        tabla = tabla+pedido.nombreCon;
+        tabla = tabla+"</td>";
+        
+        tabla = tabla+"<td class='celda-pedido'>";
+        tabla = tabla+pedido.fecha;
+        tabla = tabla+"</td>";
+            
+        if(pedido.estado==1){
+            tabla = tabla+"<td class='celda-pedido'>";
+            tabla = tabla+"Confirmado";
             tabla = tabla+"</td>";
         }
+        else{
+            tabla = tabla+"<td class='celda-pedido'>";
+            tabla = tabla+"<button class='confirm' value='confirmed'>Confirmar</button>";
+            tabla = tabla+"</td>";
+        }
+                    
         tabla = tabla+"</tr>"
-    }*/
+    }
     tabla = tabla+"</table>";
+    //alert(tabla);
     $("#lista-pedidos").empty();
     $("#lista-pedidos").append(tabla);
 }

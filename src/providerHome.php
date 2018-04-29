@@ -38,11 +38,11 @@ and open the template in the editor.
                 <input id="not-confirmed" type="radio" name="filtro" class="list-filter">
                 <label for="not-confirmed">Ver no confirmados</label>
                 
-                <button class="desplegable" value="Lista de pedidos">Lista de pedidos</button>
+                <button class="desplegable" value="Lista de pedidos" id="pedidos">Lista de pedidos</button>
                 <div class="panel-lista" id="lista-pedidos">
                 </div>
                 
-                <button class="desplegable" value="Lista de productos">Lista de productos</button>
+                <button class="desplegable" value="Lista de productos" id="productos">Lista de productos</button>
                 <div class="panel-lista" id="lista-productos">
                     <table id="tabla-productos">
                         <tr>
@@ -52,8 +52,6 @@ and open the template in the editor.
                             <th scope="col">Disponibilidad</th>
                         </tr>
                     <?php
-                    error_reporting(E_ALL);
-ini_set('display_errors', 1);
                         $lista = \Models\Producto::getListaProductosProveedor($_SESSION["user"]);
                         
                         for($i=0;$i<sizeof($lista);$i++){ 

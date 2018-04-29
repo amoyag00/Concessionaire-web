@@ -623,6 +623,13 @@ input[name="actualizar"]{
     background-color: #ADFF2F;
 }
 
+.celda-pedido{
+    width: 300px;
+    height: 20px;
+    text-align: center;
+    background-color: #ADFF2F;
+}
+
 th[scope="col"]{
     text-align: center;
     width: 300px;
@@ -633,4 +640,16 @@ th[scope="col"]{
 #tabla-productos{
     margin-top: 20px;
     margin-bottom: 20px;
+}
+
+#tabla-pedidos{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.confirm{
+    font-family:'Gugi';
+    border-radius: 0px;
+    border-style: solid;
+    border-width: 2px;
 }
