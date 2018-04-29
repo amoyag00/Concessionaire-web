@@ -1,3 +1,9 @@
+<?php
+namespace Provider;
+require_once 'isProvider.php';
+require_once 'models/Pedido.php';
+require_once 'models/Producto.php';
+?>
 <!DOCTYPE html>
 <!--
 To change this license header, choose License Headers in Project Properties.
@@ -34,27 +40,20 @@ and open the template in the editor.
                 
                 <button class="desplegable" value="Lista de pedidos">Lista de pedidos</button>
                 <div class="panel-lista" id="lista-pedidos">
-                    <label>Lista de pedidos</label>
-                    <?php
-                    
-                        ?>
                 </div>
                 
                 <button class="desplegable" value="Lista de productos">Lista de productos</button>
                 <div class="panel-lista" id="lista-productos">
                     <table id="tabla-productos">
                         <tr>
-                            <td scope="col">Identificador</td>
-                            <td scope="col">Nombre</td>
-                            <td scope="col">Precio</td>
-                            <td scope="col">Disponibilidad</td>
+                            <th scope="col">Identificador</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Precio</th>
+                            <th scope="col">Disponibilidad</th>
                         </tr>
                     <?php
-                        error_reporting(E_ALL);
-                        ini_set('display_errors', 1);
-                        require_once 'models/Producto.php';
-                        session_start();
-                        session_regenerate_id();
+                    error_reporting(E_ALL);
+ini_set('display_errors', 1);
                         $lista = \Models\Producto::getListaProductosProveedor($_SESSION["user"]);
                         
                         for($i=0;$i<sizeof($lista);$i++){ 

@@ -1,6 +1,7 @@
 <?php
 namespace Peticiones;
-require_once 'isConcessionaire.php';
+//require_once 'isConcessionaire.php';
+require_once 'isLogin.php';
 require_once 'models/Pedido.php';
 require_once 'models/Producto.php';
 
@@ -25,12 +26,11 @@ switch($obj->peticion){
     case "filtrarPedidos":
         echo json_encode(\Models\Pedido::filterPedidos($obj->param, $obj->filter,$_SESSION["user"]));
         break;
-    case "listaPedidosCompleta":
-        
-        echo json_encode(\Models\Pedido::getAll());
+    case "listaPedidosCompleta": 
+        echo json_encode(\Models\Pedido::getAll($_SESSION["user"]));
         break;
     case "listaNoConfirmados":
-        echo json_encode(\Models\Pedido::getNotConfirmed());
+        echo json_encode(\Models\Pedido::getNotConfirmed($_SESSION["user"]));
         break;
 }
 ?>
