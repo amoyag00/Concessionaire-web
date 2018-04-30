@@ -46,7 +46,7 @@ namespace Models;
         
         static function getNotConfirmed($nombre){
             $connection=DBConnection::getConnection();
-            $statement = $connection->prepare("SELECT pedido_id, nombreCon, estado, DATE_FORMAT(fecha, '%d/%m/%Y') AS fecha FROM Pedido WHERE estado=0 AND pedido_id IN (SELECT pedido_id FROM ListaProductos WHERE producto_id IN (SELECT producto_id FROM Producto WHERE nombrePro=?))");
+            $statement = $connection->prepare("SELECT pedido_id, nombreCon, DATE_FORMAT(fecha, '%d/%m/%Y') AS fecha FROM pedido WHERE pedido_id IN (SELECT pedido_id FROM listaproductos WHERE estado=0 AND producto_id IN (SELECT producto_id FROM producto WHERE nombrePro=?))");
             $statement->bind_param("s", $nombre);
             $statement->execute();
             $result = $statement->get_result();
