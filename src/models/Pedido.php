@@ -28,6 +28,22 @@ namespace Models;
            
         }
         
+        static function getProductosPedido($id){
+            $connection=DBConnection::getConnection();
+            $statement = $connection->prepare("SELECT * FROM Producto WHERE producto_id IN (SELECT producto_id FROM ListaProductos WHERE pedido_id IN (SELECT pedido_id FROM Pedido WHERE pedido_id=?))");
+            $statement->bind_param("s", $id);
+            $statement->execute();
+            $result = $statement->get_result();
+            $productos = array();
+            
+            while($fila=$result->fetch_assoc()){
+                $productos [] =$fila;
+            }
+            $statement->close();
+            
+            return $productos;
+        }
+        
         static function getAll($nombre){
             $connection=DBConnection::getConnection();
             $statement = $connection->prepare("SELECT pedido_id, nombreCon, estado, DATE_FORMAT(fecha, '%d/%m/%Y') AS fecha FROM Pedido WHERE pedido_id IN (SELECT pedido_id FROM ListaProductos WHERE producto_id IN (SELECT producto_id FROM Producto WHERE nombrePro=?))");
