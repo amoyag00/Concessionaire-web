@@ -121,22 +121,11 @@ function showPedidos(data){
                             "<th>Estado</th>" +
                             "<th></th>" +
                         "</tr>";
-                        
-        /*for(var j=0;j<listaproducos.length;j++){
-             tabla+="<tr>"+
-            "<td>Motor g324</td>" +
-            "<td>Tesla</td>" +
-            "<td>5 €</td>" +
-            "<td>2</td>" +
-            "<td>Sin confirmar</td>" +
-            "</tr>";
-        }*/
-         
-        tabla+="<tr>"+
-                        "<td>Total: "+"€</td>" +
-                        "</tr>" +
-                        "</table>";
-        $('#main-div').append(tabla);   
+        $('#main-div').append(tabla);  
+        var callback=function(data){
+            showProductosPedido(data, pedidos[i].pedido_id);
+        }
+        peticionAjax('Peticiones.php','data='+JSON.stringify({"peticion":"productosPedido","pedido_id":pedidos[i].pedido_id}),callback);            
     }
 
 }
@@ -218,7 +207,25 @@ function filter(event){
             peticionAjax("Producto.php","data="+JSON.stringify({"peticion":"listarProductos"}),showProductos);
         } 
     }
-    
+}
+
+function showProductosPedido(data, pedido_id){
+    var productos=JSON.parse(data);
+    var tabla;
+    for(var i=0;i<productos.length;i++){
+        tabla+="<tr>"+
+            "<td>"+productos[i]["nombre"]+"</td>" +
+            "<td>"+productos[i]["nombrePro"]+"</td>" +
+            "<td>"+productos[i]["precio"]+"</td>" +
+            "<td>"+productos[i]["cantidad"]+"</td>" +
+            "<td>"+productos[i]["estado"]+"</td>" +
+        "</tr>";
+    }
+    tabla+="<tr>"+
+                "<td>Total: "+"€</td>" +
+                "</tr>" +
+        "</table>";
+    $('#main-div').append(tabla);     
 }
 
 

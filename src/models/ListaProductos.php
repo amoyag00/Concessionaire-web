@@ -42,29 +42,22 @@ class ListaProductos{
 		return $result->fetch_assoc();
 	}
 	
-	function getListaProd($pedido_id){
-		
-		$statement=$this->conn->prepare("SELECT Producto.nombre, Producto.precio, ListaProductos.cantidad
+	static function getListaProd($pedido_id){
+            $conn = DBConnection::getConnection();
+            $statement = $conn->prepare("SELECT Producto.nombre, Producto.nombrePro, Producto.precio, ListaProductos.cantidad, ListaProductos.estado
 										 FROM (ListaProductos
 										 INNER JOIN Producto ON ListaProductos.producto_id = Producto.producto_id)
 										 WHERE ListaProductos.pedido_id = ?");
-										 
-		$statement->bind_param("i",$pedido_id);
-
-		$statement->execute();
-		
-		$lista = $statement->get_result();
-        $listaProductos = array();
-        
-        while($fila = $lista->fetch_assoc()){
-            $listaProductos[] = $fila;
+            $statement->bind_param("i", $pedido_id);
+            $statement->execute();
+            $lista = $statement->get_result();
+            $listaProductos = array();
+            while ($fila = $lista->fetch_assoc()) {
+                $listaProductos[] = $fila;
+            }
+            $statement->close();
+            return $listaProductos;
         }
-		
-		$statement->close();
-        
-        return $listaProductos;
-
-	}
 	
 	/*function getListaProdProv($pedido_id){
 		

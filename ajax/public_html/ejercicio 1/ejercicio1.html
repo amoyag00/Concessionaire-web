@@ -1,0 +1,56 @@
+ <!DOCTYPE html>
+<html>
+<head>
+<title>Ajax 1</title>
+<script>
+
+/* Petición ajax utilizando el método get. */	
+
+function enviarDatosSinRespuesta(){
+	var elemento1 = document.getElementById("elemento1").value;
+	var req = new XMLHttpRequest();	
+	req.open("GET", "ejercicio1.php?dato=" + elemento1, true);
+	req.send();
+}
+
+/* Petición ajax utilizando el método get. Mostrar respuesta del script ejericcio1_1.php */	
+
+function enviarDatosConRespuesta(){
+	var elemento1 = document.getElementById("elemento1").value;
+	var req = new XMLHttpRequest();
+
+	req.onreadystatechange = function(){
+		if(req.readyState == 4 && req.status == 200)
+			alert(req.responseText); 
+
+			/**												**/
+			/**  ESCRIBIR  RESPUESTA EN div con id mensajes **/
+
+	}	
+	
+	req.open("GET", "ejercicio1_1.php?dato=" + elemento1, true);
+	req.send();
+}
+
+
+window.onload = function(){
+	document.getElementById("boton1").onclick = enviarDatosSinRespuesta;
+	document.getElementById("boton2").onclick = enviarDatosConRespuesta;
+}
+</script>
+</head>
+<body>
+
+<form name="formulario">
+	Nombre: <input type="text" name="elemento1" id="elemento1" value=""/>
+	<input type="button" name="boton1" id="boton1" value="EnviarSinRespuesta">
+	<input type="button" name="boton2" id="boton2" value="EnviarConRespuesta">
+</form>
+
+<div id="mensajes">
+
+</div>
+
+
+</body>
+</html> 
