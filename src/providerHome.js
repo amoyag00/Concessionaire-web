@@ -63,7 +63,6 @@ function tablaPedidos(respuesta){
                         "<th scope='col'>ID</th>"+
                         "<th scope='col'>Concesionario</th>"+
                         "<th scope='col'>Fecha</th>"+
-                        "<th scope='col'>Estado</th>"+
                     "</tr>";
             
         var pedido = listaPedidos[i];
@@ -80,20 +79,9 @@ function tablaPedidos(respuesta){
         tabla = tabla+"<td class='celda-pedido'>";
         tabla = tabla+pedido.fecha;
         tabla = tabla+"</td>";
-            
-        if(pedido.estado==1){
-            tabla = tabla+"<td class='celda-pedido'>";
-            tabla = tabla+"Confirmado";
-            tabla = tabla+"</td>";
-        }
-        else{
-            tabla = tabla+"<td class='celda-pedido'>";
-            tabla = tabla+"<button class='confirm' value='confirmed'>Confirmar</button>";
-            tabla = tabla+"</td>";
-        }
                     
         tabla = tabla+"</tr>"
-        tabla = tabla+"</table>";
+        tabla = tabla+"</table>\n";
     }
     
     //alert(tabla);
@@ -139,7 +127,7 @@ function ajaxRequest(data, script){
             if(this.readyState == 4 && this.status == 200){
                // alert("llega");
                //alert(JSON.parse(this.responseText));
-               //alert(this.responseText);
+               alert(this.responseText);
                //console.log(this.responseText);
                tablaPedidos(this.responseText);
             }

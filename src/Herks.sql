@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 -- Estructura de tabla para la tabla `administrador`
 --
 
-CREATE TABLE `administrador` (
+CREATE TABLE `Administrador` (
   `nombreAdm` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -36,7 +36,7 @@ CREATE TABLE `administrador` (
 -- Volcado de datos para la tabla `administrador`
 --
 
-INSERT INTO `administrador` (`nombreAdm`) VALUES
+INSERT INTO `Administrador` (`nombreAdm`) VALUES
 ('admin');
 
 -- --------------------------------------------------------
@@ -45,7 +45,7 @@ INSERT INTO `administrador` (`nombreAdm`) VALUES
 -- Estructura de tabla para la tabla `concesionario`
 --
 
-CREATE TABLE `concesionario` (
+CREATE TABLE `Concesionario` (
   `nombreCon` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -53,7 +53,7 @@ CREATE TABLE `concesionario` (
 -- Volcado de datos para la tabla `concesionario`
 --
 
-INSERT INTO `concesionario` (`nombreCon`) VALUES
+INSERT INTO `Concesionario` (`nombreCon`) VALUES
 ('audi'),
 ('seat');
 
@@ -63,7 +63,7 @@ INSERT INTO `concesionario` (`nombreCon`) VALUES
 -- Estructura de tabla para la tabla `listaproductos`
 --
 
-CREATE TABLE `listaproductos` (
+CREATE TABLE `ListaProductos` (
   `producto_id` int(11) NOT NULL,
   `pedido_id` int(11) NOT NULL,
   `cantidad` smallint(6) DEFAULT NULL,
@@ -74,7 +74,7 @@ CREATE TABLE `listaproductos` (
 -- Volcado de datos para la tabla `listaproductos`
 --
 
-INSERT INTO `listaproductos` (`producto_id`, `pedido_id`, `cantidad`, `estado`) VALUES
+INSERT INTO `ListaProductos` (`producto_id`, `pedido_id`, `cantidad`, `estado`) VALUES
 (1, 1, 10, 0),
 (2, 1, 3, 1),
 (4, 2, 5, 1),
@@ -86,7 +86,7 @@ INSERT INTO `listaproductos` (`producto_id`, `pedido_id`, `cantidad`, `estado`) 
 -- Estructura de tabla para la tabla `pedido`
 --
 
-CREATE TABLE `pedido` (
+CREATE TABLE `Pedido` (
   `pedido_id` int(11) NOT NULL,
   `nombreCon` varchar(15) DEFAULT NULL,
   `fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
@@ -96,7 +96,7 @@ CREATE TABLE `pedido` (
 -- Volcado de datos para la tabla `pedido`
 --
 
-INSERT INTO `pedido` (`pedido_id`, `nombreCon`, `fecha`) VALUES
+INSERT INTO `Pedido` (`pedido_id`, `nombreCon`, `fecha`) VALUES
 (1, 'seat', '2018-04-14 22:00:00'),
 (2, 'audi', '2018-04-15 22:00:00');
 
@@ -106,7 +106,7 @@ INSERT INTO `pedido` (`pedido_id`, `nombreCon`, `fecha`) VALUES
 -- Estructura de tabla para la tabla `producto`
 --
 
-CREATE TABLE `producto` (
+CREATE TABLE `Producto` (
   `producto_id` int(11) NOT NULL,
   `nombrePro` varchar(15) DEFAULT NULL,
   `nombre` varchar(25) DEFAULT NULL,
@@ -119,7 +119,7 @@ CREATE TABLE `producto` (
 -- Volcado de datos para la tabla `producto`
 --
 
-INSERT INTO `producto` (`producto_id`, `nombrePro`, `nombre`, `caracteristicas`, `precio`, `disponible`) VALUES
+INSERT INTO `Producto` (`producto_id`, `nombrePro`, `nombre`, `caracteristicas`, `precio`, `disponible`) VALUES
 (1, 'prov', 'seat panda', 'gasolina', 8000, b'1'),
 (2, 'prov', 'seat cebra', 'diesel', 9000, b'1'),
 (3, 'prov', 'seat leon', 'gasolina', 7000, b'1'),
@@ -133,7 +133,7 @@ INSERT INTO `producto` (`producto_id`, `nombrePro`, `nombre`, `caracteristicas`,
 -- Estructura de tabla para la tabla `proveedor`
 --
 
-CREATE TABLE `proveedor` (
+CREATE TABLE `Proveedor` (
   `nombrePro` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -141,7 +141,7 @@ CREATE TABLE `proveedor` (
 -- Volcado de datos para la tabla `proveedor`
 --
 
-INSERT INTO `proveedor` (`nombrePro`) VALUES
+INSERT INTO `Proveedor` (`nombrePro`) VALUES
 ('prov'),
 ('prov2');
 
@@ -151,7 +151,7 @@ INSERT INTO `proveedor` (`nombrePro`) VALUES
 -- Estructura de tabla para la tabla `usuario`
 --
 
-CREATE TABLE `usuario` (
+CREATE TABLE `Usuario` (
   `nombre` varchar(15) NOT NULL,
   `contrasena` varchar(15) NOT NULL,
   `tipo` varchar(15) NOT NULL
@@ -161,7 +161,7 @@ CREATE TABLE `usuario` (
 -- Volcado de datos para la tabla `usuario`
 --
 
-INSERT INTO `usuario` (`nombre`, `contrasena`, `tipo`) VALUES
+INSERT INTO `Usuario` (`nombre`, `contrasena`, `tipo`) VALUES
 ('admin', 'admin', 'administrator'),
 ('audi', 'audi', 'concessionaire'),
 ('prov', 'prov', 'provider'),
@@ -175,46 +175,46 @@ INSERT INTO `usuario` (`nombre`, `contrasena`, `tipo`) VALUES
 --
 -- Indices de la tabla `administrador`
 --
-ALTER TABLE `administrador`
+ALTER TABLE `Administrador`
   ADD PRIMARY KEY (`nombreAdm`);
 
 --
 -- Indices de la tabla `concesionario`
 --
-ALTER TABLE `concesionario`
+ALTER TABLE `Concesionario`
   ADD PRIMARY KEY (`nombreCon`);
 
 --
 -- Indices de la tabla `listaproductos`
 --
-ALTER TABLE `listaproductos`
+ALTER TABLE `ListaProductos`
   ADD PRIMARY KEY (`pedido_id`,`producto_id`),
   ADD KEY `producto_id` (`producto_id`);
 
 --
 -- Indices de la tabla `pedido`
 --
-ALTER TABLE `pedido`
+ALTER TABLE `Pedido`
   ADD PRIMARY KEY (`pedido_id`),
   ADD KEY `nombreCon` (`nombreCon`);
 
 --
 -- Indices de la tabla `producto`
 --
-ALTER TABLE `producto`
+ALTER TABLE `Producto`
   ADD PRIMARY KEY (`producto_id`),
   ADD KEY `nombrePro` (`nombrePro`);
 
 --
 -- Indices de la tabla `proveedor`
 --
-ALTER TABLE `proveedor`
+ALTER TABLE `Proveedor`
   ADD PRIMARY KEY (`nombrePro`);
 
 --
 -- Indices de la tabla `usuario`
 --
-ALTER TABLE `usuario`
+ALTER TABLE `Usuario`
   ADD PRIMARY KEY (`nombre`);
 
 --
@@ -224,13 +224,13 @@ ALTER TABLE `usuario`
 --
 -- AUTO_INCREMENT de la tabla `pedido`
 --
-ALTER TABLE `pedido`
+ALTER TABLE `Pedido`
   MODIFY `pedido_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `producto`
 --
-ALTER TABLE `producto`
+ALTER TABLE `Producto`
   MODIFY `producto_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
@@ -240,39 +240,39 @@ ALTER TABLE `producto`
 --
 -- Filtros para la tabla `administrador`
 --
-ALTER TABLE `administrador`
-  ADD CONSTRAINT `administrador_ibfk_1` FOREIGN KEY (`nombreAdm`) REFERENCES `usuario` (`nombre`);
+ALTER TABLE `Administrador`
+  ADD CONSTRAINT `administrador_ibfk_1` FOREIGN KEY (`nombreAdm`) REFERENCES `Usuario` (`nombre`);
 
 --
 -- Filtros para la tabla `concesionario`
 --
-ALTER TABLE `concesionario`
-  ADD CONSTRAINT `concesionario_ibfk_1` FOREIGN KEY (`nombreCon`) REFERENCES `usuario` (`nombre`);
+ALTER TABLE `Concesionario`
+  ADD CONSTRAINT `concesionario_ibfk_1` FOREIGN KEY (`nombreCon`) REFERENCES `Usuario` (`nombre`);
 
 --
 -- Filtros para la tabla `listaproductos`
 --
-ALTER TABLE `listaproductos`
-  ADD CONSTRAINT `listaproductos_ibfk_1` FOREIGN KEY (`producto_id`) REFERENCES `producto` (`producto_id`),
-  ADD CONSTRAINT `listaproductos_ibfk_2` FOREIGN KEY (`pedido_id`) REFERENCES `pedido` (`pedido_id`);
+ALTER TABLE `ListaProductos`
+  ADD CONSTRAINT `listaproductos_ibfk_1` FOREIGN KEY (`producto_id`) REFERENCES `Producto` (`producto_id`),
+  ADD CONSTRAINT `listaproductos_ibfk_2` FOREIGN KEY (`pedido_id`) REFERENCES `Pedido` (`pedido_id`);
 
 --
 -- Filtros para la tabla `pedido`
 --
-ALTER TABLE `pedido`
-  ADD CONSTRAINT `pedido_ibfk_1` FOREIGN KEY (`nombreCon`) REFERENCES `concesionario` (`nombreCon`);
+ALTER TABLE `Pedido`
+  ADD CONSTRAINT `pedido_ibfk_1` FOREIGN KEY (`nombreCon`) REFERENCES `Concesionario` (`nombreCon`);
 
 --
 -- Filtros para la tabla `producto`
 --
-ALTER TABLE `producto`
-  ADD CONSTRAINT `producto_ibfk_1` FOREIGN KEY (`nombrePro`) REFERENCES `proveedor` (`nombrePro`);
+ALTER TABLE `Producto`
+  ADD CONSTRAINT `producto_ibfk_1` FOREIGN KEY (`nombrePro`) REFERENCES `Proveedor` (`nombrePro`);
 
 --
 -- Filtros para la tabla `proveedor`
 --
-ALTER TABLE `proveedor`
-  ADD CONSTRAINT `proveedor_ibfk_1` FOREIGN KEY (`nombrePro`) REFERENCES `usuario` (`nombre`);
+ALTER TABLE `Proveedor`
+  ADD CONSTRAINT `proveedor_ibfk_1` FOREIGN KEY (`nombrePro`) REFERENCES `Usuario` (`nombre`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

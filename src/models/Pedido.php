@@ -28,7 +28,8 @@ namespace Models;
         
         static function getAll($nombre){
             $connection=DBConnection::getConnection();
-            $statement = $connection->prepare("SELECT pedido_id, nombreCon, estado, DATE_FORMAT(fecha, '%d/%m/%Y') AS fecha FROM Pedido WHERE pedido_id IN (SELECT pedido_id FROM ListaProductos WHERE producto_id IN (SELECT producto_id FROM Producto WHERE nombrePro=?))");
+            $statement = $connection->prepare("SELECT pedido_id, nombreCon, DATE_FORMAT(fecha, '%d/%m/%Y') AS fecha FROM Pedido WHERE pedido_id IN (SELECT pedido_id FROM ListaProductos WHERE producto_id IN (SELECT producto_id FROM Producto WHERE nombrePro=?))");
+            //$statement = $connection->prepare("SELECT Pedido.pedido_id, Pedido.nombreCon, DATE_FORMAT(fecha, '%d/%m/%Y') AS fecha FROM ListaProductos INNER JOIN Producto ON Producto.producto_id = ListaProductos.producto_id AND Producto.nombrePro=? INNER JOIN Pedido ON Pedido.pedido_id = ListaProductos.pedido_id");
             $statement->bind_param("s", $nombre);
             $statement->execute();
             $result = $statement->get_result();
