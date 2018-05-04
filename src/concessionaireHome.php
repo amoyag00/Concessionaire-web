@@ -3,6 +3,7 @@ namespace Concessionaire;
     require_once 'isConcessionaire.php';
     require_once 'models/Pedido.php';
     require_once 'models/Producto.php';
+    require_once 'models/ListaProductos.php';
 ?>
 <!DOCTYPE html>
 <html>
@@ -57,38 +58,63 @@ namespace Concessionaire;
         
         <div id="main-div">
              <?php
-            
-            $pedidos = \Models\Pedido::listPedidosOfConc($_SESSION["user"]);
+            $pedidos=\Models\Pedido::listPedidosOfConc($_SESSION["user"]);
+            foreach($pedidos as $pedido){
+                $pedido->listaProductos=\Models\ListaProductos::getListaProd($pedido->pedido_id);
+            }
+
             if(count($pedidos)>0){ 
-                $total=0;
-                foreach($pedidos as $pedido){ ?>
-                    <table class='pedido'>
+                $totalMoney=0;
+                $allUnconfirmed=true;
+                $saveChanges=false;
+                foreach($pedidos as $pedido){
+                    $totalMoney=0;
+                    $allUnconfirmed=true;
+                    ?> <table class='pedido' id='<?php echo $pedido->pedido_id ?>'>
+                                    <tr>
+                                        <th>Pedido ID: <?php echo $pedido->pedido_id ?> </th>
+                                        <th>Fecha: <?php echo $pedido->fecha ?></th>
+                                    </tr>
+                                    <tr>
+                                        <th>Producto</th>
+                                        <th>Proveedor</th>
+                                        <th>Precio</th>
+                                        <th>Cantidad</th>
+                                        <th>Estado</th>
+                                        <th></th>
+                                    </tr>
+                    <?php $listaProductos=$pedido->listaProductos;
+                    foreach($listaProductos as $producto){ ?>
                         <tr>
-                            <th><?php echo "Pedido ID: ".$pedido["pedido_id"] ?></th>
-                            <th><?php echo "Fecha: ".$pedido["fecha"]?></th>
+                            <td> <?php echo $producto["nombre"] ?></td>
+                            <td><?php  echo $producto["nombrePro"] ?></td>
+                            <td><?php echo $producto["precio"] ?></td>
+
+                    <?php  if($producto["estado"]===1){ ?>
+                            <td> <?php echo $producto["cantidad"] ?></td>
+                            <td> Confirmado </td>
+                            <?php   $allUnconfirmed=false;
+                        }else{ ?>
+                            <td><input type='number' value=<?php echo $producto["cantidad"] ?> min='1' class='product-quantity'/></td>
+                            <td> Sin confirmar </td>
+                            <td><button id='<?php echo $pedido->pedido_id ?>' class='pedido-delete'>X</button></td>
+                           <?php  $saveChanges=true;
+                        } ?>
                         </tr>
-                        <tr>
-                            <th>Producto</th>
-                            <th>Proveedor</th>
-                            <th>Precio</th>
-                            <th>Cantidad</th>
-                            <th>Estado</th>
-                            
-                        </tr>
-                        <tr>
-                            <td><?php ?></td>
-                            <td><?php ?></td>
-                            <td><?php ?></td>
-                            <td><?php ?></td>
-                            
-                        </tr>
-                        <tr>
-                            <td id='total-price'> <?php echo "Total: ".$total." €" ?></td>
-                        </tr>
-                    </table>
-          <?php }             
-            } ?>
-                  
+                        <?php $totalMoney+=$producto["precio"];              
+
+                    }
+                    if($allUnconfirmed){ ?>
+                        <tr><td><button class=delete-all-pedido>Eliminar pedido</button></td></tr>
+
+              <?php }
+                    if($saveChanges){ ?>
+                        <tr><td><button class='save-changes'>Save changes</button></td></tr>
+             <?php  } ?>
+                    <tr><td> Total:<?php echo $totalMoney ?>€</td></tr></table>
+             <?php  }
+            }
+                ?>  
         </div>
     </body>
     <footer>

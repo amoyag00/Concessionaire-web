@@ -344,9 +344,30 @@ div#search-cart{
     background-color:#A9A9A9;
     box-shadow: 10px 10px 10px -6px black;
     margin:20px;
+    font-family: 'Gugi';
 }
 .pedido tr, td, th{
     padding:10px;
+    text-align: center;
+}
+
+.pedido input[type="number"]{
+    width:50px;
+}
+
+.pedido-delete{
+    background-color:red;
+    border:1px solid white;
+}
+.delete-all-pedido{
+    background-color:red;
+    border:1px solid white;
+}
+.save-changes{
+    background-color:greenyellow;
+    border:1px solid black;
+    height: 20px;
+    width:100px;
 }
 .producto{
     padding-top:10px;

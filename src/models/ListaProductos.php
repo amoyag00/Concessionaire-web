@@ -20,26 +20,18 @@ class ListaProductos{
         $this->cantidad=$data["cantidad"];
     }
 	
-	function insert(){
-        $statement=$this->conn->prepare("INSERT INTO ListaProductos VALUES(?,?,?)");
+	function insert($producto_id, $pedido_id,$cantidad){
+        $statement=$this->conn->prepare("INSERT INTO ListaProductos VALUES(?,?,?,0)");
 		$statement->bind_param("iii",$producto_id, $pedido_id, $cantidad);
 		$statement->execute();
         $statement->close();
 	}
 	
-	function update($data){
-		$statement=$this->conn->prepare("SELECT pedido_id FROM Pedido WHERE nombreCon = ?");
-        $statement->bind_param("s",$username);
-        $statement->execute();
-		$statement->bind_result($pedido_id);
+	function update($cantidad,$producto_id, $pedido_id){
+		$statement=$this->conn->prepare("UPDATE ListaProductos SET cantidad = ? WHERE pedido_id= ? AND producto_id=?");
+		$statement->bind_param("iii", $cantidad, $pedido_id,$producto_id);
+		$statement->execute();
 		$statement->close();
-		
-		$statement2=$this->conn->prepare("UPDATE ListaProductos SET cantidad = ? WHERE pedido_id= ?");
-		$statement2->bind_param("is", $data, $pedido_id);
-		$result=$statement2->get_result();
-		$statement2->close();
-		
-		return $result->fetch_assoc();
 	}
 	
 	static function getListaProd($pedido_id){

@@ -12,14 +12,22 @@ $obj= json_decode($_POST["data"]);
 
 switch($obj->peticion){
     case "listarPedidos":
-        echo json_encode(\Models\Pedido::listPedidosOfConc($_SESSION["user"]));
+        $pedidos=\Models\Pedido::listPedidosOfConc($_SESSION["user"]);
+        foreach($pedidos as $pedido){
+            $pedido->listaProductos=\Models\ListaProductos::getListaProd($pedido->pedido_id);
+        }
+        echo json_encode($pedidos);
+        
         break;
     case "registrarPedido":
         $pedido= new \Models\Pedido();
-        $attributes=array("conc_name"=>$_SESSION["user"],
-                            "status"=>0);
-        $pedido->setAttributes($attributes);
-        $pedido_id=$pedido->insert();
+       
+        $pedido_id=$pedido->insert($_SESSION["user"]);
+        $lp=new \Models\ListaProductos();
+        foreach($obj->cart_items as $item){
+            $lp->insert($item->id,$pedido_id,$item->quantity);
+        }
+        echo json_encode($obj->cart_items);
         break;
     case "listarProductos":
         echo json_encode(\Models\Producto::getAll());
@@ -33,8 +41,6 @@ switch($obj->peticion){
     case "listaNoConfirmados":
         echo json_encode(\Models\Pedido::getNotConfirmed($_SESSION["user"]));
         break;
-    case "productosPedido":
-        echo json_encode(\Models\ListaProductos::getListaProd($obj->pedido_id));
-        break;
+    
 }
 ?>

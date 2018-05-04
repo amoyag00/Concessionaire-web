@@ -6,13 +6,27 @@ $(document).ready(function(){
      $('#mis-pedidos-button').on("click",misPedidosHandler);
      $('#ver-todo').on("click",verTodoHandler);
      $('#pedir').on("click",registrarPedido);
+     $('#main-div').on("click",".save-changes",updatePedido);
      $('#search').keypress(filter);
 });
 
 var cartItems=new Array();
 var searchedItems=new Array();
+var listaPedidos=new Array();
 var currentPrice=0.0;
 
+function Pedido(id){
+    this.id=id;
+    this.listaProductos=new Array();
+    this.addProducto=function(producto){
+        this.listaProductos.push(producto);
+    };
+}
+function productoPedido(nombrePro, estado, cantidad){
+    this.nombrePro=nombrePro;
+    this.estado=estado;
+    this.cantidad=cantidad;
+}
 
 
 function purchasedItem(id, quantity){
@@ -107,8 +121,15 @@ function misPedidosHandler(){
  
 function showPedidos(data){
     var pedidos=JSON.parse(data);
+    var totalMoney=0;
+    var allUnconfirmed=true;
+    var saveChanges=false;
     for(var i=0;i<pedidos.length;i++){
-        var tabla="<table class='pedido'>"+
+        var ped=new Pedido(pedidos[i].pedido_id);
+        listaPedidos.push(ped);
+        totalMoney=0;
+        allUnconfirmed=true;
+        var tabla="<table class='pedido' id='"+pedidos[i].pedido_id+"'>"+
                         "<tr>"+
                             "<th>Pedido ID: "+pedidos[i].pedido_id +"</th>"+
                             "<th>Fecha: "+pedidos[i].fecha +"</th>"+
@@ -121,13 +142,42 @@ function showPedidos(data){
                             "<th>Estado</th>" +
                             "<th></th>" +
                         "</tr>";
-        $('#main-div').append(tabla);  
-        var callback=function(data){
-            showProductosPedido(data, pedidos[i].pedido_id);
+        var listaProductos=pedidos[i].listaProductos;
+        for(var j=0;j<listaProductos.length;j++){
+            var proPed=new productoPedido(listaProductos[j].nombrePro,listaProductos[j].estado,listaProductos[j].cantidad );
+            ped.addProducto(proPed);
+            tabla+="<tr>"+
+                        "<td>"+listaProductos[j].nombre+"</td>"+
+                        "<td>"+listaProductos[j].nombrePro+"</td>"+
+                        "<td>"+listaProductos[j].precio+"</td>";
+                
+                        
+            if(listaProductos[j].estado===1){
+                tabla+= "<td>"+listaProductos[j].cantidad+"</td>";
+                tabla+="<td> Confirmado </td>";
+                allUnconfirmed=false;
+            }else{
+                tabla+="<td><input type='number' value="+listaProductos[j].cantidad+" min='1' class='product-quantity'/></td>";
+                tabla+="<td> Sin confirmar </td>";
+                tabla+='<td><button id='+pedidos[i].pedido_id+' class="pedido-delete">X</button></td>';
+                saveChanges=true;
+            }
+            tabla+="</tr>";
+            totalMoney+=parseInt(listaProductos[j].precio);             
+                    
         }
-        peticionAjax('Peticiones.php','data='+JSON.stringify({"peticion":"productosPedido","pedido_id":pedidos[i].pedido_id}),callback);            
+        if(allUnconfirmed){
+            tabla+="<tr><td><button class=delete-all-pedido>Eliminar pedido</button></td></tr>";
+            
+        }
+        if(saveChanges){
+            tabla+="<tr><td><button class=save-changes>Save changes</button></td></tr>";
+        }
+        tabla+="<tr><td> Total: "+totalMoney+"€</td></tr></table>";
+        $('#main-div').append(tabla);  
+                  
     }
-
+    
 }
 
 function realizarPedidoHandler(){
@@ -169,6 +219,7 @@ function peticionAjax(script, data, callback){
     request.onreadystatechange= function(){
         if(this.readyState==4 && this.status==200){
             if(callback!=null){
+                //alert(this.responseText);
                 callback(this.responseText);
             }
         }
@@ -191,7 +242,7 @@ function registrarPedido(){
     if(cartItems.length===0){
         alert("No ha añadido productos al pedido");
     }else{
-        peticionAjax("Peticiones.php","data="+JSON.stringify({"peticion":"registrarPedido"}),showPedidos);
+        peticionAjax("Peticiones.php","data="+JSON.stringify({"peticion":"registrarPedido","cart_items":cartItems}));
     }
     
 }
@@ -209,24 +260,11 @@ function filter(event){
     }
 }
 
-function showProductosPedido(data, pedido_id){
-    var productos=JSON.parse(data);
-    var tabla;
-    for(var i=0;i<productos.length;i++){
-        tabla+="<tr>"+
-            "<td>"+productos[i]["nombre"]+"</td>" +
-            "<td>"+productos[i]["nombrePro"]+"</td>" +
-            "<td>"+productos[i]["precio"]+"</td>" +
-            "<td>"+productos[i]["cantidad"]+"</td>" +
-            "<td>"+productos[i]["estado"]+"</td>" +
-        "</tr>";
-    }
-    tabla+="<tr>"+
-                "<td>Total: "+"€</td>" +
-                "</tr>" +
-        "</table>";
-    $('#main-div').append(tabla);     
+function updatePedido(){
+    var pedido_id=$(this).parent().parent().parent().parent().attr('id');
+    $("table#"+pedido_id+" input").each(function(){
+        //if value != array listaPedidos ->ha cambiado 
+    });
 }
-
 
 

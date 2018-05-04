@@ -15,8 +15,6 @@ namespace Models;
         
         function setAttributes($data){
             $this->conc_name=$data["conc_name"];
-            $this->date=$data["date"];
-            $this->status=$data["status"];
         }
         
         function getAttributes(){
@@ -83,7 +81,7 @@ namespace Models;
             $statement->execute();
             $result=$statement->get_result();
             $pedidos =[];
-            while($row=$result->fetch_assoc()){
+            while($row=$result->fetch_object()){
                 $pedidos [] =$row;
             }
             $statement->close();
@@ -129,12 +127,12 @@ namespace Models;
         }
         
         
-        function insert(){
-            $statement=$this->connection->prepare("INSERT INTO Pedido(nombreCon, fecha) VALUES(?,?)");
-            $statement->bind_param("ss",$this->conc_name,$this->date);
+        function insert($nombreCon){
+            $statement=$this->connection->prepare("INSERT INTO Pedido(nombreCon) VALUES(?)");
+            $statement->bind_param("s", $nombreCon);
             $statement->execute();
             $statement->close();
-            return $this->connection->lastInsertId();
+            return $this->connection->insert_id;
             //$this->conn->close();
         }
     }
