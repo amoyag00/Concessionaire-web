@@ -139,7 +139,7 @@ function ajaxRequest(data, script){
             if(this.readyState == 4 && this.status == 200){
                // alert("llega");
                //alert(JSON.parse(this.responseText));
-               //alert(this.responseText);
+               alert(this.responseText);
                //console.log(this.responseText);
                tablaPedidos(this.responseText);
             }

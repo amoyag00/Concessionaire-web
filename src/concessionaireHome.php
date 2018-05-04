@@ -52,12 +52,12 @@ namespace Concessionaire;
         </div>
        
         <nav id="conc-nav">
-            <button type="button" id="mis-pedidos-button" disabled="">Mis pedidos</button>
+            <button type="button" id="mis-pedidos-button" >Mis pedidos</button>
             <button type="button" id="realizar-pedido-button">Realizar pedido</button>
         </nav>
         
         <div id="main-div">
-             <?php
+             <!-- <?php
             $pedidos=\Models\Pedido::listPedidosOfConc($_SESSION["user"]);
             foreach($pedidos as $pedido){
                 $pedido->listaProductos=\Models\ListaProductos::getListaProd($pedido->pedido_id);
@@ -114,7 +114,7 @@ namespace Concessionaire;
                     <tr><td> Total:<?php echo $totalMoney ?>€</td></tr></table>
              <?php  }
             }
-                ?>  
+                ?>  -->
         </div>
     </body>
     <footer>

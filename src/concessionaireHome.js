@@ -22,10 +22,11 @@ function Pedido(id){
         this.listaProductos.push(producto);
     };
 }
-function productoPedido(nombrePro, estado, cantidad){
+function productoPedido(nombrePro, estado, cantidad,producto_id){
     this.nombrePro=nombrePro;
     this.estado=estado;
     this.cantidad=cantidad;
+    this.id=producto_id;
 }
 
 
@@ -123,7 +124,6 @@ function showPedidos(data){
     var pedidos=JSON.parse(data);
     var totalMoney=0;
     var allUnconfirmed=true;
-    var saveChanges=false;
     for(var i=0;i<pedidos.length;i++){
         var ped=new Pedido(pedidos[i].pedido_id);
         listaPedidos.push(ped);
@@ -144,9 +144,9 @@ function showPedidos(data){
                         "</tr>";
         var listaProductos=pedidos[i].listaProductos;
         for(var j=0;j<listaProductos.length;j++){
-            var proPed=new productoPedido(listaProductos[j].nombrePro,listaProductos[j].estado,listaProductos[j].cantidad );
+            var proPed=new productoPedido(listaProductos[j].nombrePro,listaProductos[j].estado,listaProductos[j].cantidad, listaProductos[j].producto_id );
             ped.addProducto(proPed);
-            tabla+="<tr>"+
+            tabla+="<tr id='"+listaProductos[j].producto_id+"'>"+
                         "<td>"+listaProductos[j].nombre+"</td>"+
                         "<td>"+listaProductos[j].nombrePro+"</td>"+
                         "<td>"+listaProductos[j].precio+"</td>";
@@ -159,20 +159,18 @@ function showPedidos(data){
             }else{
                 tabla+="<td><input type='number' value="+listaProductos[j].cantidad+" min='1' class='product-quantity'/></td>";
                 tabla+="<td> Sin confirmar </td>";
-                tabla+='<td><button id='+pedidos[i].pedido_id+' class="pedido-delete">X</button></td>';
-                saveChanges=true;
+                tabla+='<td><button id='+pedidos[i].pedido_id+' class="pedido-delete">X</button>\n\
+                <button class=save-changes>Save changes</button></td>';
+
             }
             tabla+="</tr>";
             totalMoney+=parseInt(listaProductos[j].precio);             
                     
         }
         if(allUnconfirmed){
-            tabla+="<tr><td><button class=delete-all-pedido>Eliminar pedido</button></td></tr>";
-            
+            tabla+="<tr><td><button class=delete-all-pedido>Eliminar pedido</button></td></tr>";  
         }
-        if(saveChanges){
-            tabla+="<tr><td><button class=save-changes>Save changes</button></td></tr>";
-        }
+       
         tabla+="<tr><td> Total: "+totalMoney+"€</td></tr></table>";
         $('#main-div').append(tabla);  
                   
@@ -219,7 +217,7 @@ function peticionAjax(script, data, callback){
     request.onreadystatechange= function(){
         if(this.readyState==4 && this.status==200){
             if(callback!=null){
-                //alert(this.responseText);
+                alert(this.responseText);
                 callback(this.responseText);
             }
         }
@@ -255,16 +253,28 @@ function filter(event){
             var filter=$('#search').val();
             peticionAjax("Peticiones.php","data="+JSON.stringify({"peticion":"filtrarPedidos","param":param,"filter":filter}),showPedidos);
         }else{
-            peticionAjax("Producto.php","data="+JSON.stringify({"peticion":"listarProductos"}),showProductos);
+           // peticionAjax("Peticiones.php","data="+JSON.stringify({"peticion":"listarProductos"}),showProductos);
         } 
     }
 }
 
 function updatePedido(){
     var pedido_id=$(this).parent().parent().parent().parent().attr('id');
-    $("table#"+pedido_id+" input").each(function(){
-        //if value != array listaPedidos ->ha cambiado 
-    });
+    var cantidad=$("table#"+pedido_id+" input").val();
+    var producto_id=$(this).parent().parent().attr('id');
+    
+    var pedido=getItemOfId(pedido_id,listaPedidos);
+    var producto=getItemOfId(producto_id,pedido.listaProductos);
+    var estado=producto.estado;
+    
+    if(estado===0){
+        $('#cart').css('visibility','hidden');
+        $('#filter').css('visibility','visible');
+        $('#dropdown').css("display","none");
+        $("#main-div").empty();
+        peticionAjax("Peticiones.php","data="+JSON.stringify({"peticion":"updateProducto","pedido_id":pedido_id,"cantidad":cantidad,"nombre":producto_id}), showPedidos);
+    }
+    
 }
 
 
