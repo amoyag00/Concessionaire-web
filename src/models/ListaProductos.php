@@ -33,6 +33,13 @@ class ListaProductos{
 		$statement->execute();
 		$statement->close();
 	}
+        
+	function delete($pedido_id,$producto_id){
+		$statement=$this->conn->prepare("DELETE FROM ListaProductos WHERE pedido_id=? AND producto_id=?");
+		$statement->bind_param("ii",$pedido_id,$producto_id);
+		$statement->execute();
+		$statement->close();
+	}
 	
 	static function getListaProd($pedido_id){
             $conn = DBConnection::getConnection();

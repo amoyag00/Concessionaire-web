@@ -7,6 +7,7 @@ $(document).ready(function(){
      $('#ver-todo').on("click",verTodoHandler);
      $('#pedir').on("click",registrarPedido);
      $('#main-div').on("click",".save-changes",updatePedido);
+     $('#main-div').on("click",".pedido-delete",pedidoDeleteProduct);
      $('#search').keypress(filter);
 });
 
@@ -121,6 +122,7 @@ function misPedidosHandler(){
 }
  
 function showPedidos(data){
+    listaPedidos=[];
     var pedidos=JSON.parse(data);
     var totalMoney=0;
     var allUnconfirmed=true;
@@ -164,7 +166,7 @@ function showPedidos(data){
 
             }
             tabla+="</tr>";
-            totalMoney+=parseInt(listaProductos[j].precio);             
+            totalMoney+=parseInt(listaProductos[j].precio)*parseInt(listaProductos[j].cantidad);             
                     
         }
         if(allUnconfirmed){
@@ -272,7 +274,24 @@ function updatePedido(){
         $('#filter').css('visibility','visible');
         $('#dropdown').css("display","none");
         $("#main-div").empty();
-        peticionAjax("Peticiones.php","data="+JSON.stringify({"peticion":"updateProducto","pedido_id":pedido_id,"cantidad":cantidad,"nombre":producto_id}), showPedidos);
+        peticionAjax("Peticiones.php","data="+JSON.stringify({"peticion":"updateProducto","pedido_id":pedido_id,"cantidad":cantidad,"producto_id":producto_id}), showPedidos);
+    }
+    
+}
+
+function pedidoDeleteProduct(){
+    var pedido_id=$(this).parent().parent().parent().parent().attr('id');
+    var producto_id=$(this).parent().parent().attr('id');
+    
+    var pedido=getItemOfId(pedido_id,listaPedidos);
+    var producto=getItemOfId(producto_id,pedido.listaProductos);
+    var estado=producto.estado;
+    if(estado===0){
+        $('#cart').css('visibility','hidden');
+        $('#filter').css('visibility','visible');
+        $('#dropdown').css("display","none");
+        $("#main-div").empty();
+        peticionAjax("Peticiones.php","data="+JSON.stringify({"peticion":"deleteProductoPedido","pedido_id":pedido_id,"producto_id":producto_id}), showPedidos);
     }
     
 }

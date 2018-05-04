@@ -43,13 +43,21 @@ switch($obj->peticion){
         break;
     case "updateProducto":
         $lp=new \Models\ListaProductos();
-        $lp->update($obj->cantidad, $obj->nombre, $obj->pedido_id);
+        $lp->update($obj->cantidad, $obj->producto_id, $obj->pedido_id);
         $pedidos=\Models\Pedido::listPedidosOfConc($_SESSION["user"]);
         foreach($pedidos as $pedido){
             $pedido->listaProductos=\Models\ListaProductos::getListaProd($pedido->pedido_id);
         }
         echo json_encode($pedidos);
         break;
-    
+    case "deleteProductoPedido":
+        $lp=new \Models\ListaProductos();
+        $lp->delete($obj->producto_id, $obj->pedido_id);
+        $pedidos=\Models\Pedido::listPedidosOfConc($_SESSION["user"]);
+        foreach($pedidos as $pedido){
+            $pedido->listaProductos=\Models\ListaProductos::getListaProd($pedido->pedido_id);
+        }
+        echo json_encode($pedidos);
+        break;
 }
 ?>
