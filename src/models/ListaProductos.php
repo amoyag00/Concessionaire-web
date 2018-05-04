@@ -36,7 +36,7 @@ class ListaProductos{
 	
 	static function getListaProd($pedido_id){
             $conn = DBConnection::getConnection();
-            $statement = $conn->prepare("SELECT Producto.nombre, Producto.nombrePro, Producto.precio, ListaProductos.cantidad, ListaProductos.estado
+            $statement = $conn->prepare("SELECT Producto.producto_id, Producto.nombre, Producto.nombrePro, Producto.precio, ListaProductos.cantidad, ListaProductos.estado
 										 FROM (ListaProductos
 										 INNER JOIN Producto ON ListaProductos.producto_id = Producto.producto_id)
 										 WHERE ListaProductos.pedido_id = ?");

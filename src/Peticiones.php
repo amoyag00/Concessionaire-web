@@ -41,6 +41,15 @@ switch($obj->peticion){
     case "listaNoConfirmados":
         echo json_encode(\Models\Pedido::getNotConfirmed($_SESSION["user"]));
         break;
+    case "updateProducto":
+        $lp=new \Models\ListaProductos();
+        $lp->update($obj->cantidad, $obj->nombre, $obj->pedido_id);
+        $pedidos=\Models\Pedido::listPedidosOfConc($_SESSION["user"]);
+        foreach($pedidos as $pedido){
+            $pedido->listaProductos=\Models\ListaProductos::getListaProd($pedido->pedido_id);
+        }
+        echo json_encode($pedidos);
+        break;
     
 }
 ?>
