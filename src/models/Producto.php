@@ -58,6 +58,24 @@ class Producto{
         $statement->close();
     }
     
+    static function getProductosPedido($id){
+        $connection=DBConnection::getConnection();
+        //$statement = $connection->prepare("SELECT * FROM Producto WHERE producto_id IN (SELECT producto_id FROM ListaProductos WHERE pedido_id IN (SELECT pedido_id FROM Pedido WHERE pedido_id=?))");
+        //$statement = $connection->prepare("SELECT nombre, precio, cantidad, nombreCon  FROM producto, listaproductos, pedido WHERE producto.producto_id IN (SELECT producto_id FROM listaproductos WHERE pedido_id IN (SELECT pedido_id FROM pedido WHERE pedido_id=?))");
+        $statement = $connection->prepare("SELECT producto.nombre, listaproductos.cantidad, producto.precio, pedido.nombreCon FROM listaproductos INNER JOIN producto ON producto.producto_id = listaproductos.producto_id AND listaproductos.pedido_id=? INNER JOIN pedido ON pedido.pedido_id=?");
+        $statement->bind_param("ii", $id, $id);
+        $statement->execute();
+        $result = $statement->get_result();
+        $productos = array();
+            
+        while($fila=$result->fetch_assoc()){
+            $productos [] =$fila;
+        }
+        $statement->close();
+            
+        return $productos;
+    }
+    
     static function getListaProductosProveedor($prov_name){
         $connection = DBConnection::getConnection();
         $statement = $connection->prepare("SELECT producto_id, nombre, precio, disponible FROM Producto WHERE nombrePro=?");

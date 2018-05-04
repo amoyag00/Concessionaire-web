@@ -1,6 +1,9 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 namespace Login;
 include 'models/Usuario.php';
+
 if( isset($_POST["user"]) && isset($_POST["password"]) ){
     $user = FILTER_VAR($_POST["user"],FILTER_SANITIZE_STRING);
     $pass = FILTER_VAR($_POST["password"],FILTER_SANITIZE_STRING);
