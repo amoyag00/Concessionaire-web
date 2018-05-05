@@ -58,7 +58,7 @@ namespace Models;
             
             return $pedidos;
         }
-        
+       
         static public function listPedidosOfConc($conc_name){
             $connection=DBConnection::getConnection();
             $statement=$connection->prepare("SELECT pedido_id, nombreCon, DATE_FORMAT(fecha,'%d/%m/%Y') AS fecha FROM Pedido WHERE nombreCon=?");
@@ -82,16 +82,24 @@ namespace Models;
                         . "FROM Pedido WHERE DATE_FORMAT(fecha,'%d/%m/%Y') > ? AND nombreCon=?");
                         $statement->bind_param("ss", $filter,$conc);
             }else if ($param=="Proveedor"){
-                $statement=$connection->prepare("SELECT pedido_id, nombreCon, DATE_FORMAT(fecha,'%d/%m/%Y') AS fecha"
-                        . " FROM Pedido WHERE ? LIKE ?");
-                        $statement->bind_param("ss",$param, $filter);
+                $filter="%".$filter."%";
+                $statement=$connection->prepare("SELECT pedido.pedido_id, DATE_FORMAT(fecha,'%d/%m/%Y') AS fecha FROM Pedido"
+                        . " INNER JOIN listaproductos ON listaproductos.pedido_id=pedido.pedido_id "
+                        . "INNER JOIN producto ON producto.producto_id=listaproductos.producto_id "
+                        . "WHERE nombreCon=? AND producto.nombrePro LIKE ? ");
+                        $statement->bind_param("ss",$conc, $filter);
             }else if($param=="Producto"){
-                
+                $filter="%".$filter."%";
+                $statement=$connection->prepare("SELECT pedido.pedido_id, DATE_FORMAT(fecha,'%d/%m/%Y') AS fecha FROM Pedido"
+                        . " INNER JOIN listaproductos ON listaproductos.pedido_id=pedido.pedido_id "
+                        . "INNER JOIN producto ON producto.producto_id=listaproductos.producto_id "
+                        . "WHERE nombreCon=? AND producto.nombre LIKE ? ");
+                        $statement->bind_param("ss",$conc, $filter);
             }
             $statement->execute();
             $result=$statement->get_result();
             $pedidos =[];
-            while($row=$result->fetch_assoc()){
+            while($row=$result->fetch_object()){
                 $pedidos [] =$row;
             }
             $statement->close();

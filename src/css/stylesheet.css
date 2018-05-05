@@ -305,7 +305,12 @@ div#search-cart{
 #filter{
     display:inline-block;
     margin: 30px 50px 0px 0px;
-    visibility:visible;
+    visibility:hidden;
+}
+#fecha-filter{
+    display:inline-block;
+    margin: 30px 50px 0px 0px;
+    visibility:hidden;
 }
 
 #cart{

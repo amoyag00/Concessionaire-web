@@ -26,10 +26,15 @@ namespace Concessionaire;
         <div id="search-cart">
             <button id="cart" src="img/cart.png"><span>0</span></button>
             <select id="filter">
-                <option value="Fecha">Fecha</option>
                 <option value="Proveedor">Proveedor</option>
+                <option value="Fecha">Fecha</option>
                 <option value="Producto">Producto</option>
                 
+            </select>
+            <select id="fecha-filter">
+                <option value="antiguo">Previo a</option>
+                <option value="nueva">Posterior a</option>
+                <option value="exacta">Fecha exacta</option>        
             </select>
             <input type="text" id="search" placeholder="Filtrar" />
             <button id="ver-todo">Ver todo</button>
