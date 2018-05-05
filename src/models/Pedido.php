@@ -120,6 +120,13 @@ namespace Models;
             return $this->connection->insert_id;
             //$this->conn->close();
         }
+        
+        function delete($pedido_id){
+            $statement=$this->connection->prepare("DELETE FROM Pedido WHERE pedido_id=?");
+	    $statement->bind_param("i",$pedido_id);
+            $statement->execute();
+            $statement->close();
+        }
     }
 
 ?>

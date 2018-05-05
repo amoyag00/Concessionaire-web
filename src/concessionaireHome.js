@@ -8,6 +8,7 @@ $(document).ready(function(){
      $('#pedir').on("click",registrarPedido);
      $('#main-div').on("click",".save-changes",updatePedido);
      $('#main-div').on("click",".pedido-delete",pedidoDeleteProduct);
+     $('#main-div').on("click",".delete-all-pedido",deletePedido);
      $('#search').keypress(filter);
 });
 
@@ -293,6 +294,21 @@ function pedidoDeleteProduct(){
         $("#main-div").empty();
         peticionAjax("Peticiones.php","data="+JSON.stringify({"peticion":"deleteProductoPedido","pedido_id":pedido_id,"producto_id":producto_id}), showPedidos);
     }
+    
+}
+function deletePedido(){
+    var pedido_id=$(this).parent().parent().parent().parent().attr('id');
+    alert(pedido_id);
+    var pedido=getItemOfId(pedido_id,listaPedidos);
+   /* var producto=getItemOfId(producto_id,pedido.listaProductos);
+    var estado=producto.estado;
+    if(estado===0){*/
+        $('#cart').css('visibility','hidden');
+        $('#filter').css('visibility','visible');
+        $('#dropdown').css("display","none");
+        $("#main-div").empty();
+        peticionAjax("Peticiones.php","data="+JSON.stringify({"peticion":"deletePedido","pedido_id":pedido_id}), showPedidos);
+   // }
     
 }
 

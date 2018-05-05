@@ -52,8 +52,17 @@ switch($obj->peticion){
         break;
     case "deleteProductoPedido":
         $lp=new \Models\ListaProductos();
-        $lp->delete($obj->producto_id, $obj->pedido_id);
+        $lp->delete($obj->pedido_id,$obj->producto_id );
         $pedidos=\Models\Pedido::listPedidosOfConc($_SESSION["user"]);
+        foreach($pedidos as $pedido){
+            $pedido->listaProductos=\Models\ListaProductos::getListaProd($pedido->pedido_id);
+        }
+        echo json_encode($pedidos);
+        break;
+    case "deletePedido":
+        $pedido=new \Models\Pedido();
+        $pedido->delete($obj->pedido_id);
+                $pedidos=\Models\Pedido::listPedidosOfConc($_SESSION["user"]);
         foreach($pedidos as $pedido){
             $pedido->listaProductos=\Models\ListaProductos::getListaProd($pedido->pedido_id);
         }
