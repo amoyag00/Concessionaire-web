@@ -1,3 +1,6 @@
+<?php 
+namespace contact;
+?>
 <!Doctype html>
 <html>
     <head>

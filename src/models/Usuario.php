@@ -27,26 +27,13 @@ class Usuario{
     }
     
     function insert(){
-        $statement=$this->conn->prepare("INSERT INTO Usuario VALUES(?, ?,?)");
+        $this->conn=DBConnection::getConnection();
+        $statement=$this->conn->prepare("INSERT INTO Usuario(nombre,contrasena,tipo) VALUES(?,?,?)");
         $statement->bind_param("sss",$this->username,$this->password, $this->type);
         $statement->execute();
+        $affectedRows=mysqli_affected_rows($this->conn);//used for testing;
         $statement->close();
-        
-        switch($this->type){
-            case "concessionaire":
-                $statement=$this->conn->prepare("INSERT INTO Concesionario VALUES(?)");
-                $statement->bind_param("s",$this->username);
-                $statement->execute();
-                $statement->close();
-                break;
-            case "provider":
-                $statement=$this->conn->prepare("INSERT INTO Proveedor VALUES(?)");
-                $statement->bind_param("s",$this->username);
-                $statement->execute();
-                $statement->close();
-                break;
-        }
-        //$this->conn->close();
+        return $affectedRows;
     }
     
     function getType($username){
