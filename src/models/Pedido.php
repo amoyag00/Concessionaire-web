@@ -74,13 +74,23 @@ namespace Models;
             return $pedidos;
         }
         
-        static public function filterPedidos($param, $filter, $conc){
+        static public function filterPedidos($param, $filter, $conc, $fechaParam){
             $connection=DBConnection::getConnection();
-   
             if($param=="Fecha"){
-                $statement=$connection->prepare("SELECT pedido_id, nombreCon, DATE_FORMAT(fecha,'%d/%m/%Y') AS fecha "
+                if($fechaParam==="Posterior"){
+                    $statement=$connection->prepare("SELECT pedido_id, nombreCon, DATE_FORMAT(fecha,'%d/%m/%Y') AS fecha "
                         . "FROM Pedido WHERE DATE_FORMAT(fecha,'%d/%m/%Y') > ? AND nombreCon=?");
                         $statement->bind_param("ss", $filter,$conc);
+                }else if($fechaParam==="Previo"){
+                     $statement=$connection->prepare("SELECT pedido_id, nombreCon, DATE_FORMAT(fecha,'%d/%m/%Y') AS fecha "
+                        . "FROM Pedido WHERE DATE_FORMAT(fecha,'%d/%m/%Y') < ? AND nombreCon=?");
+                        $statement->bind_param("ss", $filter,$conc);
+                }else if($fechaParam==="Exacta"){
+                     $statement=$connection->prepare("SELECT pedido_id, nombreCon, DATE_FORMAT(fecha,'%d/%m/%Y') AS fecha "
+                        . "FROM Pedido WHERE DATE_FORMAT(fecha,'%d/%m/%Y') LIKE ? AND nombreCon=?");
+                        $statement->bind_param("ss", $filter,$conc);
+                }
+                
             }else if ($param=="Proveedor"){
                 $filter="%".$filter."%";
                 $statement=$connection->prepare("SELECT pedido.pedido_id, DATE_FORMAT(fecha,'%d/%m/%Y') AS fecha FROM Pedido"

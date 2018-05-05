@@ -32,9 +32,9 @@ namespace Concessionaire;
                 
             </select>
             <select id="fecha-filter">
-                <option value="antiguo">Previo a</option>
-                <option value="nueva">Posterior a</option>
-                <option value="exacta">Fecha exacta</option>        
+                <option value="Previo">Previo a</option>
+                <option value="Posterior">Posterior a</option>
+                <option value="Exacta">Fecha exacta</option>        
             </select>
             <input type="text" id="search" placeholder="Filtrar" />
             <button id="ver-todo">Ver todo</button>

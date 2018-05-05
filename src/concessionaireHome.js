@@ -257,11 +257,11 @@ function filter(event){
         if($('#mis-pedidos-button').is(':disabled')){
             var param=$('#filter').val();
             var filter=$('#search').val();
-            var fechaParam;
+            var fechaParam="null";
             if(param==='Fecha'){
-                fechaParam=$('#fechafilter').val();
+                fechaParam=$('#fecha-filter').val();
             }
-            peticionAjax("Peticiones.php","data="+JSON.stringify({"peticion":"filtrarPedidos","param":param,"filter":filter}),showPedidos);
+            peticionAjax("Peticiones.php","data="+JSON.stringify({"peticion":"filtrarPedidos","param":param,"filter":filter,"fechaParam":fechaParam}),showPedidos);
         }else{
            // peticionAjax("Peticiones.php","data="+JSON.stringify({"peticion":"listarProductos"}),showProductos);
         } 

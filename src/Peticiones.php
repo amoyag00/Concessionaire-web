@@ -33,7 +33,7 @@ switch($obj->peticion){
         echo json_encode(\Models\Producto::getAll());
         break;
     case "filtrarPedidos":
-        $pedidos=\Models\Pedido::filterPedidos($obj->param, $obj->filter,$_SESSION["user"]);
+        $pedidos=\Models\Pedido::filterPedidos($obj->param, $obj->filter,$_SESSION["user"],$obj->fechaParam);
         foreach($pedidos as $pedido){
             $pedido->listaProductos=\Models\ListaProductos::getListaProd($pedido->pedido_id);
         }
