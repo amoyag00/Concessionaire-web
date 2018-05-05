@@ -36,6 +36,26 @@ $(document).ready(function(){
 
     $(".list-filter").on("change", filterHandler);
     
+    $(".confirm").click(function(){
+        alert("llega");
+        var pedido = $(this).parent().parent().parent().first().first().text();
+        var producto = $(this).parent().parent().first().text();
+        var all;
+        
+        if($("#all").is(":checked")){
+        //alert(JSON.stringify({"peticion":"listaPedidosCompleta"}));
+            all = 1;
+        }
+        else{
+            all = 0;
+        }
+        alert(pedido);
+        alert(producto);
+        alert(all);
+
+        //ajaxRequest("data="+JSON.stringify({"peticion":"listaPedidosCompleta", "pedido": pedido, "producto": producto, "all": all }), "Peticiones.php"); 
+    });
+    
     /*$(".confirmed-filter").click(function(){
         ajaxRequest("data="+JSON.stringify({"peticion":"listaNoConfirmados"}) ,"Peticiones.php");
     });*/
@@ -56,68 +76,52 @@ function filterHandler(){
 function tablaPedidos(respuesta){
     //console.log(respuesta);
     var listaPedidos = JSON.parse(respuesta);
+    var contenido = "";
     
     for(i=0;i<listaPedidos.length;i++){
+        var pedido = listaPedidos[i];
+
         var tabla = "<table id='tabla-pedidos'>"+
                     "<tr>"+
-                        "<th scope='col'>ID</th>"+
-                        "<th scope='col'>Concesionario</th>"+
-                        "<th scope='col'>Fecha</th>"+
+                        "<th scope='col' class='cabecera-pedido'>ID "+pedido.pedido_id+"</th>"+
+                        "<th scope='col' class='cabecera-pedido'>Concesionario "+pedido.nombreCon+"</th>"+
+                        "<th scope='col' class='cabecera-pedido'>Fecha "+pedido.fecha+"</th>"+
                     "</tr>";
             
-        var pedido = listaPedidos[i];
-        tabla = tabla+"<tr>";
-        //console.log(pedido.pedido_id);
-        tabla = tabla+"<td class='celda-pedido'>";
-        tabla = tabla+pedido.pedido_id;
-        tabla = tabla+"</td>";
+        var producto = listaPedidos[i];
         
-        tabla = tabla+"<td class='celda-pedido'>";
-        tabla = tabla+pedido.nombreCon;
-        tabla = tabla+"</td>";
-        
-        tabla = tabla+"<td class='celda-pedido'>";
-        tabla = tabla+pedido.fecha;
-        tabla = tabla+"</td>";
-                    
-        tabla = tabla+"</tr>"
-        tabla = tabla+"</table>\n";
-    }
-    
-    //alert(tabla);
-    /*for(i=0;i<listaPedidos.length;i++){
-        var pedido = listaPedidos[i];
-        tabla = tabla+"<tr>";
-        //console.log(pedido.pedido_id);
-        tabla = tabla+"<td class='celda-pedido'>";
-        tabla = tabla+pedido.pedido_id;
-        tabla = tabla+"</td>";
-        
-        tabla = tabla+"<td class='celda-pedido'>";
-        tabla = tabla+pedido.nombreCon;
-        tabla = tabla+"</td>";
-        
-        tabla = tabla+"<td class='celda-pedido'>";
-        tabla = tabla+pedido.fecha;
-        tabla = tabla+"</td>";
+        for(j=i+1; j<=listaPedidos.length && pedido.pedido_id==producto.pedido_id;j++){
+            tabla = tabla+"<tr>"+
+                            "<th scope='col' class='cabecera-producto'>Producto</th>'"+
+                            "<th scope='col' class='cabecera-producto'>Cantidad</th>'"+
+                            "<th scope='col' class='cabecera-producto'>Estado</th>'"+
+                          "</tr>\n";
+                  
+            tabla = tabla+"<tr>"+
+                            "<td class='celda-pedido'>"+producto.nombre+"</td>"+
+                            "<td class='celda-pedido'>"+producto.cantidad+"</td>";
+                  
+            if(producto.estado==1){
+                tabla = tabla+"<td class='celda-pedido'>";
+                tabla = tabla+"Confirmado";
+                tabla = tabla+"</td>";
+            }
+            else{
+                tabla = tabla+"<td class='celda-pedido'>";
+                tabla = tabla+"<button class='confirm' value='confirmed'>Confirmar</button>";
+                tabla = tabla+"</td>";
+            }
             
-        if(pedido.estado==1){
-            tabla = tabla+"<td class='celda-pedido'>";
-            tabla = tabla+"Confirmado";
-            tabla = tabla+"</td>";
+            tabla = tabla+"</tr>"
+            producto = listaPedidos[j];
+            
         }
-        else{
-            tabla = tabla+"<td class='celda-pedido'>";
-            tabla = tabla+"<button class='confirm' value='confirmed'>Confirmar</button>";
-            tabla = tabla+"</td>";
-        }
-                    
-        tabla = tabla+"</tr>"
-    }*/
-    //tabla = tabla+"</table>";
-    //alert(tabla);
+        i = i+j-2;
+        contenido = contenido+tabla+"</table>";
+    }
+
     $("#lista-pedidos").empty();
-    $("#lista-pedidos").append(tabla);
+    $("#lista-pedidos").append(contenido);
 }
 
 function ajaxRequest(data, script){
@@ -127,7 +131,7 @@ function ajaxRequest(data, script){
             if(this.readyState == 4 && this.status == 200){
                // alert("llega");
                //alert(JSON.parse(this.responseText));
-               alert(this.responseText);
+               //alert(this.responseText);
                //console.log(this.responseText);
                tablaPedidos(this.responseText);
             }

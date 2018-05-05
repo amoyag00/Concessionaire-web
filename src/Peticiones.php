@@ -46,6 +46,15 @@ switch($obj->peticion){
     case "listaNoConfirmados":
         echo json_encode(\Models\Pedido::getNotConfirmed($_SESSION["user"]));
         break;
+    case "confirm":
+        \Models\Pedido::confirm($obj->pedido, $obj->producto);
+        if($obj->all){
+            echo json_encode(\Models\Pedido::getAll($_SESSION["user"]));
+        }
+        else{
+            echo json_encode(\Models\Pedido::getNotConfirmed($_SESSION["user"]));
+        }
+        break;
     case "updateProducto":
         $lp=new \Models\ListaProductos();
         $lp->update($obj->cantidad, $obj->producto_id, $obj->pedido_id);
