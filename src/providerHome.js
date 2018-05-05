@@ -36,30 +36,32 @@ $(document).ready(function(){
 
     $(".list-filter").on("change", filterHandler);
     
-    $(".confirm").click(function(){
-        alert("llega");
-        var pedido = $(this).parent().parent().parent().first().first().text();
-        var producto = $(this).parent().parent().first().text();
-        var all;
-        
-        if($("#all").is(":checked")){
-        //alert(JSON.stringify({"peticion":"listaPedidosCompleta"}));
-            all = 1;
-        }
-        else{
-            all = 0;
-        }
-        alert(pedido);
-        alert(producto);
-        alert(all);
-
-        //ajaxRequest("data="+JSON.stringify({"peticion":"listaPedidosCompleta", "pedido": pedido, "producto": producto, "all": all }), "Peticiones.php"); 
-    });
+    $(document).on("click", ".confirm", confirmation);
     
     /*$(".confirmed-filter").click(function(){
         ajaxRequest("data="+JSON.stringify({"peticion":"listaNoConfirmados"}) ,"Peticiones.php");
     });*/
 });
+
+function confirmation(){
+    var pedido = $(this).parent().parent().parent().children(":first");
+    var producto = $(this).parent().parent();
+    var all;
+        
+    if($("#all").is(":checked")){
+        //alert(JSON.stringify({"peticion":"listaPedidosCompleta"}));
+        all = 1;
+    }
+    else{
+        all = 0;
+    }
+
+    alert($(pedido).children(":first").text());
+    alert($(producto).children(":first").text());
+    alert(all);
+
+    //ajaxRequest("data="+JSON.stringify({"peticion":"listaPedidosCompleta", "pedido": pedido, "producto": producto, "all": all }), "Peticiones.php"); 
+}
 
 function filterHandler(){
     /*alert($("#all").attr("checked"));
