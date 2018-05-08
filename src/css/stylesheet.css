@@ -682,7 +682,23 @@ input[name="actualizar"]{
 
 .confirm{
     font-family:'Gugi';
+    text-align: center;
     border-radius: 0px;
     border-style: solid;
     border-width: 2px;
+}
+
+.log-out{
+    font-family:'Gugi';
+    text-align: center;
+    background-color: transparent;
+    border-style: none;
+    margin: 25px;
+    color: black;
+    float: right;
+    font-size: 30px;
+}
+
+.log-out:hover{
+    text-decoration: underline;
 }

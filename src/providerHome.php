@@ -29,6 +29,8 @@ and open the template in the editor.
         
         <section>
             
+            <button class="log-out" value="out">Log out</button>
+            
             <div id="lists">
                 <h2>Listas</h2>
                 
