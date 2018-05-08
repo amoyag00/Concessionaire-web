@@ -11,6 +11,7 @@ $(document).ready(function(){
      $('#main-div').on("click",".delete-all-pedido",deletePedido);
      $('#search').keypress(filter);
      $('#search-cart').on("change","#filter",comboBoxHandler);
+     $('.log-out').on("click",logout);
 });
 
 var cartItems=new Array();
@@ -325,5 +326,15 @@ function comboBoxHandler(){
          $('#fecha-filter').css('visibility','hidden');
     }
 }
+
+function logout(){
+    peticionAjax("Peticiones.php","data="+JSON.stringify({"peticion":"logout"}),goIndex);
+    
+}
+function goIndex(){
+    document.location.href = "index.html";
+}
+
+
 
 

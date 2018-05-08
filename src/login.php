@@ -8,11 +8,12 @@ if( isset($_POST["user"]) && isset($_POST["password"]) ){
     $u = new \Models\Usuario();
     $result=$u->checkPassword($user,$pass);
     
-    if(!empty($result["tipo"])){
+    if(!empty($result["tipo"]) && $result["logged"]===0){
         session_start();
         session_regenerate_id();
         $_SESSION["user"]=$user;
         $_SESSION["type"]=$result["tipo"];
+        $u->login($user);
        
         if($_SESSION["type"]=="provider"){
             header("Location: providerHome.php");

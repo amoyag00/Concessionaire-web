@@ -25,6 +25,7 @@ namespace Concessionaire;
         </header>
         <div id="search-cart">
             <button id="cart" src="img/cart.png"><span>0</span></button>
+            <button class="log-out" value="out">Log out</button>
             <select id="filter">
                 <option value="Proveedor">Proveedor</option>
                 <option value="Fecha">Fecha</option>
@@ -55,6 +56,7 @@ namespace Concessionaire;
                 <button id="pedir">Realizar pedido</button>
             </div>
         </div>
+        
        
         <nav id="conc-nav">
             <button type="button" id="mis-pedidos-button" >Mis pedidos</button>

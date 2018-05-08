@@ -4,6 +4,7 @@ namespace Peticiones;
 require_once 'isLogin.php';
 require_once 'models/Pedido.php';
 require_once 'models/Producto.php';
+require_once 'models/Usuario.php';
 require_once 'models/ListaProductos.php';
 
 header("Content-type: application/json; charset=utf-8");
@@ -82,5 +83,10 @@ switch($obj->peticion){
         }
         echo json_encode($pedidos);
         break;
+    case "logout":
+        $u=new \Models\Usuario();
+        $u->logout($_SESSION["user"]);
+        break;
+  
 }
 ?>
