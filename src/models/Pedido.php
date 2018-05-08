@@ -28,8 +28,8 @@ namespace Models;
         
         static function confirm($pedido, $producto){
             $connection=DBConnection::getConnection();
-            $statement = $connection->prepare("UPDATE ListaProductos SET estado=1 WHERE pedido_id=? AND producto_id=?");
-            $statement->bind_param("ii", $pedido, $producto);
+            $statement = $connection->prepare("UPDATE ListaProductos INNER JOIN Producto ON Producto.producto_id = ListaProductos.producto_id SET ListaProductos.estado=1 WHERE Producto.nombre=? AND ListaProductos.pedido_id=?");
+            $statement->bind_param("si", $producto, $pedido);
             $statement->execute();
             $statement->close();
         }
@@ -54,7 +54,7 @@ namespace Models;
         static function getNotConfirmed($nombre){
             $connection=DBConnection::getConnection();
             //$statement = $connection->prepare("SELECT pedido_id, nombreCon, DATE_FORMAT(fecha, '%d/%m/%Y') AS fecha FROM pedido WHERE pedido_id IN (SELECT pedido_id FROM listaproductos WHERE estado=0 AND producto_id IN (SELECT producto_id FROM producto WHERE nombrePro=?))");
-            $statement = $connection->prepare("SELECT ListaProductos.pedido_id, DATE_FORMAT(Pedido.fecha, '%d/%m/%Y') AS fecha, Producto.nombre, ListaProductos.cantidad, Pedido.nombreCon, ListaProductos.estado, Producto.producto_id FROM ListaProductos INNER JOIN Producto ON Producto.producto_id = ListaProductos.producto_id INNER JOIN Pedido ON Pedido.pedido_id=ListaProductos.pedido_id WHERE Producto.nombrePro=? AND ListaProductos.estado=0 ORDER BY pedido_id;");
+            $statement = $connection->prepare("SELECT ListaProductos.pedido_id, DATE_FORMAT(Pedido.fecha, '%d/%m/%Y') AS fecha, Producto.nombre, ListaProductos.cantidad, Pedido.nombreCon, ListaProductos.estado FROM ListaProductos INNER JOIN Producto ON Producto.producto_id = ListaProductos.producto_id INNER JOIN Pedido ON Pedido.pedido_id=ListaProductos.pedido_id WHERE Producto.nombrePro=? AND ListaProductos.estado=0 ORDER BY pedido_id;");
             $statement->bind_param("s", $nombre);
             $statement->execute();
             $result = $statement->get_result();

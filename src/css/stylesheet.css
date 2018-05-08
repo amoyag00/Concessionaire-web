@@ -656,11 +656,18 @@ input[name="actualizar"]{
     background-color: #ADFF2F;
 }
 
-th[scope="col"]{
+.cabecera-producto{
     text-align: center;
     width: 300px;
     height: 20px;
     background-color: #00FF00;
+}
+
+.cabecera-pedido{
+    text-align: center;
+    width: 300px;
+    height: 20px;
+    background-color: #006400;
 }
 
 #tabla-productos{

@@ -56,11 +56,12 @@ function confirmation(){
         all = 0;
     }
 
-    alert($(pedido).children(":first").text());
+    var idPedido = $(pedido).children(":first").text().substring(2);
+    /*alert(parseInt(idPedido));
     alert($(producto).children(":first").text());
-    alert(all);
+    alert(all);*/
 
-    //ajaxRequest("data="+JSON.stringify({"peticion":"listaPedidosCompleta", "pedido": pedido, "producto": producto, "all": all }), "Peticiones.php"); 
+    ajaxRequest("data="+JSON.stringify({"peticion":"confirm", "pedido": parseInt(idPedido), "producto": $(producto).children(":first").text(), "all": all }), "Peticiones.php"); 
 }
 
 function filterHandler(){
@@ -94,9 +95,9 @@ function tablaPedidos(respuesta){
         
         for(j=i+1; j<=listaPedidos.length && pedido.pedido_id==producto.pedido_id;j++){
             tabla = tabla+"<tr>"+
-                            "<th scope='col' class='cabecera-producto'>Producto</th>'"+
-                            "<th scope='col' class='cabecera-producto'>Cantidad</th>'"+
-                            "<th scope='col' class='cabecera-producto'>Estado</th>'"+
+                            "<th scope='col' class='cabecera-producto'>Producto</th>"+
+                            "<th scope='col' class='cabecera-producto'>Cantidad</th>"+
+                            "<th scope='col' class='cabecera-producto'>Estado</th>"+
                           "</tr>\n";
                   
             tabla = tabla+"<tr>"+

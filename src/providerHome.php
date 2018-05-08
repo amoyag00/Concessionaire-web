@@ -46,10 +46,10 @@ and open the template in the editor.
                 <div class="panel-lista" id="lista-productos">
                     <table id="tabla-productos">
                         <tr>
-                            <th scope="col">Identificador</th>
-                            <th scope="col">Nombre</th>
-                            <th scope="col">Precio</th>
-                            <th scope="col">Disponibilidad</th>
+                            <th scope="col" class="cabecera-producto">Identificador</th>
+                            <th scope="col" class="cabecera-producto">Nombre</th>
+                            <th scope="col" class="cabecera-producto">Precio</th>
+                            <th scope="col" class="cabecera-producto">Disponibilidad</th>
                         </tr>
                     <?php
                         $lista = \Models\Producto::getListaProductosProveedor($_SESSION["user"]);
