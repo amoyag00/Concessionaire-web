@@ -705,3 +705,386 @@ input[name="actualizar"]{
 .log-out:hover{
     text-decoration: underline;
 }
+
+/*--AdminHome--*/
+
+#row:after {
+	content:"";
+    display: table;
+    clear: both;
+	width:100%;
+}	
+#column{
+	width:30%;
+	margin:2%;
+	float: left;
+    padding: 5px;
+	 text-align:center;
+
+}
+
+
+.anyadir-user{
+	
+	
+	margin-left:3%;
+	margin-top:0px;
+
+	float:left;
+
+}
+a.anyadir-user{
+    display: inline-block;
+	font-family: 'Orbitron';
+    font-size: 20px;
+	float:left;
+	color:#000000;
+	text-align:center;
+	vertical-align:middle;
+}
+
+div.anyadir-user{
+	width: 35%;
+}
+form.anyadir-user{
+	background: -moz-linear-gradient(#F2F2F2, #27DACC 80%) fixed;
+	margin-bottom: 5%;
+	padding:2%;
+	border: 3px solid #0AF7EC;
+    border-radius: 4px; 
+}
+
+h1.anyadir-user{
+	color: #000000;
+	font-size: 40px;
+	font-weight: bold;
+	font-family: 'Orbitron';
+	text-shadow: 0 2px 0 #ccc, 2px 4px 3px #05B9B1;
+}
+
+label.anyadir-user {
+    padding: 12px 12px 12px 0;
+    display: inline-block;
+	font-family: 'Orbitron';
+	font-weight: bold;
+    font-size: 15px;
+	float:left;
+	color:#000000;
+
+}
+input[type="text"].anyadir-user{
+	width: 80%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+}
+input[type="password"].anyadir-user{
+	width: 80%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+}
+button.anyadir-user{
+	width: 40%;
+	margin-top:20px;
+	border:none;
+  	background: #0819EE;
+	 color: #fff;
+	 padding: 10px;
+	 font-size: 18px;
+	 border-radius: 1px;
+	 position: relative;
+	 box-sizing: border-box;
+	 transition: background 1s, width 2s;
+}
+
+button.anyadir-user:hover{
+	background: #F80552;
+	width:85%;
+	
+}
+.delete-user{
+	
+	
+	margin-left:3%;
+	margin-top:5%;
+
+	float:left;
+
+}
+a.delete-user{
+
+    display: inline-block;
+	font-family: 'Orbitron';
+    font-size: 20px;
+	float:left;
+	color:#000000;
+	text-align:center;
+}
+
+div.delete-user{
+	width: 35%;
+}
+form.delete-user{
+	background: -moz-linear-gradient(#F2F2F2, #27DACC 80%) fixed;
+	margin-bottom: 5%;
+	padding:2%;
+	border: 3px solid #0AF7EC;
+    border-radius: 4px; 
+}
+
+h1.delete-user{
+	color: #000000;
+	font-size: 40px;
+	font-weight: bold;
+	font-family: 'Orbitron';
+	text-shadow: 0 2px 0 #ccc, 2px 4px 3px #05B9B1;
+}
+
+label.delete-user {
+    padding: 12px 12px 12px 0;
+    display: inline-block;
+	font-family: 'Orbitron';
+	font-weight: bold;
+    font-size: 15px;
+	float:left;
+	color:#000000;
+
+}
+input[type="text"].delete-user{
+	width: 80%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+}
+input[type="password"].delete-user{
+	width: 80%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+}
+button.delete-user{
+	width: 40%;
+	margin-top:20px;
+	border:none;
+  	background: #0819EE;
+	 color: #fff;
+	 padding: 10px;
+	 font-size: 18px;
+	 border-radius: 1px;
+	 position: relative;
+	 box-sizing: border-box;
+	 transition: background 1s, width 2s;
+}
+
+button.delete-user:hover{
+	background: #F80552;
+	width:85%;
+	
+}
+
+.expulsar-user{
+	
+	
+	margin-left:3%;
+	margin-top:3%;
+
+	float:left;
+
+}
+a.expulsar-user{
+
+    display: inline-block;
+	font-family: 'Orbitron';
+    font-size: 20px;
+	float:left;
+	color:#000000;
+	text-align:center;
+}
+
+div.expulsar-user{
+	width: 35%;
+}
+form.expulsar-user{
+	background: -moz-linear-gradient(#F2F2F2, #27DACC 80%) fixed;
+	margin-bottom: 5%;
+	padding:2%;
+	border: 3px solid #0AF7EC;
+    border-radius: 4px; 
+}
+
+h1.expulsar-user{
+	color: #000000;
+	font-size: 40px;
+	font-weight: bold;
+	font-family: 'Orbitron';
+	text-shadow: 0 2px 0 #ccc, 2px 4px 3px #05B9B1;
+}
+
+label.expulsar-user {
+    padding: 12px 12px 12px 0;
+    display: inline-block;
+	font-family: 'Orbitron';
+	font-weight: bold;
+    font-size: 15px;
+	float:left;
+	color:#000000;
+
+}
+input[type="text"].expulsar-user{
+	width: 80%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+}
+input[type="password"].expulsar-user{
+	width: 80%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+}
+button.expulsar-user{
+	width: 40%;
+	margin-top:20px;
+	border:none;
+  	background: #0819EE;
+	 color: #fff;
+	 padding: 10px;
+	 font-size: 18px;
+	 border-radius: 1px;
+	 position: relative;
+	 box-sizing: border-box;
+	 transition: background 1s;
+
+}
+
+button.expulsar-user:hover{
+	background: #F80552;
+	
+}
+.bloquear-user{	
+	
+	margin-left:3%;
+	margin-top:3%;
+
+	float:left;
+
+}
+
+button.bloquear-user{
+	width: 40%;
+	margin-top:20px;
+	border:none;
+  	background: #0819EE;
+	 color: #fff;
+	 padding: 10px;
+	 font-size: 18px;
+	 border-radius: 1px;
+	 position: relative;
+	 box-sizing: border-box;
+ 	 transition: background 1s;
+
+}
+button.bloquear-user:hover{
+	background: #F80552;
+	
+}
+#admin-nav{
+	margin-top:5%;
+    background-color: #A9A9A9;
+    color:white;
+    width: 200px;
+    height: 300px; 
+    text-align: center;
+    box-shadow: 0 10px 20px -6px black inset,
+        0px 2px 10px 0px black;
+    float:left;
+    margin-bottom:100px;
+    
+}
+
+#admin-nav button{
+    padding:20px;
+    width:200px;
+    display: block;
+    overflow:hidden;
+    margin:0px;
+    background: transparent;
+    border:none;
+    font-family:'Gugi';
+    color:white;
+}
+#admin-nav button:disabled{
+    background-color:black;
+}
+#admin-nav button:hover:enabled{
+   background-color:#f45850;
+   box-shadow: 0 10px 15px -6px black inset,
+        0 -10px 15px -6px black inset;  
+}
+
+#body-admin{
+    background: -moz-linear-gradient(#A9A9A9, #000000 80%) fixed;
+    font-family:'Gugi';
+    margin:0px;
+}
+
+
+#contenedorTabla{
+	
+	margin-left:5%;
+	 width: 40%;
+	 float: left;
+	overflow:auto;
+	height: 400px;
+
+}
+
+#vistaMensajes{
+	
+	margin-left:5%;
+	margin-right:5%;
+	background-color:#ECFEFE;
+	 border: solid 2px #0618F9;
+	 width: 35%;
+	 float:left;
+	 overflow:auto;
+	 word-wrap: break-word;
+	height: 350px;
+}
+p.vistaMensajes{
+	margin:3%;
+	font-size:17px;
+	color:black;
+	text-align:left;
+}
+
+#mensaje {
+   	
+	border: solid 2px #0618F9;
+
+}
+
+#mensaje th, #mensaje td {
+    text-align: left;
+    padding: 4px;
+	background-color: #6BCAC4;
+
+}
+
+#mensaje th {
+    padding-top: 15px;
+    padding-bottom: 15px;
+	width:10%;
+    text-align: left;
+    background-color: #A7D8F1;
+    color: black;
+}
+
+
