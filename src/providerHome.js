@@ -27,10 +27,10 @@ $(document).ready(function(){
     $("#pedidos").click(function(){
         if($("#all").is(":checked")){
         //alert(JSON.stringify({"peticion":"listaPedidosCompleta"}));
-            ajaxRequest("data="+JSON.stringify({"peticion":"listaPedidosCompleta"}) ,"Peticiones.php");
+            ajaxRequest("data="+JSON.stringify({"peticion":"listaPedidosCompleta"}) ,"Peticiones.php",tablaPedidos);
         }
         else{
-            ajaxRequest("data="+JSON.stringify({"peticion":"listaNoConfirmados"}) ,"Peticiones.php");
+            ajaxRequest("data="+JSON.stringify({"peticion":"listaNoConfirmados"}) ,"Peticiones.php",tablaPedidos);
         }
     });
 
@@ -62,7 +62,7 @@ function confirmation(){
     alert($(producto).children(":first").text());
     alert(all);*/
 
-    ajaxRequest("data="+JSON.stringify({"peticion":"confirm", "pedido": parseInt(idPedido), "producto": $(producto).children(":first").text(), "all": all }), "Peticiones.php"); 
+    ajaxRequest("data="+JSON.stringify({"peticion":"confirm", "pedido": parseInt(idPedido), "producto": $(producto).children(":first").text(), "all": all }), "Peticiones.php",tablaPedidos); 
 }
 
 function filterHandler(){
@@ -70,10 +70,10 @@ function filterHandler(){
     alert($("#not-confirmed").attr("checked"));*/
     if($("#all").is(":checked")){
         //alert(JSON.stringify({"peticion":"listaPedidosCompleta"}));
-        ajaxRequest("data="+JSON.stringify({"peticion":"listaPedidosCompleta"}) ,"Peticiones.php");
+        ajaxRequest("data="+JSON.stringify({"peticion":"listaPedidosCompleta"}) ,"Peticiones.php",tablaPedidos);
     }
     else{
-        ajaxRequest("data="+JSON.stringify({"peticion":"listaNoConfirmados"}) ,"Peticiones.php");
+        ajaxRequest("data="+JSON.stringify({"peticion":"listaNoConfirmados"}) ,"Peticiones.php",tablaPedidos);
     }
 }
 
@@ -134,16 +134,18 @@ function tablaPedidos(respuesta){
     $("#lista-pedidos").append(contenido);
 }
 
-function ajaxRequest(data, script){
+function ajaxRequest(data, script,callback){
     var request = new XMLHttpRequest();
-        
         request.onreadystatechange = function(){
             if(this.readyState == 4 && this.status == 200){
-               // alert("llega");
+                if(callback!=null){
+                    // alert("llega");
                //alert(JSON.parse(this.responseText));
                alert(this.responseText);
                //console.log(this.responseText);
-               tablaPedidos(this.responseText);
+               callback(this.responseText);
+                }
+               
             }
         };
         //alert(data);
@@ -153,9 +155,10 @@ function ajaxRequest(data, script){
 }
 
 function logout(){
-    ajaxRequest("Peticiones.php","data="+JSON.stringify({"peticion":"logout"}),goIndex);
-    
+    ajaxRequest("data="+JSON.stringify({"peticion":"logout"}),"Peticiones.php",goIndex);
+   
 }
+
 function goIndex(){
     document.location.href = "index.html";
 }
