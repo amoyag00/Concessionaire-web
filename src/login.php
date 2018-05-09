@@ -1,11 +1,12 @@
 <?php
 namespace Login;
 include 'models/Usuario.php';
+use \Models\Usuario as Usuario;
 
 if( isset($_POST["user"]) && isset($_POST["password"]) ){
     $user = FILTER_VAR($_POST["user"],FILTER_SANITIZE_STRING);
     $pass = FILTER_VAR($_POST["password"],FILTER_SANITIZE_STRING);
-    $u = new \Models\Usuario();
+    $u = new Usuario();
     $result=$u->checkPassword($user,$pass);
     
     if(!empty($result["tipo"]) && $result["logged"]===0){

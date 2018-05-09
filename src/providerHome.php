@@ -3,6 +3,9 @@ namespace Provider;
 require_once 'isProvider.php';
 require_once 'models/Pedido.php';
 require_once 'models/Producto.php';
+
+use \Models\Pedido as Pedido;
+use \Models\Producto as Producto;
 ?>
 <!DOCTYPE html>
 <!--
@@ -54,7 +57,7 @@ and open the template in the editor.
                             <th scope="col" class="cabecera-producto">Disponibilidad</th>
                         </tr>
                     <?php
-                        $lista = \Models\Producto::getListaProductosProveedor($_SESSION["user"]);
+                        $lista = Producto::getListaProductosProveedor($_SESSION["user"]);
                         
                         for($i=0;$i<sizeof($lista);$i++){ 
                             $producto = $lista[$i] ?>

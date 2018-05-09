@@ -4,6 +4,8 @@ namespace Concessionaire;
     require_once 'models/Pedido.php';
     require_once 'models/Producto.php';
     require_once 'models/ListaProductos.php';
+    use \Models\Pedido as Pedido;
+    use \Models\ListaProductos as ListaProductos;
 ?>
 <!DOCTYPE html>
 <html>
@@ -60,9 +62,9 @@ namespace Concessionaire;
         
         <div id="main-div">
              <!-- <?php
-            $pedidos=\Models\Pedido::listPedidosOfConc($_SESSION["user"]);
+            $pedidos=Pedido::listPedidosOfConc($_SESSION["user"]);
             foreach($pedidos as $pedido){
-                $pedido->listaProductos=\Models\ListaProductos::getListaProd($pedido->pedido_id);
+                $pedido->listaProductos=ListaProductos::getListaProd($pedido->pedido_id);
             }
 
             if(count($pedidos)>0){ 
