@@ -23,7 +23,7 @@ namespace contact;
             <form action="addMensaje.php" method="post" class="contact">
                 <input type="text" name="name" placeholder="Nombre" class="contact"/>
                 <input type="text" name="email" placeholder="Email" class="contact"/>
-                <textarea placeholder="Escribe tu consulta" class="contact"></textarea>
+                <textarea name="consulta" placeholder="Escribe tu consulta" class="contact"></textarea>
                 <input type="submit" name="send" value="Enviar" class="contact"/>
             </form>
         </div>
