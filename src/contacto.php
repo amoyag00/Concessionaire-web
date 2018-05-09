@@ -20,7 +20,7 @@ namespace contact;
         
         <div id="contact-div">
             <h1 class="contact">Envíanos tus consultas</h1>
-            <form action="contacto.php" method="post" class="contact">
+            <form action="addMensaje.php" method="post" class="contact">
                 <input type="text" name="name" placeholder="Nombre" class="contact"/>
                 <input type="text" name="email" placeholder="Email" class="contact"/>
                 <textarea placeholder="Escribe tu consulta" class="contact"></textarea>
