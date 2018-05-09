@@ -91,9 +91,13 @@ function tablaPedidos(respuesta){
                         "<th scope='col' class='cabecera-pedido'>Fecha "+pedido.fecha+"</th>"+
                     "</tr>";
             
-        var producto = listaPedidos[i];
+        var producto = pedido;
         
         for(j=i+1; j<=listaPedidos.length && pedido.pedido_id==producto.pedido_id;j++){
+            //producto = listaPedidos[j];
+            /*alert(j);
+            alert(producto.pedido_id);*/
+            
             tabla = tabla+"<tr>"+
                             "<th scope='col' class='cabecera-producto'>Producto</th>"+
                             "<th scope='col' class='cabecera-producto'>Cantidad</th>"+
@@ -119,7 +123,9 @@ function tablaPedidos(respuesta){
             producto = listaPedidos[j];
             
         }
-        i = i+j-2;
+        i = j-2;
+        //alert(j);
+        //alert(i);
         contenido = contenido+tabla+"</table>";
     }
 
@@ -134,7 +140,7 @@ function ajaxRequest(data, script){
             if(this.readyState == 4 && this.status == 200){
                // alert("llega");
                //alert(JSON.parse(this.responseText));
-               alert(this.responseText);
+               //alert(this.responseText);
                //console.log(this.responseText);
                tablaPedidos(this.responseText);
             }
