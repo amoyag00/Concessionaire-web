@@ -47,11 +47,6 @@ namespace Concessionaire;
                         <th>Cantidad</th>
                         <th></th>
                     </tr>
-                    <tr>
-                        <td>Total: </td>
-                        <td id="total-price"></td>
-                        
-                    </tr>
                 </table>  
                 <button id="pedir">Realizar pedido</button>
             </div>

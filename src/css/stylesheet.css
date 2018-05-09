@@ -397,7 +397,9 @@ div#search-cart{
     font-weight:bold;
     margin-bottom: 20px;
 }
-
+#dropdown-table{
+    margin-bottom: 50px;
+}
 #dropdown-table button{
     width:25px;
     height:25px;
@@ -437,6 +439,7 @@ div#search-cart{
     vertical-align: bottom;
     box-shadow: 0 10px 15px -6px black;
     position: absolute;
+    margin-top:50px;
     bottom:0;
 }
 .producto button:hover, #pedir:hover{

@@ -64,9 +64,8 @@ function addToCart(){
     var quantity=$(this).prevAll().eq(1).val();
     var price=item.price;
     
-   
      currentPrice+=price*quantity;
-    $('#dropdown-table #total-price').html(currentPrice+" €");
+    //$('#dropdown-table #total-price').html(currentPrice+" €");
      var auxItem=getItemOfId(id,cartItems);
     if(auxItem!==null){
         auxItem.quantity=parseInt(auxItem.quantity)+parseInt(quantity);
@@ -248,6 +247,10 @@ function registrarPedido(){
         alert("No ha añadido productos al pedido");
     }else{
         peticionAjax("Peticiones.php","data="+JSON.stringify({"peticion":"registrarPedido","cart_items":cartItems}));
+        
+        $('#dropdown-table tbody').children( 'tr:not(:first)' ).remove();
+        cartItems=[];
+        $('#cart span').text(0);
     }
     
 }
