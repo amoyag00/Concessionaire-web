@@ -20,8 +20,8 @@ if( isset($_POST["user"]) && isset($_POST["password"]) ){
             header("Location: providerHome.php");
         }else if($_SESSION["type"]=="concessionaire"){
             header("Location: concessionaireHome.php");
-        }else if($_SESSION["type"]=="admin"){
-
+        }else if($_SESSION["type"]=="administrator"){
+			header("Location: adminHome.php");
         }
     }else{
         header("Location: index.html");

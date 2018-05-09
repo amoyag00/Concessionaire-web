@@ -6,10 +6,13 @@ require_once 'models/Pedido.php';
 require_once 'models/Producto.php';
 require_once 'models/Usuario.php';
 require_once 'models/ListaProductos.php';
+require_once 'models/Administrador.php';
+
 use \Models\Pedido as Pedido;
 use \Models\ListaProductos as ListaProductos;
 use \Models\Producto as Producto;
 use \Models\Usuario as Usuario;
+use \Models\Administrador as Administrador;
 
 header("Content-type: application/json; charset=utf-8");
 
@@ -96,6 +99,42 @@ switch($obj->peticion){
         $u=new Usuario();
         $u->logout($_SESSION["user"]);
         break;
-  
+		
+	case "expulsar":
+        $u=new Usuario();
+        $u->logout($obj->name);
+        break;
+		
+	case "deleteUser":
+        $u=new Usuario();
+        $bien = $u->eliminar($obj->name);
+        if($bien<=0){
+			$incorrecto = "EL USUARIO NO SE HA PODIDO ELIMINAR";
+			echo json_encode($incorrecto);
+		}else{
+			$correcto = "EL USUARIO HA SIDO ELIMINADO";
+			echo json_encode($correcto);
+        }
+        break;	
+		
+	case "registrarUsuario":
+        $u=new Usuario();
+		$bien = $u->insert($obj->name,$obj->password,$obj->type);
+		if($bien<=0){
+			$incorrecto = "EL USUARIO NO SE HA PODIDO REGISTRAR";
+			echo json_encode($incorrecto);
+		}else{
+			$correcto = "EL USUARIO HA SIDO REGISTRADO";
+			echo json_encode($correcto);
+        }
+        break;	
+	
+	case "listaMensajes":
+		$adm=new Administrador();
+		
+		$mensajes=$adm->getMessages();
+		echo json_encode($mensajes);
+		
+        break;
 }
 ?>
