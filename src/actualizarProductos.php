@@ -6,10 +6,11 @@ ini_set('display_errors', 1);
 
 require_once 'models/Producto.php';
 use \Models\Producto as Producto;
+use \SimpleXMLElement as SimpleXMLElement;
 
 if(is_uploaded_file($_FILES["archivo"]["tmp_name"])){
     $xmlContent = file_get_contents($_FILES["archivo"]["tmp_name"]);
-    $productos = new SimpleXMLElement($xmlContent);
+    $productos = new \SimpleXMLElement($xmlContent);
     //echo $productos->Producto[0]->attributes();
     for($i=0;$i<sizeof($productos);$i++){
         $elemento = $productos->Producto[$i];
