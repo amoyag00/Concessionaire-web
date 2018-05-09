@@ -38,6 +38,7 @@ $(document).ready(function(){
     
     $(document).on("click", ".confirm", confirmation);
     
+    $(".log-out").on("click",logout);
     /*$(".confirmed-filter").click(function(){
         ajaxRequest("data="+JSON.stringify({"peticion":"listaNoConfirmados"}) ,"Peticiones.php");
     });*/
@@ -149,4 +150,12 @@ function ajaxRequest(data, script){
         request.open("POST", script, true);
         request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         request.send(data);
+}
+
+function logout(){
+    ajaxRequest("Peticiones.php","data="+JSON.stringify({"peticion":"logout"}),goIndex);
+    
+}
+function goIndex(){
+    document.location.href = "index.html";
 }
