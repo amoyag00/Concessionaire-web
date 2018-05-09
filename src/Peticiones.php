@@ -13,6 +13,8 @@ use \Models\Usuario as Usuario;
 
 header("Content-type: application/json; charset=utf-8");
 
+$datos = filter_var($_POST["data"], FILTER_SANITIZE_STRING);
+
 $obj= json_decode($_POST["data"]);
 
 switch($obj->peticion){

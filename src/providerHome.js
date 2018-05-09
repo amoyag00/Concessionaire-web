@@ -141,7 +141,7 @@ function ajaxRequest(data, script,callback){
                 if(callback!=null){
                     // alert("llega");
                //alert(JSON.parse(this.responseText));
-               alert(this.responseText);
+               //alert(this.responseText);
                //console.log(this.responseText);
                callback(this.responseText);
                 }
