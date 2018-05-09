@@ -25,6 +25,18 @@ class Usuario{
         return $result->fetch_assoc();
 
     }
+	
+	function checkUsuario($username){
+        $this->conn=DBConnection::getConnection();
+        $statement=$this->conn->prepare("SELECT nombre FROM Usuario WHERE nombre=?;");
+        $statement->bind_param("ss",$username,$password);
+        $statement->execute();
+        $result=$statement->get_result();
+        $statement->close();
+        //$this->conn->close();
+        return $result->fetch_assoc();
+
+    }
     
     function logout($username){
         $this->conn=DBConnection::getConnection();
@@ -33,6 +45,7 @@ class Usuario{
         $statement->execute();
         $statement->close();
     }
+	
     function login($username){
         $this->conn=DBConnection::getConnection();
         $statement=$this->conn->prepare("UPDATE Usuario SET logged=1 WHERE nombre = ?");
@@ -41,7 +54,7 @@ class Usuario{
         $statement->close();
     }
     
-    function insert(){
+    /*function insert(){
         $this->conn=DBConnection::getConnection();
         $statement=$this->conn->prepare("INSERT INTO Usuario(nombre,contrasena,tipo) VALUES(?,?,?)");
         $statement->bind_param("sss",$this->username,$this->password, $this->type);
@@ -49,8 +62,27 @@ class Usuario{
         $affectedRows=mysqli_affected_rows($this->conn);//used for testing;
         $statement->close();
         return $affectedRows;
+    }*/
+	function insert($username, $password, $type){
+        $this->conn=DBConnection::getConnection();
+        $statement=$this->conn->prepare("INSERT INTO usuario(nombre,contrasena,tipo) VALUES(?,?,?)");
+        $statement->bind_param("sss",$username,$password, $type);
+        $statement->execute();
+        $affectedRows=mysqli_affected_rows($this->conn);//used for testing;
+        $statement->close();
+        return $affectedRows;
     }
     
+	function eliminar($username){
+        $this->conn=DBConnection::getConnection();
+        $statement=$this->conn->prepare("DELETE FROM usuario WHERE nombre = ?;");
+        $statement->bind_param("s",$username);
+        $statement->execute();
+		$affectedRows=mysqli_affected_rows($this->conn);//used for testing;
+        $statement->close();
+        return $affectedRows;
+    }
+	
     function getType($username){
         $this->conn=DBConnection::getConnection();
         $statement=$this->conn->prepare("SELECT tipo FROM Usuario WHERE nombre = ?");
@@ -61,6 +93,19 @@ class Usuario{
         $statement->close();
         //$this->conn->close();
         return $type;
+    }
+	
+	function addMessages($name,$email,$consult){
+		 
+        $this->conn=DBConnection::getConnection();
+        $statement=$this->conn->prepare("INSERT INTO mensaje(name,email,consulta) VALUES(?,?,?)");
+        $statement->execute();
+		$statement->bind_param("sss",$name, $email, $consult);
+        $statement->execute();
+        $affectedRows=mysqli_affected_rows($this->conn);//used for testing;
+        $statement->close();
+        return $affectedRows;
+
     }
 }
 ?>
