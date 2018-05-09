@@ -89,6 +89,9 @@ switch($obj->peticion){
         }
         echo json_encode($pedidos);
         break;
+    case "filtrarProductos":
+        echo json_encode(Producto::filter($obj->filter));
+        break;
     case "logout":
         $u=new Usuario();
         $u->logout($_SESSION["user"]);

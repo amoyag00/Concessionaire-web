@@ -107,6 +107,23 @@ class Producto{
         return $listaProductos;
     }
     
+    static function filter($nombre){
+        $nombre="%".$nombre."%";
+        $connection = DBConnection::getConnection();
+        $statement = $connection->prepare("SELECT * FROM Producto WHERE disponible=1 AND nombre LIKE ?");
+        $statement->bind_param("s",$nombre);
+        $statement->execute();
+        $lista = $statement->get_result();
+        $listaProductos = array();
+        
+        while($fila = $lista->fetch_assoc()){
+            $listaProductos[] = $fila;
+        }
+        $statement->close();
+        
+        return $listaProductos;
+    }
+    
     function updateOrInsert($p_id){
         $statement = $this->connection->prepare("INSERT INTO Producto (producto_id, nombre, caracteristicas, precio, disponible) VALUES(?,?,?,?,?) ON DUPLICATE KEY UPDATE producto_id = VALUES(producto_id), nombre = VALUES(nombre), caracteristicas = VALUES(caracteristicas), precio = VALUES(precio), disponible = VALUES(disponible)");
         $statement->bind_param("issii", $p_id, $this->nombre, $this->caracteristicas, $this->precio, $this->disponible);

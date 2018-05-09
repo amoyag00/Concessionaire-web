@@ -187,6 +187,7 @@ function showPedidos(data){
 function realizarPedidoHandler(){
    $('#cart').css('visibility','visible');
    $('#filter').css('visibility','hidden');
+   $('#fecha-filter').css('visibility','hidden');
    //Buttons
    $(this).prop("disabled",true);
    $('#mis-pedidos-button').prop("disabled",false);
@@ -267,7 +268,8 @@ function filter(event){
             }
             peticionAjax("Peticiones.php","data="+JSON.stringify({"peticion":"filtrarPedidos","param":param,"filter":filter,"fechaParam":fechaParam}),showPedidos);
         }else{
-           // peticionAjax("Peticiones.php","data="+JSON.stringify({"peticion":"listarProductos"}),showProductos);
+          var filter=$('#search').val();
+          peticionAjax("Peticiones.php","data="+JSON.stringify({"peticion":"filtrarProductos","filter":filter}),showProductos);
         } 
     }
 }
