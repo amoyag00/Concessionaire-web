@@ -143,7 +143,8 @@ CREATE TABLE `Usuario` (
   `nombre` varchar(15) NOT NULL,
   `contrasena` varchar(15) NOT NULL,
   `tipo` varchar(15) NOT NULL,
-  `logged` int(11) NOT NULL DEFAULT '0'
+  `logged` int(11) NOT NULL DEFAULT '0',
+  `bloqueado` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -151,11 +152,11 @@ CREATE TABLE `Usuario` (
 --
 
 INSERT INTO `Usuario` (`nombre`, `contrasena`, `tipo`, `logged`) VALUES
-('admin', 'admin', 'administrator', 0),
-('audi', 'audi', 'concessionaire', 0),
-('prov', 'prov', 'provider', 0),
-('prov2', 'prov2', 'provider', 0),
-('seat', 'seat', 'concessionaire', 1);
+('admin', 'admin', 'administrator', 0, 0),
+('audi', 'audi', 'concessionaire', 0, 0),
+('prov', 'prov', 'provider', 0, 0),
+('prov2', 'prov2', 'provider', 0, 1),
+('seat', 'seat', 'concessionaire', 1, 0);
 
 --
 -- Indexes for dumped tables
