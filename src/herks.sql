@@ -2,10 +2,10 @@
 -- version 4.8.0
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: May 10, 2018 at 05:38 PM
--- Server version: 10.1.31-MariaDB
--- PHP Version: 7.2.4
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 10-05-2018 a las 19:15:47
+-- Versión del servidor: 10.1.31-MariaDB
+-- Versión de PHP: 5.6.35
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,16 +19,16 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `herks`
+-- Base de datos: `herks`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ListaProductos`
+-- Estructura de tabla para la tabla `listaproductos`
 --
 
-CREATE TABLE `ListaProductos` (
+CREATE TABLE `listaproductos` (
   `producto_id` int(11) NOT NULL,
   `pedido_id` int(11) NOT NULL,
   `cantidad` smallint(6) DEFAULT NULL,
@@ -36,10 +36,10 @@ CREATE TABLE `ListaProductos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `ListaProductos`
+-- Volcado de datos para la tabla `listaproductos`
 --
 
-INSERT INTO `ListaProductos` (`producto_id`, `pedido_id`, `cantidad`, `estado`) VALUES
+INSERT INTO `listaproductos` (`producto_id`, `pedido_id`, `cantidad`, `estado`) VALUES
 (1, 1, 6, 0),
 (2, 1, 3, 1),
 (2, 13, 4, 0),
@@ -63,39 +63,38 @@ CREATE TABLE `mensaje` (
   `leido` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-
 --
 -- Volcado de datos para la tabla `mensaje`
 --
 
-INSERT INTO `mensaje` (`mensaje_id`, `name`, `email`, `consulta`) VALUES
-(1, 'borrar', 'borrar', 'Acaba conmigo por favor'),
-(2, 'otro', 'otro@gmail', 'Soy otra persona'),
-(4, 'fill', 'fill', 'Prueba para rellenar la tabla'),
-(5, 'fill', 'fill', 'Prueba para rellenar la tabla'),
-(6, 'fill', 'fill', 'Prueba para rellenar la tabla'),
-(7, 'fill', 'fill', 'Prueba para rellenar la tabla'),
-(8, 'fill', 'fill', 'Prueba para rellenar la tabla'),
-(9, 'fill', 'fill', 'Prueba para rellenar la tabla'),
-(10, 'fill', 'fill', 'Prueba para rellenar la tabla');
-
+INSERT INTO `mensaje` (`mensaje_id`, `name`, `email`, `consulta`, `leido`) VALUES
+(1, 'borrar', 'borrar', 'Acaba conmigo por favor', 0),
+(2, 'otro', 'otro@gmail', 'Soy otra persona', 0),
+(4, 'fill', 'fill', 'Prueba para rellenar la tabla', 0),
+(5, 'fill', 'fill', 'Prueba para rellenar la tabla', 0),
+(6, 'fill', 'fill', 'Prueba para rellenar la tabla', 0),
+(7, 'fill', 'fill', 'Prueba para rellenar la tabla', 0),
+(8, 'fill', 'fill', 'Prueba para rellenar la tabla', 0),
+(9, 'fill', 'fill', 'Prueba para rellenar la tabla', 0),
+(10, 'fill', 'fill', 'Prueba para rellenar la tabla', 0);
 
 -- --------------------------------------------------------
+
 --
--- Table structure for table `Pedido`
+-- Estructura de tabla para la tabla `pedido`
 --
 
-CREATE TABLE `Pedido` (
+CREATE TABLE `pedido` (
   `pedido_id` int(11) NOT NULL,
   `nombreCon` varchar(15) DEFAULT NULL,
   `fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `Pedido`
+-- Volcado de datos para la tabla `pedido`
 --
 
-INSERT INTO `Pedido` (`pedido_id`, `nombreCon`, `fecha`) VALUES
+INSERT INTO `pedido` (`pedido_id`, `nombreCon`, `fecha`) VALUES
 (1, 'seat', '2018-04-14 22:00:00'),
 (13, 'audi', '2018-05-03 23:25:14'),
 (16, 'audi', '2018-05-05 13:15:01'),
@@ -105,10 +104,10 @@ INSERT INTO `Pedido` (`pedido_id`, `nombreCon`, `fecha`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Producto`
+-- Estructura de tabla para la tabla `producto`
 --
 
-CREATE TABLE `Producto` (
+CREATE TABLE `producto` (
   `producto_id` int(11) NOT NULL,
   `nombrePro` varchar(15) DEFAULT NULL,
   `nombre` varchar(25) DEFAULT NULL,
@@ -118,10 +117,10 @@ CREATE TABLE `Producto` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `Producto`
+-- Volcado de datos para la tabla `producto`
 --
 
-INSERT INTO `Producto` (`producto_id`, `nombrePro`, `nombre`, `caracteristicas`, `precio`, `disponible`) VALUES
+INSERT INTO `producto` (`producto_id`, `nombrePro`, `nombre`, `caracteristicas`, `precio`, `disponible`) VALUES
 (1, 'prov', 'seat panda', 'gasolina', 8000, b'1'),
 (2, 'prov', 'seat cebra', 'diesel', 9000, b'1'),
 (3, 'prov', 'seat leon', 'gasolina', 7000, b'1'),
@@ -136,10 +135,10 @@ INSERT INTO `Producto` (`producto_id`, `nombrePro`, `nombre`, `caracteristicas`,
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Usuario`
+-- Estructura de tabla para la tabla `usuario`
 --
 
-CREATE TABLE `Usuario` (
+CREATE TABLE `usuario` (
   `nombre` varchar(15) NOT NULL,
   `contrasena` varchar(15) NOT NULL,
   `tipo` varchar(15) NOT NULL,
@@ -148,10 +147,10 @@ CREATE TABLE `Usuario` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `Usuario`
+-- Volcado de datos para la tabla `usuario`
 --
 
-INSERT INTO `Usuario` (`nombre`, `contrasena`, `tipo`, `logged`) VALUES
+INSERT INTO `usuario` (`nombre`, `contrasena`, `tipo`, `logged`, `bloqueado`) VALUES
 ('admin', 'admin', 'administrator', 0, 0),
 ('audi', 'audi', 'concessionaire', 0, 0),
 ('prov', 'prov', 'provider', 0, 0),
@@ -159,8 +158,15 @@ INSERT INTO `Usuario` (`nombre`, `contrasena`, `tipo`, `logged`) VALUES
 ('seat', 'seat', 'concessionaire', 1, 0);
 
 --
--- Indexes for dumped tables
+-- Índices para tablas volcadas
 --
+
+--
+-- Indices de la tabla `listaproductos`
+--
+ALTER TABLE `listaproductos`
+  ADD PRIMARY KEY (`pedido_id`,`producto_id`),
+  ADD KEY `producto_id` (`producto_id`);
 
 --
 -- Indices de la tabla `mensaje`
@@ -168,36 +174,28 @@ INSERT INTO `Usuario` (`nombre`, `contrasena`, `tipo`, `logged`) VALUES
 ALTER TABLE `mensaje`
   ADD PRIMARY KEY (`mensaje_id`);
 
-
 --
--- Indexes for table `ListaProductos`
+-- Indices de la tabla `pedido`
 --
-ALTER TABLE `ListaProductos`
-  ADD PRIMARY KEY (`pedido_id`,`producto_id`),
-  ADD KEY `producto_id` (`producto_id`);
-
---
--- Indexes for table `Pedido`
---
-ALTER TABLE `Pedido`
+ALTER TABLE `pedido`
   ADD PRIMARY KEY (`pedido_id`),
   ADD KEY `nombreCon` (`nombreCon`);
 
 --
--- Indexes for table `Producto`
+-- Indices de la tabla `producto`
 --
-ALTER TABLE `Producto`
+ALTER TABLE `producto`
   ADD PRIMARY KEY (`producto_id`),
   ADD KEY `nombrePro` (`nombrePro`);
 
 --
--- Indexes for table `Usuario`
+-- Indices de la tabla `usuario`
 --
-ALTER TABLE `Usuario`
+ALTER TABLE `usuario`
   ADD PRIMARY KEY (`nombre`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT de las tablas volcadas
 --
 
 --
@@ -205,42 +203,41 @@ ALTER TABLE `Usuario`
 --
 ALTER TABLE `mensaje`
   MODIFY `mensaje_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
-COMMIT;
 
 --
--- AUTO_INCREMENT for table `Pedido`
+-- AUTO_INCREMENT de la tabla `pedido`
 --
-ALTER TABLE `Pedido`
+ALTER TABLE `pedido`
   MODIFY `pedido_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
--- AUTO_INCREMENT for table `Producto`
+-- AUTO_INCREMENT de la tabla `producto`
 --
-ALTER TABLE `Producto`
+ALTER TABLE `producto`
   MODIFY `producto_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
--- Constraints for dumped tables
+-- Restricciones para tablas volcadas
 --
 
 --
--- Constraints for table `ListaProductos`
+-- Filtros para la tabla `listaproductos`
 --
-ALTER TABLE `ListaProductos`
-  ADD CONSTRAINT `listaproductos_ibfk_1` FOREIGN KEY (`producto_id`) REFERENCES `Producto` (`producto_id`),
-  ADD CONSTRAINT `listaproductos_ibfk_2` FOREIGN KEY (`pedido_id`) REFERENCES `Pedido` (`pedido_id`) ON DELETE CASCADE;
+ALTER TABLE `listaproductos`
+  ADD CONSTRAINT `listaproductos_ibfk_1` FOREIGN KEY (`producto_id`) REFERENCES `producto` (`producto_id`),
+  ADD CONSTRAINT `listaproductos_ibfk_2` FOREIGN KEY (`pedido_id`) REFERENCES `pedido` (`pedido_id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `Pedido`
+-- Filtros para la tabla `pedido`
 --
-ALTER TABLE `Pedido`
-  ADD CONSTRAINT `pedido_ibfk_1` FOREIGN KEY (`nombreCon`) REFERENCES `Usuario` (`nombre`);
+ALTER TABLE `pedido`
+  ADD CONSTRAINT `pedido_ibfk_1` FOREIGN KEY (`nombreCon`) REFERENCES `usuario` (`nombre`);
 
 --
--- Constraints for table `Producto`
+-- Filtros para la tabla `producto`
 --
-ALTER TABLE `Producto`
-  ADD CONSTRAINT `producto_ibfk_1` FOREIGN KEY (`nombrePro`) REFERENCES `Usuario` (`nombre`);
+ALTER TABLE `producto`
+  ADD CONSTRAINT `producto_ibfk_1` FOREIGN KEY (`nombrePro`) REFERENCES `usuario` (`nombre`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
