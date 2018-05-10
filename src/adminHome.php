@@ -37,7 +37,7 @@ namespace Administrator;
 	
 		<div id="main-div">
 			
-			<!--<div id="gestion-div">-->
+			<!--<div id="gestion-div">
 				 <form action="" method="post" class="anyadir-user">
 					<div id="row">
 						<h1 class="anyadir-user">Añadir Usuario</h1>
@@ -69,10 +69,10 @@ namespace Administrator;
 						<input type="password" id="password" name="Contraseña" placeholder="Contraseña" class="anyadir-user"/>
 					</div>
 					
-					<!--<div id="row">
+					<div id="row">
 						<label class="anyadir-user">Repite la contraseña</label>
 						<input type="password" name="Repetir contraseña" placeholder="Contraseña" class="anyadir-user"/>
-					</div>-->
+					</div>
 					
 					<div id="row">
 						<button value="Añadir usuario" class="anyadir-user" id="anyadir-user">Añadir usuario</button> 
@@ -91,7 +91,7 @@ namespace Administrator;
 						<input type="text" name="Nombre de Usuario" placeholder="Usuario" class="delete-user"/>
 					</div>
 					
-					<!--<div id="row">
+					<div id="row">
 						<div id="row">
 							<label class="delete-user">Tipo de usuario</label>
 						</div>
@@ -105,7 +105,7 @@ namespace Administrator;
 						</div>		
 							
 						
-					</div>-->
+					</div>
 					
 					<div id="row">
 						<button value="Eliminar usuario" class="delete-user" id="delete-user">Eliminar usuario</button> 
@@ -124,7 +124,7 @@ namespace Administrator;
 						<input type="text" name="Nombre de Usuario" placeholder="Usuario" class="expulsar-user"/>
 					</div>
 					
-					<!--<div id="row">
+					<div id="row">
 						<div id="row">
 							<label class="expulsar-user">Tipo de usuario</label>
 						</div>
@@ -138,7 +138,7 @@ namespace Administrator;
 						</div>		
 							
 						
-					</div>-->
+					</div>
 					
 					<div id="row">
 						<button value="Bloquear usuario" class="bloquear-user" id="bloquear-user">Bloquear usuario</button>

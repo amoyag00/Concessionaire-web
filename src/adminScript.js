@@ -1,5 +1,8 @@
 $(document).ready(function(){
     
+	peticionAjax("Peticiones.php","data="+JSON.stringify({"peticion":"listaUsuarios"}), showListaUsuarios);
+	showGestion();
+	
 	$('#gestion').on('click',gestionHandler);
 	$('#mensajes').on("click",mensajesHandler);
 	
@@ -9,7 +12,9 @@ $(document).ready(function(){
 	$('#main-div').on("click","#bloquear-user",bloquearUser);
 	$('#main-div').on("click","#desbloquear-user",desbloquearUser);
 
-	$('#main-div').on("click","tr.mensaje",showContent);
+	$('#main-div').on("click","td.noVariable",showContent);
+	$('#main-div').on("click","input[name=read]",changeLeido);
+
 	$('#filterMsj').keypress(filter);
 
 	
@@ -32,6 +37,7 @@ function gestionHandler(){
 
     //Content
     $("#main-div").empty();
+	peticionAjax("Peticiones.php","data="+JSON.stringify({"peticion":"listaUsuarios"}), showListaUsuarios);
 	showGestion();
  }
 
@@ -123,7 +129,7 @@ function mensajesHandler(){
 
 function peticionAjax(script, data, callback){
 	var request= new XMLHttpRequest();
-	
+	//alert("hola");
     request.onreadystatechange = function(aEvt){
         if(this.readyState==4 && this.status==200){
             if(callback!=null){
@@ -149,7 +155,8 @@ function showMensajes(data){
 	var tabla = 	"<table id='mensaje' class='mensaje'>"+
 							"<tr id='-1' class='mensaje'>"+
 								"<th class='mensaje' >Nombre</td>"+
-								"<th class='mensaje' >Email</td>"+					
+								"<th class='mensaje' >Email</td>"+
+								"<th class='mensaje' >Leido</td>"+
 							"</tr>";
 	
 	for(var i=0;i<mensajes.length;i++){
@@ -165,9 +172,14 @@ function showMensajes(data){
 		//alert("Fila "+i+": "+nombre+" "+email+" "+mensajes[i].consulta);
 		
 		tabla += "<tr class='mensaje leido_"+mensajes[i].leido+"' id="+i+">"+
-						"<td class='mensaje' >"+nombre+"</td>"+
-						"<td class='mensaje' >"+email+"</td>"+					
-					 "</tr>";
+						"<td class='mensaje noVariable' id='text'>"+nombre+"</td>"+
+						"<td class='mensaje noVariable' id='text'>"+email+"</td>";
+						if(mensajes[i].leido==1){
+						tabla +="<td class='mensaje' id='read' ><input type='checkbox' name='read' class='leido' checked id="+i+"> Leido</td>"
+						}else{
+							tabla +="<td class='mensaje' id='read'><input type='checkbox' name='read' class='leido' id="+i+"> Leido</td>"
+						}
+		tabla += "</tr>";
 						
 		
 		
@@ -188,22 +200,36 @@ function showContent(){
 	
 	$('#vistaMensajes').empty();
 	//alert($(this).attr("id"));
-	if($(this).attr("id")<0){
+	var row = $(this).parent();
+	if(row.attr("id")<0){
 		var vistaMensajes = "<p class='vistaMensajes'></p>";
 	}else{
-	var vistaMensajes = "<p class='vistaMensajes'> "+listaMensajes[$(this).attr("id")]+"</p>";
+	var vistaMensajes = "<p class='vistaMensajes'> "+listaMensajes[row.attr("id")]+"</p>";
 	}
 	
-	var id= listaID[$(this).attr("id")];
+	var id= listaID[row.attr("id")];
 	//alert($(this).attr("id"));
 	//alert(id);
 	
 	peticionAjax("Peticiones.php","data="+JSON.stringify({"peticion":"mensajeLeido","id":id}));
 	
-	$(this).addClass("leido_1");
+	row.addClass("leido_1");
+	var checkBox = row.children("#read");
+	checkBox.children(":checkbox").prop('checked',true);
 	
 	$('#vistaMensajes').append(vistaMensajes);
 	
+}
+
+function changeLeido(){
+	
+	var id= listaID[$(this).attr("id")];
+	
+	alert("noLeido");
+	
+	peticionAjax("Peticiones.php","data="+JSON.stringify({"peticion":"mensajeNoLeido","id":id}));
+	
+	$(this).parent().parent().removeClass("leido_1");
 }
 
 function showListaUsuarios(data){
@@ -228,7 +254,6 @@ function showListaUsuarios(data){
 		listaUsuarios.push(nombreUsr);
 		
 		var bloqueado=listaUsers[i].bloqueado;
-
 		
 		tabla += "<tr class='userName' id='bloqueado_"+bloqueado+"'>"+
 					"<td class='userName'  id='bloqueado_"+bloqueado+"'>"+nombreUsr+"</td>"+

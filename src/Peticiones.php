@@ -152,10 +152,23 @@ switch($obj->peticion){
 		
         break;
 		
+	case "nuevoMensaje":
+		$usr=new Usuario();
+		
+		$usr->addMessages($obj->name,$obj->email,$obj->consult);
+		
+        break;
+			
 	case "mensajeLeido":
 		$adm=new Usuario();
 		
 		$adm->mensajeLeido($obj->id);
+		
+        break;
+	case "mensajeNoLeido":
+		$adm=new Usuario();
+		
+		$adm->mensajeNoLeido($obj->id);
 		
         break;
 }
