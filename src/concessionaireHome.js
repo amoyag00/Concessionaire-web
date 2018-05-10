@@ -224,7 +224,6 @@ function peticionAjax(script, data, callback){
     request.onreadystatechange= function(){
         if(this.readyState==4 && this.status==200){
             if(callback!=null){
-                alert(this.responseText);
                 callback(this.responseText);
             }
         }
@@ -283,7 +282,7 @@ function updatePedido(){
     var pedido=getItemOfId(pedido_id,listaPedidos);
     var producto=getItemOfId(producto_id,pedido.listaProductos);
     var estado=producto.estado;
-    alert(cantidad);
+
     if(estado===0){
         $('#cart').css('visibility','hidden');
         $('#filter').css('visibility','visible');

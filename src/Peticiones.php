@@ -95,7 +95,7 @@ switch($obj->peticion){
         break;
     case "logout":
         $u=new Usuario();
-        $u->logout($_SESSION["user"])
+        $u->logout($_SESSION["user"]);
 	session_unset();
         break;
 		
