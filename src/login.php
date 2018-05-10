@@ -9,7 +9,7 @@ if( isset($_POST["user"]) && isset($_POST["password"]) ){
     $u = new Usuario();
     $result=$u->checkPassword($user,$pass);
     
-    if(!empty($result["tipo"]) && $result["logged"]===0){
+    if(!empty($result["tipo"]) && $result["logged"]===0 && $result["bloqueado"]===0){
         session_start();
         session_regenerate_id();
         $_SESSION["user"]=$user;
