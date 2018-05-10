@@ -16,7 +16,7 @@ class Usuario{
     
     function checkPassword($username, $password){
         $this->conn=DBConnection::getConnection();
-        $statement=$this->conn->prepare("SELECT tipo, logged FROM Usuario WHERE nombre=? AND contrasena=?");
+        $statement=$this->conn->prepare("SELECT tipo, logged, bloqueado FROM Usuario WHERE nombre=? AND contrasena=?");
         $statement->bind_param("ss",$username,$password);
         $statement->execute();
         $result=$statement->get_result();
