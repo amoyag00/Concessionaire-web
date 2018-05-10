@@ -125,8 +125,8 @@ class Producto{
     }
     
     function updateOrInsert($p_id){
-        $statement = $this->connection->prepare("INSERT INTO Producto (producto_id, nombre, caracteristicas, precio, disponible) VALUES(?,?,?,?,?) ON DUPLICATE KEY UPDATE producto_id = VALUES(producto_id), nombre = VALUES(nombre), caracteristicas = VALUES(caracteristicas), precio = VALUES(precio), disponible = VALUES(disponible)");
-        $statement->bind_param("issii", $p_id, $this->nombre, $this->caracteristicas, $this->precio, $this->disponible);
+        $statement = $this->connection->prepare("INSERT INTO Producto (producto_id, nombrePro, nombre, caracteristicas, precio, disponible) VALUES(?,?,?,?,?,?) ON DUPLICATE KEY UPDATE producto_id = VALUES(producto_id), nombrePro = VALUES(nombrePro), nombre = VALUES(nombre), caracteristicas = VALUES(caracteristicas), precio = VALUES(precio), disponible = VALUES(disponible)");
+        $statement->bind_param("isssii", $p_id, $this->proveedor, $this->nombre, $this->caracteristicas, $this->precio, $this->disponible);
         $statement->execute();
         $statement->close();
     }

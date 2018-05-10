@@ -21,7 +21,7 @@ if(is_uploaded_file($_FILES["archivo"]["tmp_name"])){
         $nuevoProducto = new Producto();
         
         $datos = array(
-            "nombrePro" => NULL,
+            "nombrePro" => $_SESSION["user"],
             "nombre" => $elemento->Nombre,
             "caracteristicas" => $elemento->Caracteristicas,
             "precio" => $elemento->Precio,
