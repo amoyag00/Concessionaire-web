@@ -99,7 +99,6 @@ namespace Models;
                         . "FROM Pedido WHERE DATE_FORMAT(fecha,'%d/%m/%Y') LIKE ? AND nombreCon=?");
                         $statement->bind_param("ss", $filter,$conc);
                 }
-                
             }else if ($param=="Proveedor"){
                 $filter="%".$filter."%";
                 $statement=$connection->prepare("SELECT pedido.pedido_id, DATE_FORMAT(fecha,'%d/%m/%Y') AS fecha FROM Pedido"
@@ -122,7 +121,6 @@ namespace Models;
                 $pedidos [] =$row;
             }
             $statement->close();
-            //$this->conn->close();
             return $pedidos;
         }
         

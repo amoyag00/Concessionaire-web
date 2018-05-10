@@ -6,13 +6,11 @@ require_once 'models/Pedido.php';
 require_once 'models/Producto.php';
 require_once 'models/Usuario.php';
 require_once 'models/ListaProductos.php';
-require_once 'models/Administrador.php';
 
 use \Models\Pedido as Pedido;
 use \Models\ListaProductos as ListaProductos;
 use \Models\Producto as Producto;
 use \Models\Usuario as Usuario;
-use \Models\Administrador as Administrador;
 
 header("Content-type: application/json; charset=utf-8");
 
@@ -147,7 +145,7 @@ switch($obj->peticion){
         break;
 		
 	case "listaMensajes":
-		$adm=new Administrador();
+		$adm=new Usuario();
 		
 		$mensajes=$adm->getMessages($obj->filtro);
 		echo json_encode($mensajes);
@@ -155,7 +153,7 @@ switch($obj->peticion){
         break;
 		
 	case "mensajeLeido":
-		$adm=new Administrador();
+		$adm=new Usuario();
 		
 		$adm->mensajeLeido($obj->id);
 		
