@@ -80,7 +80,7 @@ and open the template in the editor.
                                                 echo "Producto disponible";
                                             }
                                             else{
-                                                echo "Producto agotado";
+                                                echo "Producto de baja";
                                             }
                                         } ?>
                                     </td>
