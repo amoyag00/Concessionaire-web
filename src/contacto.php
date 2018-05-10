@@ -10,6 +10,9 @@ namespace contact;
         <link rel="stylesheet" type="text/css" href="css/stylesheet.css"/>
         <link href="https://fonts.googleapis.com/css?family=Orbitron|Economica|Gugi" rel="stylesheet"> 
         <link rel="icon" type="image/png" href="img/logo.png">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="addMensaje.js"></script> 
+
     </head>
     <header>
         <?php
@@ -20,7 +23,7 @@ namespace contact;
         
         <div id="contact-div">
             <h1 class="contact">Envíanos tus consultas</h1>
-            <form action="addMensaje.php" method="post" class="contact">
+            <form method="post" class="contact">
                 <input type="text" name="name" placeholder="Nombre" class="contact"/>
                 <input type="text" name="email" placeholder="Email" class="contact"/>
                 <textarea name="consulta" placeholder="Escribe tu consulta" class="contact"></textarea>
