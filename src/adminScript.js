@@ -204,7 +204,7 @@ function showContent(){
 	if(row.attr("id")<0){
 		var vistaMensajes = "<p class='vistaMensajes'></p>";
 	}else{
-	var vistaMensajes = "<p class='vistaMensajes'> "+listaMensajes[row.attr("id")]+"</p>";
+		var vistaMensajes = "<p class='vistaMensajes'> "+listaMensajes[row.attr("id")]+"</p>";
 	}
 	
 	var id= listaID[row.attr("id")];
@@ -224,12 +224,21 @@ function showContent(){
 function changeLeido(){
 	
 	var id= listaID[$(this).attr("id")];
+
+	if(!$(this).is(':checked')){
+		//alert('cambiar a no leido');
+		peticionAjax("Peticiones.php","data="+JSON.stringify({"peticion":"mensajeNoLeido","id":id}));
 	
-	alert("noLeido");
+		$(this).parent().parent().removeClass("leido_1");
+	}else{
+			//alert('cambiar a leido');
+
+			peticionAjax("Peticiones.php","data="+JSON.stringify({"peticion":"mensajeLeido","id":id}));
+			$(this).parent().parent().addClass("leido_1");
+
+	}
 	
-	peticionAjax("Peticiones.php","data="+JSON.stringify({"peticion":"mensajeNoLeido","id":id}));
 	
-	$(this).parent().parent().removeClass("leido_1");
 }
 
 function showListaUsuarios(data){
