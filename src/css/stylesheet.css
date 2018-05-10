@@ -748,7 +748,7 @@ div.anyadir-user{
 }
 form.anyadir-user{
 	background: -moz-linear-gradient(#F2F2F2, #27DACC 80%) fixed;
-	margin-bottom: 5%;
+	margin-bottom: 10%;
 	padding:2%;
 	border: 3px solid #0AF7EC;
     border-radius: 4px; 
@@ -892,7 +892,7 @@ button.delete-user:hover{
 	
 	margin-left:3%;
 	margin-top:3%;
-
+	
 	float:left;
 
 }
@@ -912,7 +912,7 @@ div.expulsar-user{
 form.expulsar-user{
 	background: -moz-linear-gradient(#F2F2F2, #27DACC 80%) fixed;
 	margin-bottom: 5%;
-	padding:2%;
+	padding:1%;
 	border: 3px solid #0AF7EC;
     border-radius: 4px; 
 }
@@ -995,6 +995,33 @@ button.bloquear-user:hover{
 	background: #F80552;
 	
 }
+.desbloquear-user{	
+	
+	margin-left:3%;
+	margin-top:3%;
+
+	float:left;
+
+}
+button.desbloquear-user{
+	width: 40%;
+	margin-top:20px;
+	border:none;
+  	background: #0819EE;
+	 color: #fff;
+	 padding: 10px;
+	 font-size: 18px;
+	 border-radius: 1px;
+	 position: relative;
+	 box-sizing: border-box;
+ 	 transition: background 1s;
+
+}
+button.desbloquear-user:hover{
+	background: #F80552;
+	
+}
+
 #admin-nav{
 	margin-top:5%;
     background-color: #A9A9A9;
@@ -1039,12 +1066,22 @@ button.bloquear-user:hover{
 #contenedorTabla{
 	
 	margin-left:5%;
-	 width: 40%;
+	 width: 25%;
 	 float: left;
 	overflow:auto;
 	height: 400px;
 
 }
+#contenedorUsr{
+	
+	margin-left:2%;
+	 width: 20%;
+	 float: left;
+	overflow:auto;
+	height: 400px;
+
+}
+
 
 #vistaMensajes{
 	
@@ -1068,14 +1105,25 @@ p.vistaMensajes{
 #mensaje {
    	
 	border: solid 2px #0618F9;
+	background-color: #6BCAC4;
 
 }
 
-#mensaje th, #mensaje td {
+
+
+#mensaje td {
     text-align: left;
     padding: 4px;
-	background-color: #6BCAC4;
+	border: solid 2px #000000;
 
+}
+
+tr.mensaje:hover {
+	background-color: #5EF7B6;
+}
+
+tr.leido_1{
+	background-color:#3CF6D1;
 }
 
 #mensaje th {
@@ -1084,7 +1132,51 @@ p.vistaMensajes{
 	width:10%;
     text-align: left;
     background-color: #A7D8F1;
+
     color: black;
 }
 
+#userName {
+   	
+	border: solid 2px #0618F9;
+	background-color: #6BCAC4;
+}
+
+#bloqueado_1{
+	background-color: #DF4D41;
+}
+
+#userName {
+   	
+	border: solid 2px #0618F9;
+
+}
+
+#userName th, #userName td {
+    text-align: left;
+    padding: 4px;
+	
+
+}
+
+#userName th {
+    padding-top: 15px;
+    padding-bottom: 15px;
+	width:10%;
+    text-align: left;
+    background-color: #A7D8F1;
+    color: black;
+}
+
+#filterMsj{
+    display:inline-block;
+    margin-left: 35%;
+	margin-right: 30%;
+	margin-top:1%;
+	margin-bottom:1%;
+    visibility:hidden;
+	width:20%;
+	text-align:center;
+	float:left;
+}
 
