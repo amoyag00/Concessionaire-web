@@ -52,6 +52,36 @@ INSERT INTO `ListaProductos` (`producto_id`, `pedido_id`, `cantidad`, `estado`) 
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `mensaje`
+--
+
+CREATE TABLE `mensaje` (
+  `mensaje_id` int(11) NOT NULL,
+  `name` varchar(15) DEFAULT NULL,
+  `email` varchar(35) DEFAULT NULL,
+  `consulta` text,
+  `leido` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+--
+-- Volcado de datos para la tabla `mensaje`
+--
+
+INSERT INTO `mensaje` (`mensaje_id`, `name`, `email`, `consulta`) VALUES
+(1, 'borrar', 'borrar', 'Acaba conmigo por favor'),
+(2, 'otro', 'otro@gmail', 'Soy otra persona'),
+(4, 'fill', 'fill', 'Prueba para rellenar la tabla'),
+(5, 'fill', 'fill', 'Prueba para rellenar la tabla'),
+(6, 'fill', 'fill', 'Prueba para rellenar la tabla'),
+(7, 'fill', 'fill', 'Prueba para rellenar la tabla'),
+(8, 'fill', 'fill', 'Prueba para rellenar la tabla'),
+(9, 'fill', 'fill', 'Prueba para rellenar la tabla'),
+(10, 'fill', 'fill', 'Prueba para rellenar la tabla');
+
+
+-- --------------------------------------------------------
+--
 -- Table structure for table `Pedido`
 --
 
@@ -132,6 +162,13 @@ INSERT INTO `Usuario` (`nombre`, `contrasena`, `tipo`, `logged`) VALUES
 --
 
 --
+-- Indices de la tabla `mensaje`
+--
+ALTER TABLE `mensaje`
+  ADD PRIMARY KEY (`mensaje_id`);
+
+
+--
 -- Indexes for table `ListaProductos`
 --
 ALTER TABLE `ListaProductos`
@@ -161,6 +198,13 @@ ALTER TABLE `Usuario`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT de la tabla `mensaje`
+--
+ALTER TABLE `mensaje`
+  MODIFY `mensaje_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+COMMIT;
 
 --
 -- AUTO_INCREMENT for table `Pedido`
