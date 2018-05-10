@@ -78,7 +78,7 @@ function bloquearUser(){
 	
 	var nombreUser = $(".expulsar-user:text").val();
 	//var tipo = $('input[name=tipo]:checked').val();
-	alert("Bloquear");
+	//alert("Bloquear");
 	peticionAjax("Peticiones.php","data="+JSON.stringify({"peticion":"bloquear","name":nombreUser}));
 	
 }
@@ -87,7 +87,7 @@ function desbloquearUser(){
 	
 	var nombreUser = $(".expulsar-user:text").val();
 	//var tipo = $('input[name=tipo]:checked').val();
-	alert("Desbloquear");
+	//alert("Desbloquear");
 	peticionAjax("Peticiones.php","data="+JSON.stringify({"peticion":"desbloquear","name":nombreUser}));
 	
 }
