@@ -126,7 +126,7 @@ class Usuario{
 	function listarUsuarios(){
 		 
         $this->conn=DBConnection::getConnection();
-        $statement=$this->conn->prepare("SELECT nombre, tipo FROM Usuario");
+        $statement=$this->conn->prepare("SELECT nombre, tipo, bloqueado FROM Usuario");
         $statement->execute();
         $result = $statement->get_result();
         $listaUsr = array();
@@ -160,6 +160,14 @@ class Usuario{
 	function mensajeLeido($id){
 		$this->conn=DBConnection::getConnection();
         $statement=$this->conn->prepare("UPDATE mensaje SET leido=1 WHERE mensaje_id = ?");
+        $statement->bind_param("i",$id);
+        $statement->execute();
+        $statement->close();
+	}
+	
+	function mensajeNoLeido($id){
+		$this->conn=DBConnection::getConnection();
+        $statement=$this->conn->prepare("UPDATE mensaje SET leido=0 WHERE mensaje_id = ?");
         $statement->bind_param("i",$id);
         $statement->execute();
         $statement->close();
