@@ -54,6 +54,22 @@ class Usuario{
         $statement->close();
     }
     
+	function bloquear($username){
+        $this->conn=DBConnection::getConnection();
+        $statement=$this->conn->prepare("UPDATE Usuario SET bloqueado=1 WHERE nombre = ?");
+        $statement->bind_param("s",$username);
+        $statement->execute();
+        $statement->close();
+    }
+	
+	function desbloquear($username){
+        $this->conn=DBConnection::getConnection();
+        $statement=$this->conn->prepare("UPDATE Usuario SET bloqueado=0 WHERE nombre = ?");
+        $statement->bind_param("s",$username);
+        $statement->execute();
+        $statement->close();
+    }
+	
     /*function insert(){
         $this->conn=DBConnection::getConnection();
         $statement=$this->conn->prepare("INSERT INTO Usuario(nombre,contrasena,tipo) VALUES(?,?,?)");
@@ -99,12 +115,26 @@ class Usuario{
 		 
         $this->conn=DBConnection::getConnection();
         $statement=$this->conn->prepare("INSERT INTO mensaje(name,email,consulta) VALUES(?,?,?)");
-        $statement->execute();
 		$statement->bind_param("sss",$name, $email, $consult);
         $statement->execute();
         $affectedRows=mysqli_affected_rows($this->conn);//used for testing;
         $statement->close();
         return $affectedRows;
+
+    }
+	
+	function listarUsuarios(){
+		 
+        $this->conn=DBConnection::getConnection();
+        $statement=$this->conn->prepare("SELECT nombre, tipo FROM Usuario");
+        $statement->execute();
+        $result = $statement->get_result();
+        $listaUsr = array();
+            while ($fila = $result->fetch_assoc()) {
+                $listaUsr[] = $fila;
+            }
+		
+        return $listaUsr;
 
     }
 }
