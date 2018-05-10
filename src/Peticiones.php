@@ -104,7 +104,17 @@ switch($obj->peticion){
         $u=new Usuario();
         $u->logout($obj->name);
         break;
-		
+	
+	case "bloquear":
+        $u=new Usuario();
+        $u->bloquear($obj->name);
+        break;
+	
+	case "desbloquear":
+        $u=new Usuario();
+        $u->desbloquear($obj->name);
+        break;
+	
 	case "deleteUser":
         $u=new Usuario();
         $bien = $u->eliminar($obj->name);
@@ -128,12 +138,26 @@ switch($obj->peticion){
 			echo json_encode($correcto);
         }
         break;	
-	
+	case "listaUsuarios":
+		 $u=new Usuario();
+		
+		$usr=$u->listarUsuarios();
+		echo json_encode($usr);
+		
+        break;
+		
 	case "listaMensajes":
 		$adm=new Administrador();
 		
-		$mensajes=$adm->getMessages();
+		$mensajes=$adm->getMessages($obj->filtro);
 		echo json_encode($mensajes);
+		
+        break;
+		
+	case "mensajeLeido":
+		$adm=new Administrador();
+		
+		$adm->mensajeLeido($obj->id);
 		
         break;
 }

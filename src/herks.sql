@@ -57,8 +57,10 @@ CREATE TABLE `mensaje` (
   `mensaje_id` int(11) NOT NULL,
   `name` varchar(15) DEFAULT NULL,
   `email` varchar(35) DEFAULT NULL,
-  `consulta` text
+  `consulta` text,
+  `leido` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 
 --
 -- Volcado de datos para la tabla `mensaje`
@@ -137,12 +139,14 @@ INSERT INTO `Producto` (`producto_id`, `nombrePro`, `nombre`, `caracteristicas`,
 -- Estructura de tabla para la tabla `usuario`
 --
 
-CREATE TABLE `Usuario` (
+CREATE TABLE `usuario` (
   `nombre` varchar(15) NOT NULL,
   `contrasena` varchar(15) NOT NULL,
   `tipo` varchar(15) NOT NULL,
-  `logged` int(11) NOT NULL DEFAULT '0'
+  `logged` int(11) NOT NULL DEFAULT '0',
+  `bloqueado` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 
 --
 -- Volcado de datos para la tabla `usuario`

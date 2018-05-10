@@ -4,27 +4,51 @@ $(document).ready(function(){
 	$('#mensajes').on("click",mensajesHandler);
 	
     $('#main-div').on("click","#anyadir-user",anyadirUser);
-	$('#main-div').on("click",".delete-user:submit",deleteUser);
-	$('#main-div').on("click",".expulsar-user:submit",expulsarUser);
+	$('#main-div').on("click","#delete-user",deleteUser);
+	$('#main-div').on("click","#expulsar-user",expulsarUser);
+	$('#main-div').on("click","#bloquear-user",bloquearUser);
+	$('#main-div').on("click","#desbloquear-user",desbloquearUser);
+
+	$('#main-div').on("click","tr.mensaje",showContent);
+	$('#filterMsj').keypress(filter);
+
 	
-	$('#main-div').on("click","tr",showContent);
 	
 	$('.log-out').on("click",logout);
 	
 });
 
 var listaMensajes=new Array();
+var listaID=new Array();
+
+var listaUsuarios=new Array();
 
 function gestionHandler(){
  
    //Buttons
    $(this).prop("disabled",true);
    $('#mensajes').prop("disabled",false);
+   	$('#filterMsj').css('visibility','Hidden');
+
     //Content
     $("#main-div").empty();
 	showGestion();
  }
 
+ function filter(event){
+
+	if(event.which==13){
+		$("#main-div").empty();
+        
+		var param=$('#filterMsj').val();
+
+		peticionAjax("Peticiones.php","data="+JSON.stringify({"peticion":"listaUsuarios"}), showListaUsuarios);
+		peticionAjax("Peticiones.php","data="+JSON.stringify({"peticion":"listaMensajes","filtro":param}), showMensajes);
+		
+	}
+	
+ } 
+ 
  function anyadirUser(){
 
 	
@@ -39,22 +63,41 @@ function expulsarUser(){
 	
 	var nombreUser = $(".expulsar-user:text").val();
 	//var tipo = $('input[name=tipo]:checked').val();
-	alert("Expulsar");
-	peticionAjax("Peticiones.php","data="+JSON.stringify({"peticion":"expulsar","name":nombreUser}),alerta);
+	//alert("Expulsar");
+	peticionAjax("Peticiones.php","data="+JSON.stringify({"peticion":"expulsar","name":nombreUser}));
 	
 }
+
+function bloquearUser(){
+	
+	var nombreUser = $(".expulsar-user:text").val();
+	//var tipo = $('input[name=tipo]:checked').val();
+	alert("Bloquear");
+	peticionAjax("Peticiones.php","data="+JSON.stringify({"peticion":"bloquear","name":nombreUser}));
+	
+}
+
+function desbloquearUser(){
+	
+	var nombreUser = $(".expulsar-user:text").val();
+	//var tipo = $('input[name=tipo]:checked').val();
+	alert("Desbloquear");
+	peticionAjax("Peticiones.php","data="+JSON.stringify({"peticion":"desbloquear","name":nombreUser}));
+	
+}
+
 function deleteUser(){
 	
 	var nombreUser = $(".delete-user:text").val();
 	//var tipo = $('input[name=tipo]:checked').val();
-	alert("Borrar");
+	//alert("Borrar");
 	peticionAjax("Peticiones.php","data="+JSON.stringify({"peticion":"deleteUser","name":nombreUser}),alerta);
 	
 }
 
 function alerta(data){
 	var info=JSON.parse(data);
-	//alert(info);
+	alert(info);
 }
 
 function mensajesHandler(){
@@ -62,37 +105,47 @@ function mensajesHandler(){
    $(this).prop("disabled",true);
    $('#gestion').prop("disabled",false);
     //Content
+	//alert("Mostrar");
     $("#main-div").empty();
-	peticionAjax("Peticiones.php","data="+JSON.stringify({"peticion":"listaMensajes"}), showMensajes);
+	/*var filtro = "<select id='filterMsj'>"+
+						"<option value='todos'>Todos</option>"+
+						"<option value='noLeidos'>No Leidos</option>"  +      
+					"</select>";*/
+	
+	$('#filterMsj').css('visibility','visible');
+	
+	var param=$('#filterMsj').val();
+
+	peticionAjax("Peticiones.php","data="+JSON.stringify({"peticion":"listaUsuarios"}), showListaUsuarios);
+	peticionAjax("Peticiones.php","data="+JSON.stringify({"peticion":"listaMensajes","filtro":param}), showMensajes);
 	
 }
 
 function peticionAjax(script, data, callback){
-    var request= new XMLHttpRequest();
-	alert("Peticion");
-    request.onreadystatechange= function(){
+	var request= new XMLHttpRequest();
+	
+    request.onreadystatechange = function(aEvt){
         if(this.readyState==4 && this.status==200){
             if(callback!=null){
-                alert(this.responseText);
                 callback(this.responseText);
             }
         }
     };
-    request.open("POST",script,true);//method script async
+    request.open("POST",script,false);//method script sync
     request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     request.send(data);
-	alert("Acabada");
-
+	//alert("Acabado");
 }
 
 function showMensajes(data){
 	listaMensajes = [];
+	listaID=[];
 	var mensajes=JSON.parse(data);
 	//mensajes.length
 
 	var contenedor="<div id='contenedorTabla'></div>";
 	$('#main-div').append(contenedor);
-	
+
 	var tabla = 	"<table id='mensaje' class='mensaje'>"+
 							"<tr id='-1' class='mensaje'>"+
 								"<th class='mensaje' >Nombre</td>"+
@@ -104,13 +157,14 @@ function showMensajes(data){
 		var consulta=mensajes[i].consulta;
 		
 		listaMensajes.push(consulta);
-	
+		listaID.push(mensajes[i].mensaje_id);
+		
 		var nombre = mensajes[i].name;
 		var email = mensajes[i].email;
 		
 		//alert("Fila "+i+": "+nombre+" "+email+" "+mensajes[i].consulta);
 		
-		tabla += "<tr class='mensaje' id="+i+">"+
+		tabla += "<tr class='mensaje leido_"+mensajes[i].leido+"' id="+i+">"+
 						"<td class='mensaje' >"+nombre+"</td>"+
 						"<td class='mensaje' >"+email+"</td>"+					
 					 "</tr>";
@@ -121,7 +175,7 @@ function showMensajes(data){
 	
 	tabla +="</table>";
 	
-	alert(listaMensajes);
+	//alert(listaMensajes);
 	
 	var vistaMensajes = "<div id='vistaMensajes'> </div>";
 	
@@ -129,6 +183,7 @@ function showMensajes(data){
 	$('#main-div').append(vistaMensajes);
 
 }
+
 function showContent(){
 	
 	$('#vistaMensajes').empty();
@@ -138,9 +193,53 @@ function showContent(){
 	}else{
 	var vistaMensajes = "<p class='vistaMensajes'> "+listaMensajes[$(this).attr("id")]+"</p>";
 	}
+	
+	var id= listaID[$(this).attr("id")];
+	//alert($(this).attr("id"));
+	//alert(id);
+	
+	peticionAjax("Peticiones.php","data="+JSON.stringify({"peticion":"mensajeLeido","id":id}));
+	
+	$(this).addClass("leido_1");
+	
 	$('#vistaMensajes').append(vistaMensajes);
+	
 }
 
+function showListaUsuarios(data){
+	
+	listaUsuarios=[];
+	
+	var listaUsers = JSON.parse(data);
+	
+	var contenedor="<div id='contenedorUsr'></div>";
+	$('#main-div').append(contenedor);
+	
+	var tabla = 	"<table id='userName' class='userName'>"+
+							"<tr id='-1' class='userName'>"+
+								"<th class='userName' >Usuario</td>"+
+										
+							"</tr>";
+	
+	for(var i=0;i<listaUsers.length;i++){
+		
+		var nombreUsr=listaUsers[i].nombre;
+		
+		listaUsuarios.push(nombreUsr);
+		
+		var bloqueado=listaUsers[i].bloqueado;
+
+		
+		tabla += "<tr class='userName' id='bloqueado_"+bloqueado+"'>"+
+					"<td class='userName'  id='bloqueado_"+bloqueado+"'>"+nombreUsr+"</td>"+
+				 "</tr>";
+	}
+	tabla +="</table>";
+	
+	//alert(listaUsuarios);
+	
+	$('#contenedorUsr').append(tabla);
+}
 
 function logout(){
     peticionAjax("Peticiones.php","data="+JSON.stringify({"peticion":"logout"}),goIndex);
@@ -199,7 +298,7 @@ function showGestion(){
 						"</form>"+				 
 						"<form action='' method='post' class='expulsar-user'>"+
 							"<div id='row'>"+
-								"<h1 class='expulsar-user'>Expulsar Usuario</h1>"+
+								"<h1 class='expulsar-user'>Gestionar Usuario</h1>"+
 							"</div>"+					
 							"<div id='row'>"+
 								"<label class='expulsar-user'>Nombre de usuario</label>"+
@@ -207,7 +306,9 @@ function showGestion(){
 							"</div>"+
 						
 							"<div id='row'>"+
-								"<button value='Expulsar usuario' class='expulsar-user' id='expulsar-user'>Expulsar usuario</button> "+
+								"<button value='Bloquear usuario' class='bloquear-user' id='bloquear-user'>Bloquear usuario</button>"+
+								"<button value='Desbloquear usuario' class='desbloquear-user' id='desbloquear-user'>Desbloquear usuario</button>"+
+								"<button value='Expulsar usuario' class='expulsar-user' id='expulsar-user'>Desloguear usuario</button>"+
 							"</div>"+                  
 						"</form>";
 					

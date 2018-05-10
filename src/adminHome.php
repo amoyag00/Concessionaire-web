@@ -22,11 +22,18 @@ namespace Administrator;
             require_once 'header.php';
             ?>
         </header>
+		<select id='filterMsj'>
+						<option value='todos'>Todos</option>
+						<option value='noLeidos'>No Leidos</option>     
+		</select>
 	<button class="log-out" value="out">Log out</button>
+	
 		<nav id="admin-nav">
 			<button type="button" id="gestion" disabled="">Gestionar Usuarios</button>
 			<button type="button" id="mensajes">Mensajes</button>
 		</nav>
+	
+	
 	
 		<div id="main-div">
 			
@@ -109,7 +116,7 @@ namespace Administrator;
 				
 				 <form action="" method="post" class="expulsar-user">
 					<div id="row">
-						<h1 class="expulsar-user">Expulsar Usuario</h1>
+						<h1 class="expulsar-user">Gestionar Usuario</h1>
 					</div>
 					
 					<div id="row">
@@ -134,7 +141,9 @@ namespace Administrator;
 					</div>-->
 					
 					<div id="row">
-						<button value="Expulsar usuario" class="expulsar-user" id="expulsar-user">Expulsar usuario</button> 
+						<button value="Bloquear usuario" class="bloquear-user" id="bloquear-user">Bloquear usuario</button>
+						<button value="Desbloquear usuario" class="desbloquear-user" id="desbloquear-user">Desbloquear usuario</button>
+						<button value="Expulsar usuario" class="expulsar-user" id="expulsar-user">Desloguear usuario</button>
 					</div>
                     
 				</form>
