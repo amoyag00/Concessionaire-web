@@ -748,7 +748,7 @@ div.anyadir-user{
 }
 form.anyadir-user{
 	background: -moz-linear-gradient(#F2F2F2, #27DACC 80%) fixed;
-	margin-bottom: 10%;
+	margin-bottom: 3%;
 	padding:2%;
 	border: 3px solid #0AF7EC;
     border-radius: 4px; 
@@ -890,7 +890,7 @@ button.delete-user:hover{
 .expulsar-user{
 	
 	
-	margin-left:3%;
+	margin-left:10%;
 	margin-top:3%;
 	
 	float:left;
@@ -1075,6 +1075,8 @@ button.desbloquear-user:hover{
 #contenedorUsr{
 	
 	margin-left:2%;
+	margin-bottom:10%;
+
 	 width: 20%;
 	 float: left;
 	overflow:auto;
@@ -1180,3 +1182,6 @@ tr.leido_1{
 	float:left;
 }
 
+.centrar{
+	text-align:center;
+}
